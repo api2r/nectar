@@ -1,13 +1,15 @@
 test_that("resp_tidy_json fails gracefully with a bad subset_path", {
   expect_error(
     resp_tidy_json(subset_path = list(a = 1:10, b = mean), resp = NULL),
-    class = "stbl_error_coerce_character"
+    class = "stbl-error-coerce-character"
   )
 })
 
 test_that("resp_tidy_json tidies a response", {
   target_tibble <- tibble::tibble(
-    a = letters, b = LETTERS, c = 1:26
+    a = letters,
+    b = LETTERS,
+    c = 1:26
   )
   mock_response <- httr2::response_json(
     body = target_tibble
@@ -20,7 +22,9 @@ test_that("resp_tidy_json tidies a response", {
 
 test_that("resp_tidy_json subsets a response", {
   target_tibble <- tibble::tibble(
-    a = letters, b = LETTERS, c = 1:26
+    a = letters,
+    b = LETTERS,
+    c = 1:26
   )
   mock_response <- httr2::response_json(
     body = list(
@@ -38,10 +42,14 @@ test_that("resp_tidy_json subsets a response", {
 
 test_that("resp_tidy_json tidies a response with a spec", {
   source_tibble <- tibble::tibble(
-    a = letters, b = LETTERS, c = 1:26
+    a = letters,
+    b = LETTERS,
+    c = 1:26
   )
   target_tibble <- tibble::tibble(
-    lc = letters, uc = LETTERS, n = 1:26
+    lc = letters,
+    uc = LETTERS,
+    n = 1:26
   )
   mock_response <- httr2::response_json(
     body = source_tibble
@@ -59,10 +67,14 @@ test_that("resp_tidy_json tidies a response with a spec", {
 
 test_that("resp_tidy_json works with resp_tidy", {
   source_tibble <- tibble::tibble(
-    a = letters, b = LETTERS, c = 1:26
+    a = letters,
+    b = LETTERS,
+    c = 1:26
   )
   target_tibble <- tibble::tibble(
-    lc = letters, uc = LETTERS, n = 1:26
+    lc = letters,
+    uc = LETTERS,
+    n = 1:26
   )
   mock_response <- httr2::response_json(
     body = source_tibble
@@ -89,7 +101,9 @@ test_that("resp_tidy_json works with resp_tidy", {
 
 test_that("resp_tidy_json works with resp_tidy", {
   source_tibble <- tibble::tibble(
-    a = letters, b = LETTERS, c = 1:26
+    a = letters,
+    b = LETTERS,
+    c = 1:26
   )
   mock_response <- httr2::response_json(
     body = source_tibble

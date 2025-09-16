@@ -32,11 +32,11 @@ test_that("call_api() applies auth", {
 test_that("call_api() uses response_parser", {
   local_mocked_bindings(
     req_perform_opinionated = function(req, ...) {
-      list(httr2::response(body = "specific text"))
+      list(httr2::response(body = charToRaw("specific text")))
     }
   )
   parser <- function(resp) {
-    resp$body == "specific text"
+    rawToChar(resp$body) == "specific text"
   }
   test_result <- call_api(
     base_url = "https://example.com",
