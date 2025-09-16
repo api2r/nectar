@@ -25,12 +25,12 @@ test_that("req_auth_api_key works for header", {
     api_key = "my_key"
   )
   expect_in(
-    test_result$headers,
-    list(parm = "my_key")
-  )
-  expect_in(
-    attr(test_result$headers, "redact"),
+    names(test_result$headers),
     "parm"
+  )
+  expect_type(
+    test_result$headers$parm,
+    "weakref"
   )
 
   test_result <- req_auth_api_key(
@@ -40,12 +40,12 @@ test_that("req_auth_api_key works for header", {
     location = "header"
   )
   expect_in(
-    test_result$headers,
-    list(parm = "my_key")
-  )
-  expect_in(
-    attr(test_result$headers, "redact"),
+    names(test_result$headers),
     "parm"
+  )
+  expect_type(
+    test_result$headers$parm,
+    "weakref"
   )
 })
 

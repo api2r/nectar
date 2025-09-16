@@ -3,11 +3,14 @@
 on:
   push:
     branches: [main, master]
+    paths-ignore:
+      - '.github/ai/issues.json'
   pull_request:
+    branches: [main, master]
+    paths-ignore:
+      - '.github/ai/issues.json'
 
-name: R-CMD-check.yaml
-
-permissions: read-all
+name: R-CMD-check
 
 jobs:
   R-CMD-check:
@@ -48,4 +51,3 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'

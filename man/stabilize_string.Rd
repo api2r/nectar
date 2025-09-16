@@ -18,14 +18,21 @@ stabilize_string(
 \item{...}{
   Arguments passed on to \code{\link[stbl:stabilize_chr]{stbl::stabilize_chr_scalar}}
   \describe{
-    \item{\code{x_class}}{Character. The class name of \code{x} to use in error messages. Use
-this if you remove a special class from \code{x} before checking its coercion,
-but want the error message to match the original class.}
+    \item{\code{x_class}}{\verb{(length-1 character)} The class name of \code{x} to use in error
+messages. Use this if you remove a special class from \code{x} before checking
+its coercion, but want the error message to match the original class.}
   }}
 
-\item{regex}{Character scalar. An optional regex pattern to compare the
-value(s) of \code{x} against. If a complex regex pattern throws an error, try
-installing the stringi package with \code{install.packages("stringi")}.}
+\item{regex}{\verb{(character, list, or stringr_pattern)} One or more optional
+regular expressions to test against the values of \code{x}. This can be a
+character vector, a list of character vectors, or a pattern object from the
+\{stringr\} package (e.g., \code{stringr::fixed("a.b")}). The default error
+message for non-matching values will include the pattern itself (see
+\code{\link[stbl:regex_must_match]{regex_must_match()}}). To provide a custom message, supply a named
+character vector where the value is the regex pattern and the name is the
+message that should be displayed. To check that a pattern is \emph{not} matched,
+attach a \code{negate} attribute set to \code{TRUE}. If a complex regex pattern
+throws an error, try installing the stringi package.}
 
 \item{arg}{An argument name as a string. This argument
 will be mentioned in error messages as the input that is at the
