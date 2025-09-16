@@ -1,0 +1,140 @@
+{
+  "_metadata": {
+    "description": "A collection of GitHub issues for the nectar repository.",
+    "lookup_key": "issue_number",
+    "comment": "Each key in the 'issues' object is a string representation of the GitHub issue number. Empty objects are placeholders so that positions and ids match. Empty objects should be ignored."
+  },
+  "issues": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": {
+      "title": "Basic Usage Vignette",
+      "type": {},
+      "milestone": {},
+      "body": "Create a vignette with name = package (per pkgdown) about how/why to use nectar.\r\n\r\nSerious question: With updates to httr2, can/should this be simplified or even eliminated?",
+      "comments": {}
+    },
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": {
+      "title": "Key finder",
+      "type": {},
+      "milestone": {},
+      "body": "Consider exporting a function or functions for finding keys in various places. User passes in a key name (or potentially just an API abbreviation) and potentially an ordered list of places to look (env, opt, shiny_user, also maybe httr2 cache...), and the function finds a key, if it exists (with a pretty, standardized error message if it doesn't).\r\n\r\nPeople often seem to be confused about where to put api keys, and I've seen multiple cases where (for example) the package loads a key from an environment variable (or even a specialized environment) without the user having much or sometimes any control over it. Make it easy to include the key as an argument, while doing everything we can to find that key.",
+      "comments": "Check keyring first if it's installed. Use the `.key_get_chill()` idea from my profile. Remember that they might pass in something special (\"slack_dslc\") as the key to find, but probably default to the api abbreviation in beekeeper. make sure this function is exported and visible to users when used, and include a note about that in the help."
+    },
+    "17": [],
+    "18": [],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "23": [],
+    "24": [],
+    "25": [],
+    "26": [],
+    "27": [],
+    "28": [],
+    "29": [],
+    "30": [],
+    "31": [],
+    "32": [],
+    "33": [],
+    "34": [],
+    "35": [],
+    "36": [],
+    "37": {
+      "title": "Cursor pagination sample",
+      "type": {},
+      "milestone": {},
+      "body": "Look into extending `httr2::example_url()` to provide a cursor-paginated endpoint (and, in general, to provide samples for examples, tests, etc.",
+      "comments": "#38 might be a better target."
+    },
+    "38": {
+      "title": "Function factory for httr2::local_mocked_responses",
+      "type": {},
+      "milestone": {},
+      "body": "Provide a function factory through which users can supply a list of `req`s, and a parallel list of `resps`, and get back a function for use in httr2::local_mocked_responses(). It might make more sense to abstract it farther. It should simplify these tests\r\n\r\n- `test-iterate_with_json_cursor.R`\r\n\r\n(more to be added as I find use cases)",
+      "comments": {}
+    },
+    "39": [],
+    "40": [],
+    "41": {
+      "title": "Test order of auth",
+      "type": {},
+      "milestone": {},
+      "body": "If I supply bearer token and refresh, does it use the bearer token without trying refresh? Does order I add the req methods matter? Turn off internet to more easily trace. ",
+      "comments": "Last oauth function applied overwrites previous one(s). The main thing that I'm still not sure of is what happens if a given refresh token is bad. Does it just fail? It *might* try to reauth, but it doesn't have a PKCE flag, so it would presumably always use the default. I'm thinking I might want to do something along these lines:\r\n- \"Hide\" the oauth params in something like `$policies$auth_sign_bak` (so httr2 won't try to use them prematurely).\r\n- Try the query with `req_auth_bearer_token()` (when I have a token). Doing both of these MIGHT not be necessary but I don't know every possible situation. I think I'll have to tryCatch this myself; httr2 would overwrite any \"real\" req_retry(), for example. I also might want to `req_error()` (saving any existing req_error() settings) to let it \"succeed\" (without throwing an error) so I can check the response and then decide what to do next.\r\n- If that query fails, move oauth params to their proper home and re-try (possibly doing so for refresh before doing so for the rest of oauth, depending whether I can make them play together).\r\n\r\nThat should allow me to use the httr2 wiring, but try all the options.\r\n\r\nIf it works, consider pushing it back to httr2, but I think it's more hand-wavy-hand-holding than he's aiming for."
+    },
+    "42": {
+      "title": "Add examples",
+      "type": {},
+      "milestone": {},
+      "body": "I've been loose with examples while things are in flux. Before pushing to CRAN, make sure to add them to all exported functions.",
+      "comments": {}
+    },
+    "43": [],
+    "44": [],
+    "45": [],
+    "46": [],
+    "47": [],
+    "48": [],
+    "49": [],
+    "50": [],
+    "51": [],
+    "52": {
+      "title": "Investigate localhost/authoriize/",
+      "type": {},
+      "milestone": {},
+      "body": "Setting one of these as redirect for both YouTube and Zoom seems to have stabilized things\n- http://127.0.0.1:8888/authorize/\n- http://localhost:8888/authorize/\n\nShould I recommend something like that, and default to it? It deals with URL normalization, too.\n\n",
+      "comments": {}
+    },
+    "53": [],
+    "54": {
+      "title": "binary_string_to_raw()",
+      "type": {},
+      "milestone": {},
+      "body": "The OpenAPI Format Registry includes a (deprecated, but it still could happen in existing APIs) \"binary\" format for the \"string\" data type, in which binary data is concatenated into a string (without base64 encoding, for example). Getting this data back to raw is tricky, so let's provide a function for it. This is a proof-of-concept:\n\n``` r\ninput_string <- \"testing\"\nhex_string <- charToRaw(input_string) |> \n  as.character() |> \n  paste(collapse = \"\")\nhex_string\n#> [1] \"74657374696e67\"\n\nsplit_hex_string <- function(hex_string) {\n  hex_chars <- strsplit(hex_string, \"\")[[1]]\n  hex_pairs <- paste0(\n    hex_chars[c(TRUE, FALSE)],\n    hex_chars[c(FALSE, TRUE)]\n  )\n  return(hex_pairs)\n}\nhex_to_raw <- function(hex_string) {\n  hex_pairs <- split_hex_string(hex_string)\n  as.raw(as.hexmode(hex_pairs))\n}\n\ndecode_binary_string <- function(x) {\n  if (grepl(\"^[A-Fa-f0-9]+$\", x) && nchar(x) %% 2 == 0) {\n    return(hex_to_raw(x))\n  }\n  openssl::base64_decode(x)\n}\n\n\nraw_data <- decode_binary_string(hex_string)\ndecoded_data <- rawToChar(raw_data)\ndecoded_data\n#> [1] \"testing\"\n\nidentical(decoded_data, input_string)\n#> [1] TRUE\n```\n\n<sup>Created on 2025-02-12 with [reprex v2.1.1](https://reprex.tidyverse.org)<\/sup>\n\nSee if you can find any examples via [apis.guru](https://apis.guru) before implementing this. ",
+      "comments": {}
+    },
+    "55": [],
+    "56": {
+      "title": "parse_sf_binary()",
+      "type": {},
+      "milestone": {},
+      "body": "https://www.rfc-editor.org/rfc/rfc8941#name-byte-sequences\n\n```r\nparse_sf_binary <- function(x) {\n  # Trim metadata before and after the main Base64-encoded string\n  x <- sub(\"^.*?:\", \"\", x)  # Remove anything before and including the first \":\"\n  x <- sub(\":.*$\", \"\", x)   # Remove anything after and including the last \":\"\n\n  # Decode the remaining Base64-encoded string\n  openssl::base64_decode(x)\n}\n```\n\nIt looks like all of the \"sf-\" formats can also have metadata after \";\" at the end, so strip that out, too. We'll need to do this for all of these \"sf\" (\"structured field\") formats. Does httr2 already deal with these?",
+      "comments": {}
+    },
+    "57": {
+      "title": "stabilize_*()",
+      "type": {},
+      "milestone": {},
+      "body": "Export these `stabilize_*()` functions:\n- `stabilize_int64()`\n- `stabilize_int()`\n- `stabilize_date()`\n- `stabilize_chr()`\n- `stabilize_base64_to_chr()`\n- `stabilize_double()`\n- `stabilize_datetime()`\n- `stabilize_structured_lgl()`\n- `stabilize_duration()`\n- `stabilize_time()`\n- `stabilize_binary_to_raw()`\n- `stabilize_base64url_to_chr()`\n- `stabilize_uuid()`\n\nBut consider where these should live, and whether this is the best approach. Deciding somewhat in beekeeper. This needs to be bidirectional in a lot of cases, so a class with `to_*()` methods (and thus `stabilize_*()` methods) might make the most sense.",
+      "comments": {}
+    },
+    "58": {
+      "title": "Migrate to api2r organization",
+      "type": {},
+      "milestone": {},
+      "body": "In order to organize things better and take advantage of additional GitHub features, as the lead developer of these packages, I would like to wrap them up into the api2r organization.",
+      "comments": {}
+    },
+    "59": {
+      "title": "tib_datetime()?",
+      "type": {},
+      "milestone": {},
+      "body": "Consider implementing tib_datetime() here if {tibblify} isn't making progress to accept it.\n\nThis is how I implemented it in {apisguru}:\n\n```r\n.tib_datetime <- function(key, ..., required = TRUE) {\n  tibblify::tib_scalar(\n    key = key,\n    ptype = vctrs::new_datetime(tzone = \"UTC\"),\n    required = required,\n    ptype_inner = character(),\n    transform = .quick_datetime,\n    ...\n  )\n}\n\n.quick_datetime <- function(x, tzone = \"UTC\") {\n  as.POSIXct(gsub(\"T\", \" \", x), tz = tzone)\n}\n```",
+      "comments": {}
+    }
+  }
+}
