@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/nectar)](https://CRAN.R-project.org/package=nectar)
-[![Codecov test coverage](https://codecov.io/gh/jonthegeek/nectar/graph/badge.svg)](https://app.codecov.io/gh/jonthegeek/nectar)
-[![R-CMD-check](https://github.com/jonthegeek/nectar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jonthegeek/nectar/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/api2r/nectar/graph/badge.svg)](https://app.codecov.io/gh/api2r/nectar)
+[![R-CMD-check](https://github.com/api2r/nectar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/api2r/nectar/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 An opinionated framework for use within api-wrapping R packages.
@@ -30,7 +30,7 @@ You can install the development version of nectar from [GitHub](https://github.c
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("jonthegeek/nectar")
+remotes::install_github("api2r/nectar")
 ```
 
 ## Usage
