@@ -121,6 +121,26 @@
       "milestone": {},
       "body": "Export these `stabilize_*()` functions:\n- `stabilize_int64()`\n- `stabilize_int()`\n- `stabilize_date()`\n- `stabilize_chr()`\n- `stabilize_base64_to_chr()`\n- `stabilize_double()`\n- `stabilize_datetime()`\n- `stabilize_structured_lgl()`\n- `stabilize_duration()`\n- `stabilize_time()`\n- `stabilize_binary_to_raw()`\n- `stabilize_base64url_to_chr()`\n- `stabilize_uuid()`\n\nBut consider where these should live, and whether this is the best approach. Deciding somewhat in beekeeper. This needs to be bidirectional in a lot of cases, so a class with `to_*()` methods (and thus `stabilize_*()` methods) might make the most sense.",
       "comments": {}
+    },
+    "58": [],
+    "59": [],
+    "60": [],
+    "61": [],
+    "62": {
+      "title": "Remove tibblify suggestion",
+      "type": {
+        "id": 20894809,
+        "node_id": "IT_kwDOCPuMJs4BPtRZ",
+        "name": "Task",
+        "description": "A specific piece of work",
+        "color": "yellow",
+        "created_at": "2024-02-20T11:21:46Z",
+        "updated_at": "2024-07-26T15:33:07Z",
+        "is_enabled": true
+      },
+      "milestone": {},
+      "body": "Re-imagine/rewrite `/R/resp_tidy_json.R` without {tibblify}, since {tibblify} appears to be abandoned. This will include a big decision about what I recommend instead. For OpenAPI descriptions, {rapid} will make sense, but I don't have an answer yet for general rectangling of JSON data. Maybe a package specifically for rectangling of OpenAPI-defined (and thus {rapid}-defined) JSON data would make sense?\n\nI'm creating this issue as a task, which will likely involve writing additional issues.",
+      "comments": "I considered something like {tidyjson}, but I don't think it does what I need, and it's another package that might have iffy stability. Don't fall into that trap again!"
     }
   }
 }
