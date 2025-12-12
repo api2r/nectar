@@ -121,20 +121,6 @@
       "milestone": {},
       "body": "Export these `stabilize_*()` functions:\n- `stabilize_int64()`\n- `stabilize_int()`\n- `stabilize_date()`\n- `stabilize_chr()`\n- `stabilize_base64_to_chr()`\n- `stabilize_double()`\n- `stabilize_datetime()`\n- `stabilize_structured_lgl()`\n- `stabilize_duration()`\n- `stabilize_time()`\n- `stabilize_binary_to_raw()`\n- `stabilize_base64url_to_chr()`\n- `stabilize_uuid()`\n\nBut consider where these should live, and whether this is the best approach. Deciding somewhat in beekeeper. This needs to be bidirectional in a lot of cases, so a class with `to_*()` methods (and thus `stabilize_*()` methods) might make the most sense.",
       "comments": {}
-    },
-    "58": {
-      "title": "Migrate to api2r organization",
-      "type": {},
-      "milestone": {},
-      "body": "In order to organize things better and take advantage of additional GitHub features, as the lead developer of these packages, I would like to wrap them up into the api2r organization.",
-      "comments": {}
-    },
-    "59": {
-      "title": "tib_datetime()?",
-      "type": {},
-      "milestone": {},
-      "body": "Consider implementing tib_datetime() here if {tibblify} isn't making progress to accept it.\n\nThis is how I implemented it in {apisguru}:\n\n```r\n.tib_datetime <- function(key, ..., required = TRUE) {\n  tibblify::tib_scalar(\n    key = key,\n    ptype = vctrs::new_datetime(tzone = \"UTC\"),\n    required = required,\n    ptype_inner = character(),\n    transform = .quick_datetime,\n    ...\n  )\n}\n\n.quick_datetime <- function(x, tzone = \"UTC\") {\n  as.POSIXct(gsub(\"T\", \" \", x), tz = tzone)\n}\n```",
-      "comments": {}
     }
   }
 }
