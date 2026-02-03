@@ -11,9 +11,9 @@ Description: An opinionated framework for use within api-wrapping R
 License: MIT + file LICENSE
 URL: https://nectar.api2r.org, https://github.com/api2r/nectar
 BugReports: https://github.com/api2r/nectar/issues
-Depends: 
+Depends:
     R (>= 4.1.0)
-Imports: 
+Imports:
     cli,
     curl,
     fs,
@@ -25,9 +25,8 @@ Imports:
     rlang,
     stbl,
     stringr,
-    utils,
     vctrs
-Suggests: 
+Suggests:
     covr,
     stringi,
     testthat (>= 3.0.0),
@@ -39,4 +38,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
