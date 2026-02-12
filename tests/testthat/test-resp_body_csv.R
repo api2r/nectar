@@ -1,4 +1,4 @@
-test_that("resp_body_csv extracts csv data", {
+test_that("resp_body_csv extracts csv data (#40)", {
   resp <- httr2::response(
     headers = list(`Content-Type` = "text/csv"),
     body = charToRaw("a,b,c\n1,3,5\n2,4,6")
@@ -9,7 +9,7 @@ test_that("resp_body_csv extracts csv data", {
   )
 })
 
-test_that("resp_body_csv fails gracefully for bad data", {
+test_that("resp_body_csv fails gracefully for bad data (#40)", {
   resp <- httr2::response(
     headers = list(`Content-Type` = "not/csv"),
     body = charToRaw("a,b,c\n1,3,5\n2,4,6")
@@ -20,7 +20,7 @@ test_that("resp_body_csv fails gracefully for bad data", {
   )
 })
 
-test_that("resp_body_tsv extracts tsv data", {
+test_that("resp_body_tsv extracts tsv data (#40)", {
   resp <- httr2::response(
     headers = list(`Content-Type` = "text/tab-separated-values"),
     body = charToRaw("a\tb\tc\n1\t3\t5\n2\t4\t6")
@@ -31,7 +31,7 @@ test_that("resp_body_tsv extracts tsv data", {
   )
 })
 
-test_that("resp_body_tsv fails gracefully for bad data", {
+test_that("resp_body_tsv fails gracefully for bad data (#40)", {
   resp <- httr2::response(
     headers = list(`Content-Type` = "not/tsv"),
     body = charToRaw("a\tb\tc\n1\t3\t5\n2\t4\t6")

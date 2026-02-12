@@ -1,4 +1,4 @@
-# resp_tidy fails gracefully for non-responses
+# resp_tidy fails gracefully for non-responses (#40)
 
     Code
       resp_tidy(test_obj)
@@ -7,7 +7,7 @@
       ! No method is available to `nectar::resp_tidy()` this object.
       i `nectar::resp_tidy()` expects <httr2_response> objects, or lists thereof.
 
-# resp_tidy fails gracefully for lists of non-responses
+# resp_tidy fails gracefully for lists of non-responses (#40)
 
     Code
       resp_tidy(test_obj)

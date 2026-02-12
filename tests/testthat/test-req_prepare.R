@@ -1,4 +1,4 @@
-test_that("req_prepare() applies user agent", {
+test_that("req_prepare() applies user agent (#29)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     additional_user_agent = "foo"

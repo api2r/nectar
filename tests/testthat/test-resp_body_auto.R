@@ -1,4 +1,4 @@
-test_that("resp_body_auto works for json", {
+test_that("resp_body_auto works for json (#40)", {
   local_mocked_bindings(
     resp_body_json = function(resp) "json",
     .package = "httr2"
@@ -7,18 +7,7 @@ test_that("resp_body_auto works for json", {
   expect_identical(resp_body_auto(resp), "json")
 })
 
-test_that("resp_body_auto works for json", {
-  local_mocked_bindings(
-    resp_body_json = function(resp) "json",
-    .package = "httr2"
-  )
-  resp <- httr2::response(
-    headers = list(`Content-Type` = "application/something+json")
-  )
-  expect_identical(resp_body_auto(resp), "json")
-})
-
-test_that("resp_body_auto works for xml", {
+test_that("resp_body_auto works for xml (#40)", {
   local_mocked_bindings(
     resp_body_xml = function(resp) "xml",
     .package = "httr2"
@@ -29,18 +18,20 @@ test_that("resp_body_auto works for xml", {
   expect_identical(resp_body_auto(resp), "xml")
 })
 
-test_that("resp_body_auto works for html", {
+test_that("resp_body_auto works for html (#40)", {
   local_mocked_bindings(
     resp_body_html = function(resp) "html",
     .package = "httr2"
   )
-  resp <- httr2::response(headers = list(`Content-Type` = "application/xhtml+xml"))
+  resp <- httr2::response(
+    headers = list(`Content-Type` = "application/xhtml+xml")
+  )
   expect_identical(resp_body_auto(resp), "html")
   resp <- httr2::response(headers = list(`Content-Type` = "text/html"))
   expect_identical(resp_body_auto(resp), "html")
 })
 
-test_that("resp_body_auto works for svg", {
+test_that("resp_body_auto works for svg (#40)", {
   local_mocked_bindings(
     resp_body_string = function(resp) "string",
     .package = "httr2"
@@ -49,7 +40,7 @@ test_that("resp_body_auto works for svg", {
   expect_identical(resp_body_auto(resp), "string")
 })
 
-test_that("resp_body_auto works for csv", {
+test_that("resp_body_auto works for csv (#40)", {
   local_mocked_bindings(
     resp_body_csv = function(resp) "csv"
   )
@@ -57,7 +48,7 @@ test_that("resp_body_auto works for csv", {
   expect_identical(resp_body_auto(resp), "csv")
 })
 
-test_that("resp_body_auto works for tsv", {
+test_that("resp_body_auto works for tsv (#40)", {
   local_mocked_bindings(
     resp_body_tsv = function(resp) "tsv"
   )
@@ -67,7 +58,7 @@ test_that("resp_body_auto works for tsv", {
   expect_identical(resp_body_auto(resp), "tsv")
 })
 
-test_that("resp_body_auto works for other strings", {
+test_that("resp_body_auto works for other strings (#40)", {
   local_mocked_bindings(
     resp_body_string = function(resp) "string",
     .package = "httr2"
@@ -76,7 +67,7 @@ test_that("resp_body_auto works for other strings", {
   expect_identical(resp_body_auto(resp), "string")
 })
 
-test_that("resp_body_auto works for other things", {
+test_that("resp_body_auto works for other things (#40)", {
   local_mocked_bindings(
     resp_body_raw = function(resp) "raw",
     .package = "httr2"

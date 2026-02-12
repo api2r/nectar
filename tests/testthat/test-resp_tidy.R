@@ -1,4 +1,4 @@
-test_that("resp_tidy fails gracefully for non-responses", {
+test_that("resp_tidy fails gracefully for non-responses (#40)", {
   test_obj <- 1
   expect_error(
     resp_tidy(test_obj),
@@ -12,7 +12,7 @@ test_that("resp_tidy fails gracefully for non-responses", {
   )
 })
 
-test_that("resp_tidy fails gracefully for lists of non-responses", {
+test_that("resp_tidy fails gracefully for lists of non-responses (#40)", {
   test_obj <- list(a = letters, b = 1:26)
   expect_error(
     resp_tidy(test_obj),
@@ -26,13 +26,13 @@ test_that("resp_tidy fails gracefully for lists of non-responses", {
   )
 })
 
-test_that("resp_tidy parses json-containing httr2_response objects", {
+test_that("resp_tidy parses json-containing httr2_response objects (#40)", {
   mock_response <- httr2::response_json(body = 1:3)
   test_result <- resp_tidy(mock_response)
   expect_identical(test_result, as.list(1:3))
 })
 
-test_that("resp_tidy parses httr2_response objects with resp_tidy policy", {
+test_that("resp_tidy parses httr2_response objects with resp_tidy policy (#40)", {
   mock_response <- httr2::response_json(body = 1:3)
   mock_response$request <- list(
     policies = list(
@@ -47,7 +47,7 @@ test_that("resp_tidy parses httr2_response objects with resp_tidy policy", {
   expect_identical(test_result, 1:3)
 })
 
-test_that("resp_tidy uses policies$resp_tidy$tidy_args", {
+test_that("resp_tidy uses policies$resp_tidy$tidy_args (#40)", {
   mock_response <- httr2::response_json(body = 1:3)
   mock_response$request <- list(
     policies = list(
@@ -63,7 +63,7 @@ test_that("resp_tidy uses policies$resp_tidy$tidy_args", {
   expect_identical(test_result, 1:6)
 })
 
-test_that("resp_tidy parses and combines nectar_responses objects", {
+test_that("resp_tidy parses and combines nectar_responses objects (#40)", {
   request_obj <- list(
     policies = list(
       resp_tidy = list(
@@ -85,7 +85,7 @@ test_that("resp_tidy parses and combines nectar_responses objects", {
   expect_identical(test_result, 1:6)
 })
 
-test_that("resp_tidy parses and combines lists of httr2_response objects", {
+test_that("resp_tidy parses and combines lists of httr2_response objects (#40)", {
   request_obj <- list(
     policies = list(
       resp_tidy = list(

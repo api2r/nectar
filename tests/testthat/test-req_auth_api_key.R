@@ -18,7 +18,7 @@ test_that("req_auth_api_key returns req unchanged if no api_key set", {
   expect_identical(req, test_result)
 })
 
-test_that("req_auth_api_key works for header", {
+test_that("req_auth_api_key works for header (#8)", {
   test_result <- req_auth_api_key(
     httr2::request("https://example.com"),
     parameter_name = "parm",
@@ -49,7 +49,7 @@ test_that("req_auth_api_key works for header", {
   )
 })
 
-test_that("req_auth_api_key works for query", {
+test_that("req_auth_api_key works for query (#8)", {
   test_result <- req_auth_api_key(
     httr2::request("https://example.com"),
     parameter_name = "parm",
@@ -70,7 +70,7 @@ test_that("req_auth_api_key works for query", {
   )
 })
 
-test_that("req_auth_api_key works for cookies", {
+test_that("req_auth_api_key works for cookies (#30)", {
   test_result <- req_auth_api_key(
     httr2::request("https://example.com"),
     parameter_name = "parm",

@@ -1,4 +1,4 @@
-test_that("req_tidy_policy errors informatively for bad fn", {
+test_that("req_tidy_policy errors informatively for bad fn (#44)", {
   expect_error(
     req_tidy_policy(
       httr2::request("https://example.com"),
@@ -8,7 +8,7 @@ test_that("req_tidy_policy errors informatively for bad fn", {
   )
 })
 
-test_that("req_tidy_policy applies resp_body_auto by default", {
+test_that("req_tidy_policy applies resp_body_auto by default (#44)", {
   req <- req_tidy_policy(httr2::request("https://example.com"))
   expect_identical(
     req$policies$resp_tidy,
@@ -19,7 +19,7 @@ test_that("req_tidy_policy applies resp_body_auto by default", {
   )
 })
 
-test_that("req_tidy_policy applies the specified policy", {
+test_that("req_tidy_policy applies the specified policy (#44)", {
   req <- req_tidy_policy(
     httr2::request("https://example.com"),
     tidy_fn = httr2::resp_body_json,

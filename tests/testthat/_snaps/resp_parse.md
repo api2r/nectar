@@ -1,4 +1,4 @@
-# resp_parse fails gracefully for unsupported classes
+# resp_parse fails gracefully for unsupported classes (#40)
 
     Code
       resp_parse(1)

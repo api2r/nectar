@@ -1,4 +1,4 @@
-test_that("resp_parse fails gracefully for unsupported classes", {
+test_that("resp_parse fails gracefully for unsupported classes (#40)", {
   expect_error(
     resp_parse(1),
     class = "nectar_error-unsupported_response_class"
