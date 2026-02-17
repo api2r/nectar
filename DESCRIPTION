@@ -34,7 +34,7 @@ Suggests:
     tibble,
     tibblify
 Remotes:
-    qcthat=Gilead-BioStats/qcthat@fix-52-53-tag_tests_with_issues,
+    qcthat=Gilead-BioStats/qcthat@dev,
     wranglezone/stbl,
     wranglezone/tibblify
 Config/testthat/edition: 3
