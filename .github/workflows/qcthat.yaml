@@ -1,3 +1,5 @@
+# Workflow derived from
+# https://github.com/Gilead-BioStats/qcthat/tree/v1.1.0/inst/workflows/qcthat.yaml.
 on:
   push:
     branches: [main]
@@ -54,7 +56,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: Gilead-BioStats/qcthat@fix-52-53-tag_tests_with_issues
+          extra-packages: local::., Gilead-BioStats/qcthat@dev
 
       - name: Manage User Acceptance Testing
         if: >-
