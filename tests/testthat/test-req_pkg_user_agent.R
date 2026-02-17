@@ -32,7 +32,7 @@ test_that("req_pkg_user_agent adds a package agent and url (#29)", {
   )
 })
 
-test_that("Corner case of no supplied name works. (#29)", {
+test_that("Corner case of no supplied name works (#29)", {
   existing <- stringi::stri_rand_strings(1, 10)
   expect_identical(
     .lib_user_agent_append(existing, name = NULL, version = "x"),
@@ -40,6 +40,6 @@ test_that("Corner case of no supplied name works. (#29)", {
   )
 })
 
-test_that("Corner case of no supplied agent works. (#29)", {
+test_that("Corner case of no supplied agent works (#29)", {
   expect_null(.user_agent_remove(NULL, NULL))
 })

@@ -40,7 +40,7 @@ test_that("resp_tidy_json subsets a response (#40)", {
   )
 })
 
-test_that("resp_tidy_json tidies a response (#40) with a spec", {
+test_that("resp_tidy_json tidies a response with a spec (#40)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
