@@ -1,16 +1,16 @@
-# Error messaging for this package.
+# Raise a package-scoped error
 
-Error messaging for this package.
+Raise a package-scoped error
 
 ## Usage
 
 ``` r
 .nectar_abort(
   message,
-  error_class,
-  ...,
-  call = rlang::caller_env(),
-  .envir = rlang::caller_env()
+  subclass,
+  call = caller_env(),
+  message_env = caller_env(),
+  ...
 )
 ```
 
@@ -18,16 +18,14 @@ Error messaging for this package.
 
 - message:
 
-  It is formatted via a call to
-  [`cli_bullets()`](https://cli.r-lib.org/reference/cli_bullets.html).
+  (`character`) The message for the new error. Messages will be
+  formatted with
+  [`cli::cli_bullets()`](https://cli.r-lib.org/reference/cli_bullets.html).
 
-- error_class:
+- subclass:
 
-  (`length-1 character`) A short string to identify the error family.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
+  (`character`) Class(es) to assign to the error. Will be prefixed by
+  "{package}-error-".
 
 - call:
 
@@ -38,11 +36,16 @@ Error messaging for this package.
   functions that are intended to be called as utilities inside other
   functions.
 
-- .envir:
+- message_env:
 
-  Environment to evaluate the glue expressions in.
+  (`environment`) The execution environment to use to evaluate variables
+  in error messages.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 ## Value
 
 An error condition with classes `"nectar-condition"`, `"nectar-error"`,
-and `"nectar-error-{error_class}"`.
+and `"nectar-error-{subclass}"`.

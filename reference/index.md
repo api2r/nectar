@@ -43,8 +43,6 @@
   : Extract and clean a JSON API response
 - [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md)
   : Error informatively for unknown response types
-- [`stabilize_string()`](https://nectar.api2r.org/reference/stabilize_string.md)
-  : Ensure an argument is a length-1 character
 - [`url_normalize()`](https://nectar.api2r.org/reference/url_normalize.md)
   : Normalize a URL
 - [`url_path_append()`](https://nectar.api2r.org/reference/url_path_append.md)
