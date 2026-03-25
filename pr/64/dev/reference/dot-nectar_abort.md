@@ -48,4 +48,4 @@ Raise a package-scoped error
 ## Value
 
 An error condition with classes `"nectar-condition"`, `"nectar-error"`,
-and `"nectar-error-{error_class}"`.
+and `"nectar-error-{subclass}"`.
