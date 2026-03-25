@@ -101,7 +101,7 @@ fetch_records <- function(x, output_column = NULL) {
 ```r
 .check_non_empty <- function(x, call = rlang::caller_env()) {
   if (length(x) == 0L) {
-    .pkg_abort("Input {.arg x} cannot be empty.", "empty_input", call = call)
+    .nectar_abort("Input {.arg x} cannot be empty.", "empty_input", call = call)
   }
 }
 
@@ -174,10 +174,10 @@ Internal helpers use a dot prefix (e.g. `.parse_response()`).
 
 ## Error handling
 
-Use `.pkg_abort()` (defined in `R/aaa-conditions.R`) rather than calling `cli::cli_abort()` directly. This wraps `stbl::pkg_abort()` and ensures consistent error class formatting:
+Use `.nectar_abort()` (defined in `R/aaa-conditions.R`) rather than calling `cli::cli_abort()` directly. This wraps `stbl::pkg_abort()` and ensures consistent error class formatting:
 
 ```r
-.pkg_abort(
+.nectar_abort(
   "Column {.field {name}} not found in {.arg data}.",
   "column_not_found",
   call = call

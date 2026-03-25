@@ -118,7 +118,7 @@ expect_identical(x, y)                    # exact match
 
 ### Conditions
 
-**Errors thrown by this package** (via `.pkg_abort()`) should always be tested
+**Errors thrown by this package** (via `.nectar_abort()`) should always be tested
 with `expect_nectar_error_snapshot()` (defined in
 `tests/testthat/helper-expectations.R`), which captures both the error class
 hierarchy and the user-facing message in one snapshot:
