@@ -1,14 +1,5 @@
-test_that("resp_parse fails gracefully for unsupported classes", {
-  expect_error(
-    resp_parse(1),
-    class = "nectar_error-unsupported_response_class"
-  )
-  expect_snapshot(
-    {
-      resp_parse(1)
-    },
-    error = TRUE
-  )
+test_that("resp_parse fails gracefully for unsupported classes (#40)", {
+  expect_nectar_error_snapshot(resp_parse(1), "unsupported_response_class")
 })
 
 test_that("resp_parse parses json-containing httr2_response objects", {

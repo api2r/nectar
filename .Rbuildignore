@@ -9,3 +9,6 @@
 ^docs$
 ^pkgdown$
 ^principles\.md$
+^AGENTS\.md$
+^\.positai$
+^\.claude$

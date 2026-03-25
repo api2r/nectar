@@ -1,4 +1,4 @@
-test_that("req_pagination_policy errors informatively for bad fn", {
+test_that("req_pagination_policy errors informatively for bad fn (#35)", {
   expect_error(
     req_pagination_policy(
       httr2::request("https://example.com"),
@@ -8,7 +8,7 @@ test_that("req_pagination_policy errors informatively for bad fn", {
   )
 })
 
-test_that("req_pagination_policy applies the specified policy", {
+test_that("req_pagination_policy applies the specified policy (#35)", {
   pag_fn <- httr2::iterate_with_offset("page")
   req <- req_pagination_policy(
     httr2::request("https://example.com"),
@@ -22,12 +22,12 @@ test_that("req_pagination_policy applies the specified policy", {
   )
 })
 
-test_that("choose_pagination_fn returns NULL for no policy", {
+test_that("choose_pagination_fn returns NULL for no policy (#35)", {
   req <- httr2::request("https://example.com")
   expect_null(choose_pagination_fn(req))
 })
 
-test_that("choose_pagination_fn extracts the pagination_fn", {
+test_that("choose_pagination_fn extracts the pagination_fn (#35)", {
   pag_fn <- httr2::iterate_with_offset("page")
   req <- req_pagination_policy(
     httr2::request("https://example.com"),

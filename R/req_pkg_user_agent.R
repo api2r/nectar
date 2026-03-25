@@ -11,10 +11,12 @@
 #' req$options$useragent
 #' req_pkg_user_agent(req)$options$useragent
 #' req_pkg_user_agent(req, "stbl")$options$useragent
-req_pkg_user_agent <- function(req,
-                               pkg_name = get_pkg_name(call),
-                               pkg_url = NULL,
-                               call = rlang::caller_env()) {
+req_pkg_user_agent <- function(
+  req,
+  pkg_name = get_pkg_name(call),
+  pkg_url = NULL,
+  call = rlang::caller_env()
+) {
   # Always include nectar since we're the ones doing this.
   user_agent_string <- .nectar_user_agent_append(
     existing_user_agent = req$options$useragent %||%
@@ -40,10 +42,12 @@ req_pkg_user_agent <- function(req,
 #' @returns A string to use as a user agent. Attach the agent to your request
 #'   with [httr2::req_user_agent()].
 #' @keywords internal
-.pkg_user_agent_append <- function(existing_user_agent = NULL,
-                                   pkg_name = get_pkg_name(call),
-                                   pkg_url = NULL,
-                                   call = rlang::caller_env()) {
+.pkg_user_agent_append <- function(
+  existing_user_agent = NULL,
+  pkg_name = get_pkg_name(call),
+  pkg_url = NULL,
+  call = rlang::caller_env()
+) {
   .lib_user_agent_append(
     existing_user_agent,
     name = pkg_name,
@@ -58,13 +62,15 @@ req_pkg_user_agent <- function(req,
 #' @inheritParams .shared-params
 #' @returns A user agent string for the library.
 #' @keywords internal
-.lib_user_agent_string <- function(name,
-                                   version,
-                                   url = NULL,
-                                   call = rlang::caller_env()) {
-  name <- stabilize_string(name, call = call)
+.lib_user_agent_string <- function(
+  name,
+  version,
+  url = NULL,
+  call = rlang::caller_env()
+) {
+  name <- stbl::stabilize_chr_scalar(name, allow_na = FALSE, call = call)
   agent <- glue::glue("{name}/{version}")
-  url <- stbl::to_chr_scalar(url, call = call)
+  url <- stbl::to_chr_scalar(url, allow_null = TRUE, call = call)
   if (length(url)) {
     agent <- glue::glue("{agent} ({url})")
   }
@@ -76,11 +82,13 @@ req_pkg_user_agent <- function(req,
 #' @inheritParams .shared-params
 #' @returns A modified user agent string for the library.
 #' @keywords internal
-.lib_user_agent_append <- function(existing_user_agent,
-                                   name,
-                                   version,
-                                   url = NULL,
-                                   call = rlang::caller_env()) {
+.lib_user_agent_append <- function(
+  existing_user_agent,
+  name,
+  version,
+  url = NULL,
+  call = rlang::caller_env()
+) {
   if (is.null(name)) {
     return(existing_user_agent)
   }
@@ -105,8 +113,10 @@ req_pkg_user_agent <- function(req,
 #' @returns A string to use as a user agent, with the nectar user agent
 #'   prepended exactly once.
 #' @keywords internal
-.nectar_user_agent_append <- function(existing_user_agent = NULL,
-                                      call = rlang::caller_env()) {
+.nectar_user_agent_append <- function(
+  existing_user_agent = NULL,
+  call = rlang::caller_env()
+) {
   return(
     .pkg_user_agent_append(
       pkg_name = "nectar",
@@ -131,20 +141,26 @@ req_pkg_user_agent <- function(req,
 #' @returns A modified user agent string, minus `name`, any associated version,
 #'   and the `url`.
 #' @keywords internal
-.user_agent_remove <- function(existing_user_agent,
-                               name,
-                               url = NULL,
-                               call = rlang::caller_env()) {
-  existing_user_agent <- stbl::to_chr_scalar(existing_user_agent, call = call)
+.user_agent_remove <- function(
+  existing_user_agent,
+  name,
+  url = NULL,
+  call = rlang::caller_env()
+) {
+  existing_user_agent <- stbl::to_chr_scalar(
+    existing_user_agent,
+    allow_null = TRUE,
+    call = call
+  )
   if (!length(existing_user_agent)) {
     return(existing_user_agent)
   }
   # Order of removal matters. Go from most specific to least specific.
   if (length(url)) {
-    url <- stabilize_string(url, call = call)
+    url <- stbl::stabilize_chr_scalar(url, allow_na = FALSE, call = call)
     existing_user_agent <- stringr::str_remove(existing_user_agent, url)
   }
-  name <- stabilize_string(name, call = call)
+  name <- stbl::stabilize_chr_scalar(name, allow_na = FALSE, call = call)
   existing_user_agent <- stringr::str_remove(
     existing_user_agent,
     paste0(name, "/[^ ]+")

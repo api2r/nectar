@@ -1,4 +1,4 @@
-test_that("resp_body_separate listifies responses", {
+test_that("resp_body_separate listifies responses (#40)", {
   expect_identical(
     resp_body_separate("1", as.integer),
     list(1L)

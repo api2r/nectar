@@ -1,11 +1,18 @@
-test_that("resp_tidy_json fails gracefully with a bad subset_path", {
-  expect_error(
+test_that("resp_tidy_json fails gracefully with a bad subset_path (#40)", {
+  stbl::expect_pkg_error_classes(
     resp_tidy_json(subset_path = list(a = 1:10, b = mean), resp = NULL),
-    class = "stbl-error-coerce-character"
+    package = "stbl",
+    "coerce",
+    "character"
   )
 })
 
-test_that("resp_tidy_json tidies a response", {
+test_that("resp_tidy_json returns NULL for an empty body (#40)", {
+  mock_response <- httr2::response_json(body = list())
+  expect_null(resp_tidy_json(mock_response))
+})
+
+test_that("resp_tidy_json tidies a response (#40)", {
   target_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -20,7 +27,7 @@ test_that("resp_tidy_json tidies a response", {
   )
 })
 
-test_that("resp_tidy_json subsets a response", {
+test_that("resp_tidy_json subsets a response (#40)", {
   target_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -40,7 +47,7 @@ test_that("resp_tidy_json subsets a response", {
   )
 })
 
-test_that("resp_tidy_json tidies a response with a spec", {
+test_that("resp_tidy_json tidies a response with a spec (#40)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -65,7 +72,7 @@ test_that("resp_tidy_json tidies a response with a spec", {
   )
 })
 
-test_that("resp_tidy_json works with resp_tidy", {
+test_that("resp_tidy_json works with resp_tidy (#40)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -97,27 +104,4 @@ test_that("resp_tidy_json works with resp_tidy", {
     resp_tidy(mock_response),
     target_tibble
   )
-})
-
-test_that("resp_tidy_json works with resp_tidy", {
-  source_tibble <- tibble::tibble(
-    a = letters,
-    b = LETTERS,
-    c = 1:26
-  )
-  mock_response <- httr2::response_json(
-    body = source_tibble
-  )
-  mock_response$request <- list(
-    policies = list(
-      resp_tidy = list(
-        tidy_fn = resp_tidy_json,
-        tidy_args = list(
-          subset_path = "d"
-        )
-      )
-    )
-  )
-  test_result <- expect_no_error(resp_tidy(mock_response))
-  expect_null(test_result)
 })

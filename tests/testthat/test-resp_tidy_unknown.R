@@ -10,8 +10,8 @@ test_that("resp_tidy_unknown fails gracefully with object information", {
     )
   )
 
-  expect_error(
+  expect_nectar_error_snapshot(
     resp_tidy_unknown(mock_response),
-    class = "nectar_error-unknown_response_type"
+    "unknown_response_type"
   )
 })

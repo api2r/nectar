@@ -8,10 +8,9 @@ test_that(".req_policy returns reqs unchanged when no policies added", {
 
 test_that(".req_policy errors informatively for unnamed policies", {
   req <- httr2::request("https://example.com")
-  expect_error(
+  expect_nectar_error_snapshot(
     .req_policy(req, list(my_policy = "whatever")),
-    "must be named",
-    class = "nectar_error-bad_policy"
+    "bad_policy"
   )
 })
 

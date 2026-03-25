@@ -1,4 +1,4 @@
-test_that("iterate_with_json_cursor repeats with non-empty cursor", {
+test_that("iterate_with_json_cursor repeats with non-empty cursor (#32)", {
   httr2::local_mocked_responses(list(
     httr2::response_json(
       body = list(
@@ -27,7 +27,7 @@ test_that("iterate_with_json_cursor repeats with non-empty cursor", {
   expect_equal(httr2::resp_body_json(resps[[2]])$data, "response2")
 })
 
-test_that("iterate_with_json_cursor stops with NULL cursor", {
+test_that("iterate_with_json_cursor stops with NULL cursor (#32)", {
   httr2::local_mocked_responses(list(
     httr2::response_json(
       body = list(
@@ -62,7 +62,7 @@ test_that("iterate_with_json_cursor stops with NULL cursor", {
   expect_equal(httr2::resp_body_json(resps[[2]])$data, "response2")
 })
 
-test_that("iterate_with_json_cursor stops with blank cursor", {
+test_that("iterate_with_json_cursor stops with blank cursor (#32)", {
   httr2::local_mocked_responses(list(
     httr2::response_json(
       body = list(

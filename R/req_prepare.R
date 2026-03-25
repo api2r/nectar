@@ -70,7 +70,7 @@ req_prepare <- function(base_url,
       "{.arg {req}} must be a {.cls httr2_request}.",
       x = "{.arg {req}} is {.obj_type_friendly {req}}."
     ),
-    error_class = "unsupported_request_class",
+    subclass = "unsupported_request_class",
     call = call
   )
 }

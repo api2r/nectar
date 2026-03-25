@@ -169,9 +169,15 @@ get_pkg_name <- function(call = rlang::caller_env()) {
 #' @inheritParams .shared-params
 #' @returns The numeric version of the package.
 #' @keywords internal
-.get_pkg_version <- function(pkg_name = get_pkg_name(call),
-                             call = rlang::caller_env()) {
-  pkg_name <- stabilize_string(pkg_name, call = call)
+.get_pkg_version <- function(
+  pkg_name = get_pkg_name(call),
+  call = rlang::caller_env()
+) {
+  pkg_name <- stbl::stabilize_chr_scalar(
+    pkg_name,
+    allow_na = FALSE,
+    call = call
+  )
   rlang::check_installed(pkg_name, "to find the package version.", call = call)
   return(as.character(utils::packageVersion(pkg_name)))
 }

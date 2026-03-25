@@ -26,8 +26,10 @@
 # .as_nectar_request() fails gracefully for non-reqs
 
     Code
-      .as_nectar_request(test_obj)
-    Condition
+      (expect_pkg_error_classes(.as_nectar_request(test_obj), "nectar",
+      "unsupported_request_class"))
+    Output
+      <error/nectar-error-unsupported_request_class>
       Error:
       ! `1` must be a <httr2_request>.
       x `1` is a number.
