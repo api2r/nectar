@@ -58,6 +58,17 @@ test_that("resp_body_auto works for tsv (#40)", {
   expect_identical(resp_body_auto(resp), "tsv")
 })
 
+test_that("resp_body_auto works for json subtypes (#40)", {
+  local_mocked_bindings(
+    resp_body_json = function(resp) "json",
+    .package = "httr2"
+  )
+  resp <- httr2::response(
+    headers = list(`Content-Type` = "application/vnd.api+json")
+  )
+  expect_identical(resp_body_auto(resp), "json")
+})
+
 test_that("resp_body_auto works for other strings (#40)", {
   local_mocked_bindings(
     resp_body_string = function(resp) "string",

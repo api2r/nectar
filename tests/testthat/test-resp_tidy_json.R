@@ -7,6 +7,11 @@ test_that("resp_tidy_json fails gracefully with a bad subset_path (#40)", {
   )
 })
 
+test_that("resp_tidy_json returns NULL for an empty body (#40)", {
+  mock_response <- httr2::response_json(body = list())
+  expect_null(resp_tidy_json(mock_response))
+})
+
 test_that("resp_tidy_json tidies a response (#40)", {
   target_tibble <- tibble::tibble(
     a = letters,
