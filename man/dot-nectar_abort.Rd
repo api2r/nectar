@@ -32,7 +32,7 @@ evaluate variables in error messages.}
 }
 \value{
 An error condition with classes \code{"nectar-condition"},
-\code{"nectar-error"}, and \code{"nectar-error-{error_class}"}.
+\code{"nectar-error"}, and \code{"nectar-error-{subclass}"}.
 }
 \description{
 Raise a package-scoped error
