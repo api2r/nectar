@@ -1,7 +1,9 @@
 test_that("resp_tidy_json fails gracefully with a bad subset_path (#40)", {
-  expect_error(
+  stbl::expect_pkg_error_classes(
     resp_tidy_json(subset_path = list(a = 1:10, b = mean), resp = NULL),
-    class = "stbl-error-coerce-character"
+    package = "stbl",
+    "coerce",
+    "character"
   )
 })
 

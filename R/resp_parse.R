@@ -38,7 +38,7 @@ resp_parse.default <- function(resps,
       "{.arg {arg}} must be a {.cls list} or a {.cls httr2_response}.",
       x = "{.arg {arg}} is {.obj_type_friendly {resps}}."
     ),
-    error_class = "unsupported_response_class",
+    subclass = "unsupported_response_class",
     call = call
   )
 }

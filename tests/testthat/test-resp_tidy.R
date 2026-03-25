@@ -1,29 +1,11 @@
 test_that("resp_tidy fails gracefully for non-responses (#40)", {
   test_obj <- 1
-  expect_error(
-    resp_tidy(test_obj),
-    class = "nectar_error-unsupported_response_class"
-  )
-  expect_snapshot(
-    {
-      resp_tidy(test_obj)
-    },
-    error = TRUE
-  )
+  expect_nectar_error_snapshot(resp_tidy(test_obj), "unsupported_response_class")
 })
 
 test_that("resp_tidy fails gracefully for lists of non-responses (#40)", {
   test_obj <- list(a = letters, b = 1:26)
-  expect_error(
-    resp_tidy(test_obj),
-    class = "nectar_error-unsupported_response_class"
-  )
-  expect_snapshot(
-    {
-      resp_tidy(test_obj)
-    },
-    error = TRUE
-  )
+  expect_nectar_error_snapshot(resp_tidy(test_obj), "unsupported_response_class")
 })
 
 test_that("resp_tidy parses json-containing httr2_response objects (#40)", {

@@ -155,14 +155,8 @@ test_that("req_prepare() applies tidying", {
 
 test_that(".as_nectar_request() fails gracefully for non-reqs", {
   test_obj <- 1
-  expect_error(
+  expect_nectar_error_snapshot(
     .as_nectar_request(test_obj),
-    class = "nectar_error-unsupported_request_class"
-  )
-  expect_snapshot(
-    {
-      .as_nectar_request(test_obj)
-    },
-    error = TRUE
+    "unsupported_request_class"
   )
 })

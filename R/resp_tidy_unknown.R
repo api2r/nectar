@@ -15,7 +15,7 @@ resp_tidy_unknown <- function(resp, call = rlang::caller_env()) {
       "No parser is defined for this response.",
       i = "Response pieces: {names(results)}"
     ),
-    error_class = "unknown_response_type",
+    subclass = "unknown_response_type",
     call = call
   )
 }

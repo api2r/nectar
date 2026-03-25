@@ -15,15 +15,21 @@
 #'
 #' @inherit .shared-request return
 #' @export
-req_auth_api_key <- function(req,
-                             parameter_name,
-                             ...,
-                             api_key = NULL,
-                             location = c("header", "query", "cookie"),
-                             call = rlang::caller_env()) {
+req_auth_api_key <- function(
+  req,
+  parameter_name,
+  ...,
+  api_key = NULL,
+  location = c("header", "query", "cookie"),
+  call = rlang::caller_env()
+) {
   rlang::check_dots_empty(call = call)
-  parameter_name <- stabilize_string(parameter_name, call = call)
-  api_key <- stbl::to_chr_scalar(api_key, call = call)
+  parameter_name <- stbl::stabilize_chr_scalar(
+    parameter_name,
+    allow_na = FALSE,
+    call = call
+  )
+  api_key <- stbl::to_chr_scalar(api_key, allow_null = TRUE, call = call)
   # Return without failing if api_key isn't set. This makes it easier to set up
   # APIs that change behavior when an API key is set, without failing when it
   # isn't.

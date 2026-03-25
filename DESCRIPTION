@@ -27,6 +27,7 @@ Imports:
     stringr,
     vctrs
 Suggests:
+    astgrepr,
     covr,
     stringi,
     testthat (>= 3.0.0),
