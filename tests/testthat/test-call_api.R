@@ -1,4 +1,4 @@
-test_that("call_api() calls an API", {
+test_that("call_api() calls an API (#6)", {
   local_mocked_bindings(
     req_perform_opinionated = function(req, ...) list("performed"),
     resp_parse = function(resp, ...) {
@@ -11,7 +11,7 @@ test_that("call_api() calls an API", {
   expect_true(test_result)
 })
 
-test_that("call_api() applies auth (#8)", {
+test_that("call_api() applies auth (#5, #8, #11, #19)", {
   local_mocked_bindings(
     req_perform_opinionated = function(req, ...) req,
     resp_parse = function(resp, ...) resp

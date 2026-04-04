@@ -1,4 +1,4 @@
-test_that("req_prepare() applies user agent (#29)", {
+test_that("req_prepare() applies user agent (#10, #29)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     additional_user_agent = "foo"
@@ -12,7 +12,7 @@ test_that("req_prepare() applies user agent (#29)", {
   )
 })
 
-test_that("req_prepare() deals with paths.", {
+test_that("req_prepare() deals with paths (#10)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     path = "foo/bar"
@@ -35,7 +35,7 @@ test_that("req_prepare() deals with paths.", {
   )
 })
 
-test_that("req_prepare() uses query parameters", {
+test_that("req_prepare() uses query parameters (#5, #10, #11, #19)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     query = list(
@@ -49,7 +49,7 @@ test_that("req_prepare() uses query parameters", {
   )
 })
 
-test_that("req_prepare() uses the .multi arg", {
+test_that("req_prepare() uses the .multi arg (#5, #11, #19)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     query = list(
@@ -64,7 +64,7 @@ test_that("req_prepare() uses the .multi arg", {
   )
 })
 
-test_that("req_prepare() removes empty query parameters", {
+test_that("req_prepare() removes empty query parameters (#5, #11, #19)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     query = list(
@@ -78,7 +78,7 @@ test_that("req_prepare() removes empty query parameters", {
   )
 })
 
-test_that("req_prepare() uses body parameters", {
+test_that("req_prepare() uses body parameters (#10)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     body = list(
@@ -92,7 +92,7 @@ test_that("req_prepare() uses body parameters", {
   )
 })
 
-test_that("bodies with paths are handled properly", {
+test_that("bodies with paths are handled properly (#6)", {
   expect_snapshot({
     test_result <- req_prepare(
       base_url = "https://example.com",
@@ -106,7 +106,7 @@ test_that("bodies with paths are handled properly", {
   expect_identical(test_result$body$type, "multipart")
 })
 
-test_that("req_prepare() applies methods", {
+test_that("req_prepare() applies methods (#5, #10, #11, #19)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     method = "PATCH"

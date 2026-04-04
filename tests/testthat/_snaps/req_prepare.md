@@ -1,4 +1,4 @@
-# bodies with paths are handled properly
+# bodies with paths are handled properly (#6)
 
     Code
       test_result <- req_prepare(base_url = "https://example.com", body = list(foo = "bar",
