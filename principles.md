@@ -60,10 +60,10 @@ these rules to decide how to name things:
   make sure it isn't already defined.
 - If a parameter is reused but doesn't have a clear "home" (eg, `req` is used in 
   several unrelated functions), define it in the `.shared-params` block of 
-  `aaa-shared.R`. It's ok to err on the side of definining things there.
+  `aaa-shared_params.R`. It's ok to err on the side of definining things there.
 - Likewise, if a return value is reused but doesn't have a clear "home" (eg the 
   `httr2::request` objects returned by several functions), define it once in 
-  `aaa-shared.R` in a block with `@name .shared-{name}`, where `{name}` 
+  `aaa-shared_params.R` in a block with `@name .shared-{name}`, where `{name}` 
   concisely describes the return value. Use this in function documentation with
   `@inherit .shared-{name} return`.
 - If a choice contradicts with the choice in {httr2}, explain and justify it in 
