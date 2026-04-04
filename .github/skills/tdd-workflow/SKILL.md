@@ -37,7 +37,7 @@ which(purrr::map_int(covr_res, "value") == 0)
 
 Files excluded from the coverage requirement:
 - `R/*-package.R`
-- `R/aaa-shared.R`
+- `R/aaa-shared_params.R`
 - Files matching `R/import-standalone-*.R`
 
 ## Test types
@@ -88,7 +88,8 @@ Snapshots are stored in `tests/testthat/_snaps/`. The filename corresponds to th
 - **Self-sufficient:** each test contains its own setup, execution, and assertion. Tests must be runnable in isolation.
 - **Duplication over factoring:** repeat setup code rather than extracting it. Clarity beats DRY in tests.
 - **One concept per test:** a failing test should tell you exactly what broke.
-- **Issue reference in description:** the `desc` of every new `test_that()` call should end with one or more parenthetical issue references for the issue(s) *verified by those tests* — typically the issue currently being solved. Never guess or invent issue numbers; if no tracked issue applies, use `#noissue`:
+- **Minimal with few comments:** keep tests lean. Avoid over-commenting.
+- **Issue reference in description:** the `desc` of every new `test_that()` call should end with one or more parenthetical issue references for the issue(s) *verified by those tests* — typically the issue currently being solved. **Never guess or invent issue numbers.** Determine the number from the user's prompt, the branch name (`git branch --show-current`), or `gh issue list`. Before writing a number, verify you can trace it to one of these sources. If no tracked issue applies, use `#noissue`. The numbers in the examples below are illustrative placeholders — do not copy them:
   ```r
   test_that("fetch_records() returns correct columns (#1)", { ... })
   test_that("build_summary() returns correct columns (#2, #3)", { ... })
@@ -118,25 +119,26 @@ expect_identical(x, y)                    # exact match
 
 ### Conditions
 
-**Errors thrown by this package** (via `.nectar_abort()`) should always be tested
-with `expect_nectar_error_snapshot()` (defined in
-`tests/testthat/helper-expectations.R`), which captures both the error class
+**Errors thrown by this package** (via `.pkg_abort()`) should always be tested
+with `stbl::expect_pkg_error_snapshot()`, which captures both the error class
 hierarchy and the user-facing message in one snapshot:
 
 ```r
 test_that("process_data() errors on empty input (#42)", {
-  expect_nectar_error_snapshot(
+  stbl::expect_pkg_error_snapshot(
     process_data(data.frame()),
+    "nectar",
     "empty_input"
   )
 })
 ```
 
+Pass `transform = stbl::.transform_path(path)` to scrub volatile values (e.g. temp
+paths) from the snapshot before comparison.
+
 **Errors thrown by `stbl`** (via `stbl::to_*()` / `stbl::stabilize_*()`)
 should be tested with `stbl::expect_pkg_error_classes()`. Since the message
-text is controlled by `stbl`, only the class hierarchy needs to be asserted.
-
-Pass the subclass as a single string for simple error classes:
+text is controlled by `stbl`, only the class hierarchy needs to be asserted:
 
 ```r
 test_that("process_data() errors on non-integer page_size (#43)", {
@@ -156,7 +158,7 @@ separate argument. Underscores within a component are kept as-is:
 test_that("process_data() errors on non-coercible input (#43)", {
   stbl::expect_pkg_error_classes(
     process_data(sample_data, value = list(bad = "input")),
-    package = "stbl",
+    "stbl",
     "coerce",
     "character"
   )

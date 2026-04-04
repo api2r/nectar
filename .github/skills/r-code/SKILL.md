@@ -45,7 +45,15 @@ fetch_records(fp, ps, ow)
 
 One exported function per file: `R/{function_name}.R` (e.g. `fetch_records()` → `R/fetch_records.R`). Internal helpers used exclusively by that function live in the same file. Shared helpers go in `R/utils.R` or `R/utils-{topic}.R` (e.g. `R/utils-parsing.R`).
 
+## Coding style
+
+- Always run `air format .` after generating code.
+- Use the base pipe operator (`|>`) not the magrittr pipe (`%>%`).
+- Use `\() ...` for single-line anonymous functions. For all other cases, use `function() {...}`.
+
 ## Function design
+
+**Functional core, imperative shell** — pure, testable functions that accept data and return data form the core. The imperative shell orchestrates program flow, manages state, and calls the functional core.
 
 Functions should be **small and single-purpose**. Each function should operate at a **single level of abstraction**: it either orchestrates calls to other functions, or performs a direct operation on data, but does not mix the two.
 
@@ -66,6 +74,10 @@ build_report <- function(data, output_path) {
 ```
 
 Name functions well enough that their purpose is obvious from the call site. When reading the orchestrator above, each step is self-documenting — no comments needed.
+
+**Simplify control flow** — prefer guard clauses and returning early over complex if/else structures.
+
+**Pure conditionals** — the expression inside a conditional check should not cause side effects. Extract the pure check from the impure action into separate functions if needed.
 
 ## General API design patterns
 
