@@ -13,12 +13,12 @@ Source:
 [`DESCRIPTION`](https://github.com/api2r/nectar/blob/main/DESCRIPTION)
 
 Harmon J (2026). *nectar: A Framework for Web API Packages*. R package
-version 0.0.0.9006, <https://nectar.api2r.org>.
+version 0.0.0.9007, <https://nectar.api2r.org>.
 
     @Manual{,
       title = {nectar: A Framework for Web API Packages},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.0.0.9006},
+      note = {R package version 0.0.0.9007},
       url = {https://nectar.api2r.org},
     }

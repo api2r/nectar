@@ -26,8 +26,6 @@ contributing to this project, you agree to abide by its terms.
 
 ## All functions
 
-- [`call_api()`](https://nectar.api2r.org/reference/call_api.md)
-  **\[questioning\]** : Send a request to an API
 - [`choose_pagination_fn()`](https://nectar.api2r.org/reference/choose_pagination_fn.md)
   : Extract a pagination policy from a request
 - [`compact_nested_list()`](https://nectar.api2r.org/reference/compact_nested_list.md)
