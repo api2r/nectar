@@ -15,9 +15,11 @@
 #' @examples
 #' req <- httr2::request("https://example.com")
 #' req_pagination_policy(req, httr2::iterate_with_offset("page"))
-req_pagination_policy <- function(req,
-                                  pagination_fn,
-                                  call = rlang::caller_env()) {
+req_pagination_policy <- function(
+  req,
+  pagination_fn,
+  call = rlang::caller_env()
+) {
   pagination_fn <- rlang::as_function(pagination_fn, call = call)
   .req_policy(
     req,

@@ -29,10 +29,12 @@ resp_parse <- function(resps, ...) {
 #' @inheritParams .shared-params
 #' @export
 #' @rdname resp_parse
-resp_parse.default <- function(resps,
-                               ...,
-                               arg = rlang::caller_arg(resps),
-                               call = rlang::caller_env()) {
+resp_parse.default <- function(
+  resps,
+  ...,
+  arg = rlang::caller_arg(resps),
+  call = rlang::caller_env()
+) {
   .nectar_abort(
     c(
       "{.arg {arg}} must be a {.cls list} or a {.cls httr2_response}.",
@@ -46,16 +48,12 @@ resp_parse.default <- function(resps,
 #' @inheritParams .shared-params
 #' @export
 #' @rdname resp_parse
-resp_parse.httr2_response <- function(resps,
-                                      ...,
-                                      response_parser = resp_tidy) {
+resp_parse.httr2_response <- function(resps, ..., response_parser = resp_tidy) {
   do_if_fn_defined(resps, response_parser, ...)
 }
 
 #' @export
-resp_parse.list <- function(resps,
-                            ...,
-                            response_parser = resp_tidy) {
+resp_parse.list <- function(resps, ..., response_parser = resp_tidy) {
   resps_parsed <- .resp_parse_impl(resps, response_parser, ...)
   .resps_combine(resps_parsed)
 }

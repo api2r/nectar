@@ -26,11 +26,13 @@
 #' @return A list of [httr2::response()] objects, one for each request
 #'   performed. The list has additional class `nectar_responses`.
 #' @export
-req_perform_opinionated <- function(req,
-                                    ...,
-                                    next_req_fn = choose_pagination_fn(req),
-                                    max_reqs = 2,
-                                    max_tries_per_req = 3) {
+req_perform_opinionated <- function(
+  req,
+  ...,
+  next_req_fn = choose_pagination_fn(req),
+  max_reqs = 2,
+  max_tries_per_req = 3
+) {
   rlang::check_dots_empty()
   req <- .req_apply_retry_default(req, max_tries_per_req)
   if (is.null(next_req_fn)) {
