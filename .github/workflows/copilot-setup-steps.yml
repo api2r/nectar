@@ -44,7 +44,6 @@ jobs:
             any::testthat
             any::usethis
             any::withr
-            wranglezone/stbl
             local::.
 
       - name: Install air
