@@ -14,14 +14,16 @@
 #' req_base <- req_init("https://example.com")
 #' req_modify(req_base, path = c("specific/{path}", path = "endpoint"))
 #' req_modify(req_base, query = c("param1" = "value1", "param2" = "value2"))
-req_modify <- function(req,
-                       ...,
-                       path = NULL,
-                       query = NULL,
-                       body = NULL,
-                       mime_type = NULL,
-                       method = NULL,
-                       call = rlang::caller_env()) {
+req_modify <- function(
+  req,
+  ...,
+  path = NULL,
+  query = NULL,
+  body = NULL,
+  mime_type = NULL,
+  method = NULL,
+  call = rlang::caller_env()
+) {
   rlang::check_dots_empty()
   req <- .req_path_append(req, path, call = call)
   req <- .req_query_flatten(req, query)
@@ -50,8 +52,7 @@ req_modify <- function(req,
 #' @inheritParams .shared-params
 #' @inherit .shared-request return
 #' @keywords internal
-.req_query_flatten <- function(req,
-                               query) {
+.req_query_flatten <- function(req, query) {
   query <- purrr::discard(query, is.null)
   rlang::inject(httr2::req_url_query(req, !!!query))
 }
@@ -68,8 +69,7 @@ req_modify <- function(req,
   .do_if_args_defined(req, httr2::req_method, method = method, call = call)
 }
 
-.prepare_body <- function(body,
-                          mime_type = NULL) {
+.prepare_body <- function(body, mime_type = NULL) {
   body <- compact_nested_list(body)
   if (length(body)) {
     if (purrr::some(body, \(x) inherits(x, "fs_path"))) {
@@ -106,10 +106,12 @@ req_modify <- function(req,
 #' @inheritParams .shared-params
 #' @inherit httr2::req_body_json return
 #' @keywords internal
-.req_body_auto <- function(req,
-                           body,
-                           mime_type = NULL,
-                           call = rlang::caller_env()) {
+.req_body_auto <- function(
+  req,
+  body,
+  mime_type = NULL,
+  call = rlang::caller_env()
+) {
   body <- .prepare_body(body, mime_type)
   .do_if_args_defined(req, .add_body, body = body, call = call)
 }

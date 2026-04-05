@@ -22,10 +22,12 @@
 #'
 #' @returns The tibblified response body.
 #' @export
-resp_tidy_json <- function(resp,
-                           spec = NULL,
-                           unspecified = "list",
-                           subset_path = NULL) {
+resp_tidy_json <- function(
+  resp,
+  spec = NULL,
+  unspecified = "list",
+  subset_path = NULL
+) {
   rlang::check_installed(
     "tibblify",
     "to tidy the JSON response body."

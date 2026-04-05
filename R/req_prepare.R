@@ -9,20 +9,22 @@
 #' @inherit .shared-request return
 #' @family opinionated request functions
 #' @export
-req_prepare <- function(base_url,
-                        ...,
-                        path = NULL,
-                        query = NULL,
-                        body = NULL,
-                        mime_type = NULL,
-                        method = NULL,
-                        additional_user_agent = NULL,
-                        auth_fn = NULL,
-                        auth_args = list(),
-                        tidy_fn = NULL,
-                        tidy_args = list(),
-                        pagination_fn = NULL,
-                        call = rlang::caller_env()) {
+req_prepare <- function(
+  base_url,
+  ...,
+  path = NULL,
+  query = NULL,
+  body = NULL,
+  mime_type = NULL,
+  method = NULL,
+  additional_user_agent = NULL,
+  auth_fn = NULL,
+  auth_args = list(),
+  tidy_fn = NULL,
+  tidy_args = list(),
+  pagination_fn = NULL,
+  call = rlang::caller_env()
+) {
   rlang::check_dots_empty()
   req <- req_init(
     base_url,
@@ -74,4 +76,3 @@ req_prepare <- function(base_url,
     call = call
   )
 }
-

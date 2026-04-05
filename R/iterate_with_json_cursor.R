@@ -19,8 +19,7 @@
 #' @returns A function that takes the response and the previous request, and
 #'   returns the next request if there are more results.
 #' @export
-iterate_with_json_cursor <- function(param_name = "cursor",
-                                     next_cursor_path) {
+iterate_with_json_cursor <- function(param_name = "cursor", next_cursor_path) {
   httr2::iterate_with_cursor(
     param_name = param_name,
     resp_param_value = .next_cursor_finder(
@@ -38,8 +37,10 @@ iterate_with_json_cursor <- function(param_name = "cursor",
 #' @returns A function that returns the next cursor, or `NULL` if the next
 #'   cursor is `NULL` (or otherwise length-0) or `""`.
 #' @keywords internal
-.next_cursor_finder <- function(next_cursor_path,
-                                resp_body_fn = resp_body_auto) {
+.next_cursor_finder <- function(
+  next_cursor_path,
+  resp_body_fn = resp_body_auto
+) {
   force(next_cursor_path)
   function(resp) {
     cursor <- purrr::pluck(resp_body_fn(resp), !!!next_cursor_path)

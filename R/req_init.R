@@ -16,10 +16,12 @@
 #'   "https://example.com",
 #'   additional_user_agent = "my_api_client (https://my.api.client)"
 #' )
-req_init <- function(base_url,
-                     ...,
-                     additional_user_agent = NULL,
-                     call = rlang::caller_env()) {
+req_init <- function(
+  base_url,
+  ...,
+  additional_user_agent = NULL,
+  call = rlang::caller_env()
+) {
   req <- httr2::request(base_url)
   req <- httr2::req_user_agent(req, additional_user_agent)
   req <- req_pkg_user_agent(req, call = call)

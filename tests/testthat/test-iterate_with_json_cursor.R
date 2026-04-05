@@ -96,4 +96,3 @@ test_that("iterate_with_json_cursor stops with blank cursor (#32)", {
   expect_equal(httr2::resp_body_json(resps[[1]])$data, "response1")
   expect_equal(httr2::resp_body_json(resps[[2]])$data, "response2")
 })
-

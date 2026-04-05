@@ -12,3 +12,5 @@
 ^AGENTS\.md$
 ^\.positai$
 ^\.claude$
+^[.]?air[.]toml$
+^\.vscode$
