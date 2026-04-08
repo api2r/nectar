@@ -2,3 +2,8 @@ url: https://nectar.api2r.org
 template:
   bootstrap: 5
 
+articles:
+- title: "Get started"
+  navbar: ~
+  contents:
+  - nectar
