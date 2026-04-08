@@ -1,6 +1,11 @@
 # Extract response body into list
 
-Extract response body into list
+Wrap the parsed response body in a
+[`list()`](https://rdrr.io/r/base/list.html). Unlike
+[`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md),
+this function prevents individual response bodies from being
+concatenated when combining multiple responses, which is useful for raw
+or otherwise non-concatenatable types.
 
 ## Usage
 

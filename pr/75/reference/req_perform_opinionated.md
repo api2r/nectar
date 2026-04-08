@@ -63,22 +63,33 @@ req_perform_opinionated(
 
 ## Value
 
-A list of
+Always returns a list of
 [`httr2::response()`](https://httr2.r-lib.org/reference/response.html)
-objects, one for each request performed. The list has additional class
-`nectar_responses`.
+objects, one for each request performed, to ensure that downstream
+operations are the same regardless of the number of responses. The list
+has additional class `nectar_responses`.
 
 ## Examples
 
 ``` r
 # Performs a single request and returns a list of responses
-req <- httr2::request("https://nectar.api2r.org")
+req <- httr2::request("https://jsonplaceholder.typicode.com/posts")
 resps <- req_perform_opinionated(req)
 httr2::resp_status(resps[[1]])
 #> [1] 200
-httr2::resp_body_html(resps[[1]])
-#> {html_document}
-#> <html lang="en-US">
-#> [1] <head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-#> [2] <body>\n    <a href="#main" class="visually-hidden-focusable">Skip to con ...
+resp_parse(resps, response_parser = resp_tidy_json)
+#> # A tibble: 100 × 4
+#>    userId    id title                                                      body 
+#>     <int> <int> <chr>                                                      <chr>
+#>  1      1     1 sunt aut facere repellat provident occaecati excepturi op… "qui…
+#>  2      1     2 qui est esse                                               "est…
+#>  3      1     3 ea molestias quasi exercitationem repellat qui ipsa sit a… "et …
+#>  4      1     4 eum et est occaecati                                       "ull…
+#>  5      1     5 nesciunt quas odio                                         "rep…
+#>  6      1     6 dolorem eum magni eos aperiam quia                         "ut …
+#>  7      1     7 magnam facilis autem                                       "dol…
+#>  8      1     8 dolorem dolore est ipsam                                   "dig…
+#>  9      1     9 nesciunt iure omnis dolorem tempora et accusantium         "con…
+#> 10      1    10 optio molestias id quia eum                                "quo…
+#> # ℹ 90 more rows
 ```

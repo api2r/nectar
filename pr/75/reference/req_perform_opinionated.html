@@ -91,22 +91,34 @@ attempt each individual request. Passed to the <code>max_tries</code> argument o
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of <code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> objects, one for each request
-performed. The list has additional class <code>nectar_responses</code>.</p>
+    <p>Always returns a list of <code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> objects, one for each
+request performed, to ensure that downstream operations are the same
+regardless of the number of responses. The list has additional class
+<code>nectar_responses</code>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Performs a single request and returns a list of responses</span></span></span>
-<span class="r-in"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span><span class="op">(</span><span class="st">"https://nectar.api2r.org"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span><span class="op">(</span><span class="st">"https://jsonplaceholder.typicode.com/posts"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">resps</span> <span class="op">&lt;-</span> <span class="fu">req_perform_opinionated</span><span class="op">(</span><span class="va">req</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_status.html" class="external-link">resp_status</a></span><span class="op">(</span><span class="va">resps</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
-<span class="r-in"><span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_html</a></span><span class="op">(</span><span class="va">resps</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {html_document}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;html lang="en-US"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] &lt;body&gt;\n    &lt;a href="#main" class="visually-hidden-focusable"&gt;Skip to con ...</span>
+<span class="r-in"><span><span class="fu"><a href="resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="va">resps</span>, response_parser <span class="op">=</span> <span class="va">resp_tidy_json</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    userId    id title                                                      body </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>      1     1 sunt aut facere repellat provident occaecati excepturi op… <span style="color: #949494;">"</span>qui…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>      1     2 qui est esse                                               <span style="color: #949494;">"</span>est…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>      1     3 ea molestias quasi exercitationem repellat qui ipsa sit a… <span style="color: #949494;">"</span>et …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>      1     4 eum et est occaecati                                       <span style="color: #949494;">"</span>ull…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>      1     5 nesciunt quas odio                                         <span style="color: #949494;">"</span>rep…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>      1     6 dolorem eum magni eos aperiam quia                         <span style="color: #949494;">"</span>ut …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>      1     7 magnam facilis autem                                       <span style="color: #949494;">"</span>dol…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      1     8 dolorem dolore est ipsam                                   <span style="color: #949494;">"</span>dig…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      1     9 nesciunt iure omnis dolorem tempora et accusantium         <span style="color: #949494;">"</span>con…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>      1    10 optio molestias id quia eum                                <span style="color: #949494;">"</span>quo…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

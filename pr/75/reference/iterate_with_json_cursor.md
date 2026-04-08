@@ -47,18 +47,22 @@ iterate_with_json_cursor("cursor", c("response_metadata", "next_cursor"))
 #>         req_url_query(req, `:=`(!!param_name, value))
 #>     }
 #> }
-#> <bytecode: 0x55911fd0b110>
-#> <environment: 0x55911fd0a700>
+#> <bytecode: 0x55b330ff1b68>
+#> <environment: 0x55b330ff1158>
 
 # Create a cursor iterator for the Crossref API
-iterate_with_json_cursor("cursor", "next-cursor")
-#> function (resp, req) 
-#> {
-#>     value <- resp_param_value(resp)
-#>     if (!is.null(value)) {
-#>         req_url_query(req, `:=`(!!param_name, value))
-#>     }
-#> }
-#> <bytecode: 0x55911fd0b110>
-#> <environment: 0x55911f783510>
+iterate_xref <- iterate_with_json_cursor("cursor", c("message", "next-cursor"))
+
+if (FALSE) { # \dontrun{
+# Use the iterator to paginate through Crossref API results. The cursor must
+# be set to "*" for the initial request to trigger the api to return the next
+# cursor.
+req <- httr2::request("https://api.crossref.org/works") |>
+  httr2::req_url_query(rows = 5, cursor = "*", select = "DOI")
+
+resps <- req_perform_opinionated(
+  req, next_req_fn = iterate_xref, max_reqs = 2
+)
+resps
+} # }
 ```

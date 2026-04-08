@@ -23,7 +23,8 @@ Add a retry policy if none is defined
 
 ## Value
 
-A list of
+Always returns a list of
 [`httr2::response()`](https://httr2.r-lib.org/reference/response.html)
-objects, one for each request performed. The list has additional class
-`nectar_responses`.
+objects, one for each request performed, to ensure that downstream
+operations are the same regardless of the number of responses. The list
+has additional class `nectar_responses`.
