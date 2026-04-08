@@ -42,8 +42,18 @@ test_that("req_auth_api_key removes the key when api_key is NULL (#76)", {
   expect_false(grepl("parm", req_removed$url))
 
   # Cookie: NULL removes a previously-set cookie
-  req_with_cookie <- req_auth_api_key(req, "parm", api_key = "my_key", location = "cookie")
-  req_removed <- req_auth_api_key(req_with_cookie, "parm", api_key = NULL, location = "cookie")
+  req_with_cookie <- req_auth_api_key(
+    req,
+    "parm",
+    api_key = "my_key",
+    location = "cookie"
+  )
+  req_removed <- req_auth_api_key(
+    req_with_cookie,
+    "parm",
+    api_key = NULL,
+    location = "cookie"
+  )
   expect_false(grepl("parm", req_removed$options$cookie %||% ""))
 })
 
