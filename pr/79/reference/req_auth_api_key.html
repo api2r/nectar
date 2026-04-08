@@ -11,7 +11,7 @@ apply those keys to requests."><meta property="og:image" content="https://nectar
 
     <a class="navbar-brand me-2" href="../index.html">nectar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,8 @@ in the header, query, or cookie.</p></dd>
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
 <dd><p>(<code>length-1 character</code> or <code>NULL</code>) The API key to use. If this
-value is <code>NULL</code>, <code>req</code> is returned unchanged.</p></dd>
+value is <code>NULL</code>, the key will be removed from the request. If this value is
+<code>NA</code> or an empty string, <code>req</code> is returned unchanged.</p></dd>
 
 
 <dt id="arg-location">location<a class="anchor" aria-label="anchor" href="#arg-location"></a></dt>
@@ -112,7 +113,7 @@ other functions.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com/?api_key=my-api-key</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># If `api_key` is NULL, the request is returned unchanged</span></span></span>
+<span class="r-in"><span><span class="co"># If `api_key` is NULL, the key is removed from the request</span></span></span>
 <span class="r-in"><span><span class="fu">req_auth_api_key</span><span class="op">(</span><span class="va">req</span>, <span class="st">"X-API-Key"</span>, api_key <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_request&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com</span>

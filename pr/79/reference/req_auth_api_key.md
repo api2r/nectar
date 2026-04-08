@@ -37,7 +37,8 @@ req_auth_api_key(
 - api_key:
 
   (`length-1 character` or `NULL`) The API key to use. If this value is
-  `NULL`, `req` is returned unchanged.
+  `NULL`, the key will be removed from the request. If this value is
+  `NA` or an empty string, `req` is returned unchanged.
 
 - location:
 
@@ -77,7 +78,7 @@ req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
 #> GET https://example.com/?api_key=my-api-key
 #> Body: empty
 
-# If `api_key` is NULL, the request is returned unchanged
+# If `api_key` is NULL, the key is removed from the request
 req_auth_api_key(req, "X-API-Key", api_key = NULL)
 #> <httr2_request>
 #> GET https://example.com
