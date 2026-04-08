@@ -37,8 +37,10 @@ attempt each individual request. Passed to the \code{max_tries} argument of
 \code{\link[httr2:req_retry]{httr2::req_retry()}}.}
 }
 \value{
-A list of \code{\link[httr2:response]{httr2::response()}} objects, one for each request
-performed. The list has additional class \code{nectar_responses}.
+Always returns a list of \code{\link[httr2:response]{httr2::response()}} objects, one for each
+request performed, to ensure that downstream operations are the same
+regardless of the number of responses. The list has additional class
+\code{nectar_responses}.
 }
 \description{
 This function ensures that a request has \code{\link[httr2:req_retry]{httr2::req_retry()}} applied, and
@@ -46,11 +48,11 @@ then performs the request, using either \code{\link[httr2:req_perform_iterative]
 a \code{next_req_fn} function is supplied) or \code{\link[httr2:req_perform]{httr2::req_perform()}} (if not).
 }
 \examples{
-\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+\dontshow{if (httr2::is_online() && rlang::is_installed("tibblify")) withAutoprint(\{ # examplesIf}
 # Performs a single request and returns a list of responses
-req <- httr2::request("https://nectar.api2r.org")
+req <- httr2::request("https://jsonplaceholder.typicode.com/posts")
 resps <- req_perform_opinionated(req)
 httr2::resp_status(resps[[1]])
-httr2::resp_body_html(resps[[1]])
+resp_parse(resps, response_parser = resp_tidy_json)
 \dontshow{\}) # examplesIf}
 }

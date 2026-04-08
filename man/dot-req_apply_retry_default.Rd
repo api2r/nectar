@@ -14,8 +14,10 @@ attempt each individual request. Passed to the \code{max_tries} argument of
 \code{\link[httr2:req_retry]{httr2::req_retry()}}.}
 }
 \value{
-A list of \code{\link[httr2:response]{httr2::response()}} objects, one for each request
-performed. The list has additional class \code{nectar_responses}.
+Always returns a list of \code{\link[httr2:response]{httr2::response()}} objects, one for each
+request performed, to ensure that downstream operations are the same
+regardless of the number of responses. The list has additional class
+\code{nectar_responses}.
 }
 \description{
 Add a retry policy if none is defined
