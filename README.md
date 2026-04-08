@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nectar <a href="https://nectar.api2r.org"><img src="man/figures/logo.svg" align="right" height="424" /></a>
+# nectar <a href="https://nectar.api2r.org"><img src="man/figures/logo.svg" align="right" height="278" /></a>
 
 <!-- badges: start -->
 
@@ -22,8 +22,8 @@ You can install the development version of nectar from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("api2r/nectar")
+# install.packages("pak")
+pak::pak("api2r/nectar")
 ```
 
 ## Usage
@@ -31,10 +31,9 @@ remotes::install_github("api2r/nectar")
 nectar provides an opinionated framework for building R packages that
 wrap web APIs. The three core functions compose into a natural pipeline:
 
-``` r
-library(nectar)
+1.  Prepare a request (attach auth, pagination, and tidy functions)
 
-# 1. Prepare a request (attach auth, pagination, and tidy functions)
+``` r
 req <- req_prepare(
   "https://api.crossref.org/works",
   query = list(
@@ -47,11 +46,17 @@ req <- req_prepare(
     next_cursor_path = c("message", "next-cursor")
   )
 )
+```
 
-# 2. Perform the request (handles pagination and retries automatically)
+2.  Perform the request (handles pagination and retries automatically)
+
+``` r
 resps <- req_perform_opinionated(req, max_reqs = 2)
+```
 
-# 3. Parse all responses into a single tibble
+3.  Parse all responses into a single tibble
+
+``` r
 result <- resp_parse(resps)
 result
 ```

@@ -22,7 +22,8 @@ in the header, query, or cookie.}
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{api_key}{(\verb{length-1 character} or \code{NULL}) The API key to use. If this
-value is \code{NULL}, \code{req} is returned unchanged.}
+value is \code{NULL}, the key will be removed from the request. If this value is
+\code{NA} or an empty string, \code{req} is returned unchanged.}
 
 \item{location}{(\verb{length-1 character}) Where the API key should be passed.
 One of \code{"header"} (default), \code{"query"}, or \code{"cookie"}.}
@@ -50,6 +51,6 @@ req_auth_api_key(req, "X-API-Key", api_key = "my-api-key")
 # Add an API key named `"api_key"` as a query parameter
 req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
 
-# If `api_key` is NULL, the request is returned unchanged
+# If `api_key` is NULL, the key is removed from the request
 req_auth_api_key(req, "X-API-Key", api_key = NULL)
 }
