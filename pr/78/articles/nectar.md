@@ -19,8 +19,8 @@ The main entry point in nectar is
 wraps
 [`httr2::request()`](https://httr2.r-lib.org/reference/request.html) and
 a collection of `req_*` functions into a single, composable call. You
-provide the base URL and any options you need — authentication,
-pagination, and response tidying — and
+provide the base URL and any options you need, such as authentication,
+pagination, and response tidying, and
 [`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md)
 stores those settings directly on the request object so that downstream
 functions can use them automatically.
@@ -40,8 +40,8 @@ req
 
 ## Authentication with `req_auth_api_key()`
 
-Many APIs accept an optional key — or, as in Crossref’s case, an email
-address — to identify your application and gain access to a higher rate
+Many APIs accept an optional key (or, as in Crossref’s case, an email
+address) to identify your application and gain access to a higher rate
 limit. nectar provides
 [`req_auth_api_key()`](https://nectar.api2r.org/reference/req_auth_api_key.md)
 for this purpose. You can pass it through
@@ -61,8 +61,8 @@ req <- req_prepare(
 )
 ```
 
-If you need to remove the key — for example, to fall back to anonymous
-access — pass `api_key = NULL`:
+If you need to remove the key (for example, to fall back to anonymous
+access), pass `api_key = NULL`:
 
 ``` r
 req <- req_prepare(
@@ -234,4 +234,4 @@ works <- function(
 ```
 
 Users of the package never need to know about cursors, retry logic, or
-JSON parsing — nectar handles it all.
+JSON parsing; nectar handles it all.

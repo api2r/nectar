@@ -72,10 +72,10 @@ Resource API</a> as a real-world example.</p>
 <p>The main entry point in nectar is <code><a href="../reference/req_prepare.html">req_prepare()</a></code>. It
 wraps <code><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">httr2::request()</a></code> and a collection of
 <code>req_*</code> functions into a single, composable call. You provide
-the base URL and any options you need — authentication, pagination, and
-response tidying — and <code><a href="../reference/req_prepare.html">req_prepare()</a></code> stores those settings
-directly on the request object so that downstream functions can use them
-automatically.</p>
+the base URL and any options you need, such as authentication,
+pagination, and response tidying, and <code><a href="../reference/req_prepare.html">req_prepare()</a></code> stores
+those settings directly on the request object so that downstream
+functions can use them automatically.</p>
 <p>Here we prepare a request to the Crossref <code>/works</code>
 endpoint. We ask for five results per page (<code>rows = 5</code>),
 select only the <code>DOI</code> field to keep the response small, and
@@ -91,10 +91,10 @@ cursor-based pagination:</p>
 <div class="section level2">
 <h2 id="authentication-with-req_auth_api_key">Authentication with <code>req_auth_api_key()</code><a class="anchor" aria-label="anchor" href="#authentication-with-req_auth_api_key"></a>
 </h2>
-<p>Many APIs accept an optional key — or, as in Crossref’s case, an
-email address — to identify your application and gain access to a higher
-rate limit. nectar provides <code><a href="../reference/req_auth_api_key.html">req_auth_api_key()</a></code> for this
-purpose. You can pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
+<p>Many APIs accept an optional key (or, as in Crossref’s case, an email
+address) to identify your application and gain access to a higher rate
+limit. nectar provides <code><a href="../reference/req_auth_api_key.html">req_auth_api_key()</a></code> for this purpose.
+You can pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
 <code>auth_fn</code> and <code>auth_args</code> arguments:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
@@ -107,8 +107,8 @@ purpose. You can pass it through <code><a href="../reference/req_prepare.html">r
 <span>    location <span class="op">=</span> <span class="st">"query"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If you need to remove the key — for example, to fall back to
-anonymous access — pass <code>api_key = NULL</code>:</p>
+<p>If you need to remove the key (for example, to fall back to anonymous
+access), pass <code>api_key = NULL</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
@@ -260,7 +260,7 @@ provide:</p>
 <span>    <span class="fu"><a href="../reference/resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Users of the package never need to know about cursors, retry logic,
-or JSON parsing — nectar handles it all.</p>
+or JSON parsing; nectar handles it all.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

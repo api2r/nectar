@@ -37,7 +37,7 @@ help you write a unit test, if needed).
   `usethis::pr_init("brief-description-of-change")`.
 
 - Make your changes, commit to git, and then create a PR by running
-  [`usethis::pr_push()`](https://usethis.r-lib.org/reference/pull-requests.html),
+  [`usethis::pr_push()`](https://rdrr.io/pkg/usethis/man/pull-requests.html),
   and following the prompts in your browser. The title of your PR should
   briefly describe the change. The body of your PR should contain
   `Fixes #issue-number`.
