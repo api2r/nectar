@@ -28,3 +28,10 @@ return a \code{NULL} \code{next_cursor} to indicate that there are no more pages
 results, while other endpoints might return \code{""}. This function normalizes
 all such results to \code{NULL}.
 }
+\examples{
+# Create a cursor iterator for the Slack API response structure
+iterate_with_json_cursor("cursor", c("response_metadata", "next_cursor"))
+
+# Create a cursor iterator for the Crossref API
+iterate_with_json_cursor("cursor", "next-cursor")
+}

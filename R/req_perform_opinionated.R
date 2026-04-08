@@ -26,6 +26,10 @@
 #' @return A list of [httr2::response()] objects, one for each request
 #'   performed. The list has additional class `nectar_responses`.
 #' @export
+#'
+#' @examplesIf httr2::is_online()
+#' req <- httr2::request("https://httr2.r-lib.org")
+#' req_perform_opinionated(req)
 req_perform_opinionated <- function(
   req,
   ...,

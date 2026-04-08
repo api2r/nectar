@@ -20,3 +20,7 @@ things like raw vectors that you wish to parse with \code{\link[httr2:resps_succ
 \description{
 Extract response body into list
 }
+\examples{
+resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_body_separate(resp)
+}

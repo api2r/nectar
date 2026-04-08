@@ -45,3 +45,9 @@ This function ensures that a request has \code{\link[httr2:req_retry]{httr2::req
 then performs the request, using either \code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}} (if
 a \code{next_req_fn} function is supplied) or \code{\link[httr2:req_perform]{httr2::req_perform()}} (if not).
 }
+\examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+req <- httr2::request("https://httr2.r-lib.org")
+req_perform_opinionated(req)
+\dontshow{\}) # examplesIf}
+}

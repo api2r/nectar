@@ -22,6 +22,18 @@
 #'
 #' @returns The tibblified response body.
 #' @export
+#'
+#' @examples
+#' resp <- httr2::response_json(
+#'   body = list(list(id = 1, name = "Alice"), list(id = 2, name = "Bob"))
+#' )
+#' resp_tidy_json(resp)
+#'
+#' # Extract a nested subset of the response body
+#' resp_nested <- httr2::response_json(
+#'   body = list(data = list(list(id = 1), list(id = 2)))
+#' )
+#' resp_tidy_json(resp_nested, subset_path = "data")
 resp_tidy_json <- function(
   resp,
   spec = NULL,

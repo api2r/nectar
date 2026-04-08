@@ -61,3 +61,13 @@ and \code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}, w
 a single response or multiple responses have been returned, and parses the
 responses appropriately.
 }
+\examples{
+resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_parse(resp, response_parser = httr2::resp_body_json)
+
+resps <- list(
+  httr2::response_json(body = list(list(id = 1), list(id = 2))),
+  httr2::response_json(body = list(list(id = 3), list(id = 4)))
+)
+resp_parse(resps, response_parser = httr2::resp_body_json)
+}

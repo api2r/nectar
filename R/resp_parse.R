@@ -22,6 +22,16 @@
 #'   [httr2::resps_data], this function does not concatenate raw vector
 #'   responses.
 #' @export
+#'
+#' @examples
+#' resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+#' resp_parse(resp, response_parser = httr2::resp_body_json)
+#'
+#' resps <- list(
+#'   httr2::response_json(body = list(list(id = 1), list(id = 2))),
+#'   httr2::response_json(body = list(list(id = 3), list(id = 4)))
+#' )
+#' resp_parse(resps, response_parser = httr2::resp_body_json)
 resp_parse <- function(resps, ...) {
   UseMethod("resp_parse")
 }

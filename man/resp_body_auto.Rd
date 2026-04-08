@@ -18,3 +18,13 @@ Use the \code{Content-Type} header (extracted using \code{\link[httr2:resp_conte
 of a response to automatically choose and apply a body parser, such as
 \code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} or \code{\link[=resp_body_csv]{resp_body_csv()}}.
 }
+\examples{
+resp_json <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_body_auto(resp_json)
+
+resp_csv <- httr2::response(
+  headers = list("Content-Type" = "text/csv"),
+  body = charToRaw("a,b\n1,2\n3,4")
+)
+resp_body_auto(resp_csv)
+}

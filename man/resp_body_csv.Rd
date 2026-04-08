@@ -24,3 +24,15 @@ The parsed response body as a data frame.
 Extract tabular data in comma-separated or tab-separated format from a
 response body.
 }
+\examples{
+resp_csv <- httr2::response(
+  headers = list("Content-Type" = "text/csv"),
+  body = charToRaw("a,b\n1,2\n3,4")
+)
+resp_body_csv(resp_csv)
+resp_tsv <- httr2::response(
+  headers = list("Content-Type" = "text/tab-separated-values"),
+  body = charToRaw("a\tb\n1\t2\n3\t4")
+)
+resp_body_tsv(resp_tsv)
+}

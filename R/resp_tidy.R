@@ -19,6 +19,19 @@
 #'   dealing with responses (particularly useful if the request does not include
 #'   a `resp_tidy` policy).
 #' @export
+#'
+#' @examples
+#' # Without a tidy policy, resp_tidy() uses resp_body_auto()
+#' resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+#' resp_tidy(resp)
+#'
+#' # With a tidy policy, resp_tidy() uses the policy's tidy function
+#' req <- req_tidy_policy(
+#'   httr2::request("https://example.com"),
+#'   httr2::resp_body_json
+#' )
+#' resp$request <- req
+#' resp_tidy(resp)
 resp_tidy <- function(resps) {
   UseMethod("resp_tidy")
 }

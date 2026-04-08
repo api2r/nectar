@@ -24,3 +24,10 @@ the response pieces after parsing with \code{\link[=resp_body_auto]{resp_body_au
 If you have not defined a parser for a response type, use this function to
 return useful information to help construct a parser.
 }
+\examples{
+resp <- httr2::response_json(body = list(status = "ok", data = list(id = 1)))
+tryCatch(
+  resp_tidy_unknown(resp),
+  error = function(e) conditionMessage(e)
+)
+}
