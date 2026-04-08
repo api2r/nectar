@@ -26,6 +26,23 @@
 #'
 #' # Create a cursor iterator for the Crossref API
 #' iterate_with_json_cursor("cursor", "next-cursor")
+#'
+#' \dontrun{
+#' # Use the iterator to paginate through Crossref API results.
+#' # The cursor must be set to "*" for the initial request.
+#' req <- httr2::request("https://api.crossref.org/works") |>
+#'   httr2::req_url_query(rows = 5, cursor = "*", select = "DOI")
+#'
+#' resps <- httr2::req_perform_iterative(
+#'   req,
+#'   next_req = iterate_with_json_cursor(
+#'     "cursor",
+#'     next_cursor_path = c("message", "next-cursor")
+#'   ),
+#'   max_reqs = 3
+#' )
+#' resps
+#' }
 iterate_with_json_cursor <- function(param_name = "cursor", next_cursor_path) {
   httr2::iterate_with_cursor(
     param_name = param_name,

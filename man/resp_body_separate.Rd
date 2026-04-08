@@ -18,7 +18,10 @@ The parsed response body wrapped in a \code{\link[=list]{list()}}. This is usefu
 things like raw vectors that you wish to parse with \code{\link[httr2:resps_successes]{httr2::resps_data()}}.
 }
 \description{
-Extract response body into list
+Wrap the parsed response body in a \code{\link[=list]{list()}}. Unlike \code{\link[=resp_body_auto]{resp_body_auto()}}, this
+function prevents individual response bodies from being concatenated when
+combining multiple responses, which is useful for raw or otherwise
+non-concatenatable types.
 }
 \examples{
 resp <- httr2::response_json(body = list(a = 1, b = "hello"))
