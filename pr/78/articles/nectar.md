@@ -26,17 +26,10 @@ stores those settings directly on the request object so that downstream
 functions can use them automatically.
 
 Here we prepare a request to the Crossref `/works` endpoint. We ask for
-five results per page (`rows = 5`), select only the `DOI` field to keep
-the response small, and set the `cursor` parameter to `"*"` to trigger
-cursor-based pagination:
-
-``` r
-req <- req_prepare(
-  "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI")
-)
-req
-```
+ten results per page (`rows = 10`), select only the “publisher” and
+“DOI” fields, tell [httr2](https://httr2.r-lib.org) to concatenate the
+`select` parameter with commas (`.multi`), and set the `cursor`
+parameter to `"*"` to trigger cursor-based pagination:
 
 ## Authentication with `req_auth_api_key()`
 
@@ -51,13 +44,11 @@ the `auth_fn` and `auth_args` arguments:
 ``` r
 req <- req_prepare(
   "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI"),
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  ),
   auth_fn = req_auth_api_key,
-  auth_args = list(
-    parameter_name = "mailto",
-    api_key = "your@email.com",
-    location = "query"
-  )
+  auth_args = list("mailto", api_key = "your@email.com", location = "query")
 )
 ```
 
@@ -65,15 +56,11 @@ If you need to remove the key (for example, to fall back to anonymous
 access), pass `api_key = NULL`:
 
 ``` r
-req <- req_prepare(
-  "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI"),
-  auth_fn = req_auth_api_key,
-  auth_args = list(
-    parameter_name = "mailto",
-    api_key = NULL,
-    location = "query"
-  )
+req <- req_auth_api_key(
+  req, # From above, with "your@email.com" attached as the key.
+  parameter_name = "mailto",
+  api_key = NULL,
+  location = "query"
 )
 ```
 
@@ -99,7 +86,9 @@ later:
 ``` r
 req <- req_prepare(
   "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI"),
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  ),
   tidy_fn = resp_tidy_json,
   tidy_args = list(subset_path = c("message", "items"))
 )
@@ -128,13 +117,12 @@ argument in
 ``` r
 req <- req_prepare(
   "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI"),
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  ),
   tidy_fn = resp_tidy_json,
   tidy_args = list(subset_path = c("message", "items")),
-  pagination_fn = iterate_with_json_cursor(
-    param_name = "cursor",
-    next_cursor_path = c("message", "next-cursor")
-  )
+  pagination_fn = iterate_xref
 )
 ```
 
@@ -182,7 +170,9 @@ full workflow in one expression:
 ``` r
 result <- req_prepare(
   "https://api.crossref.org/works",
-  query = list(rows = 5, cursor = "*", select = "DOI"),
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  ),
   tidy_fn = resp_tidy_json,
   tidy_args = list(subset_path = c("message", "items")),
   pagination_fn = iterate_with_json_cursor(
@@ -190,10 +180,26 @@ result <- req_prepare(
     next_cursor_path = c("message", "next-cursor")
   )
 ) |>
-  req_perform_opinionated(max_reqs = 2) |>
+  req_perform_opinionated(max_reqs = 3) |>
   resp_parse()
 
 result
+
+#> # A tibble: 30 × 2
+#>    publisher                         DOI                               
+#>    <chr>                             <chr>                             
+#>  1 Springer Fachmedien Wiesbaden     10.1007/978-3-658-17671-6_18-1    
+#>  2 Springer International Publishing 10.1007/978-3-031-23161-2_300726  
+#>  3 Elsevier                          10.1016/b978-0-08-102696-0.00020-8
+#>  4 Springer International Publishing 10.1007/978-3-031-28170-9_6       
+#>  5 Springer Nature Singapore         10.1007/978-981-16-8679-5_306     
+#>  6 Springer Singapore                10.1007/978-981-15-1636-8_42      
+#>  7 Springer Berlin Heidelberg        10.1007/978-3-642-33832-8_41      
+#>  8 Springer Nature Switzerland       10.1007/978-3-031-72371-1_11      
+#>  9 Springer International Publishing 10.1007/978-3-319-18938-3         
+#> 10 Springer International Publishing 10.1007/978-3-319-19932-0_5       
+#> # i 20 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 The resulting tibble contains the DOIs from the first two pages of
@@ -216,11 +222,7 @@ works <- function(
     "https://api.crossref.org/works",
     query = list(rows = rows, cursor = "*", select = select),
     auth_fn = req_auth_api_key,
-    auth_args = list(
-      parameter_name = "mailto",
-      api_key = mailto,
-      location = "query"
-    ),
+    auth_args = list("mailto", api_key = mailto, location = "query"),
     tidy_fn = resp_tidy_json,
     tidy_args = list(subset_path = c("message", "items")),
     pagination_fn = iterate_with_json_cursor(

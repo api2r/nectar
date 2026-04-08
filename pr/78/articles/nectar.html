@@ -77,16 +77,11 @@ pagination, and response tidying, and <code><a href="../reference/req_prepare.ht
 those settings directly on the request object so that downstream
 functions can use them automatically.</p>
 <p>Here we prepare a request to the Crossref <code>/works</code>
-endpoint. We ask for five results per page (<code>rows = 5</code>),
-select only the <code>DOI</code> field to keep the response small, and
-set the <code>cursor</code> parameter to <code>"*"</code> to trigger
-cursor-based pagination:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">req</span></span></code></pre></div>
+endpoint. We ask for ten results per page (<code>rows = 10</code>),
+select only the “publisher” and “DOI” fields, tell <a href="https://httr2.r-lib.org" class="external-link">httr2</a>
+to concatenate the <code>select</code> parameter with commas
+(<code>.multi</code>), and set the <code>cursor</code> parameter to
+<code>"*"</code> to trigger cursor-based pagination:</p>
 </div>
 <div class="section level2">
 <h2 id="authentication-with-req_auth_api_key">Authentication with <code>req_auth_api_key()</code><a class="anchor" aria-label="anchor" href="#authentication-with-req_auth_api_key"></a>
@@ -96,29 +91,23 @@ address) to identify your application and gain access to a higher rate
 limit. nectar provides <code><a href="../reference/req_auth_api_key.html">req_auth_api_key()</a></code> for this purpose.
 You can pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
 <code>auth_fn</code> and <code>auth_args</code> arguments:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
+<span>  <span class="op">)</span>,</span>
 <span>  auth_fn <span class="op">=</span> <span class="va">req_auth_api_key</span>,</span>
-<span>  auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    parameter_name <span class="op">=</span> <span class="st">"mailto"</span>,</span>
-<span>    api_key <span class="op">=</span> <span class="st">"your@email.com"</span>,</span>
-<span>    location <span class="op">=</span> <span class="st">"query"</span></span>
-<span>  <span class="op">)</span></span>
+<span>  auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="st">"your@email.com"</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>If you need to remove the key (for example, to fall back to anonymous
 access), pass <code>api_key = NULL</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span>,</span>
-<span>  auth_fn <span class="op">=</span> <span class="va">req_auth_api_key</span>,</span>
-<span>  auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    parameter_name <span class="op">=</span> <span class="st">"mailto"</span>,</span>
-<span>    api_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    location <span class="op">=</span> <span class="st">"query"</span></span>
-<span>  <span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_auth_api_key.html">req_auth_api_key</a></span><span class="op">(</span></span>
+<span>  <span class="va">req</span>, <span class="co"># From above, with "your@email.com" attached as the key.</span></span>
+<span>  parameter_name <span class="op">=</span> <span class="st">"mailto"</span>,</span>
+<span>  api_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  location <span class="op">=</span> <span class="st">"query"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -135,10 +124,12 @@ path from the response at the same time with the
 <code>tidy_fn</code> argument in <code><a href="../reference/req_prepare.html">req_prepare()</a></code>, so that
 every response is automatically tidied when you call
 <code><a href="../reference/resp_parse.html">resp_parse()</a></code> later:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
+<span>  <span class="op">)</span>,</span>
 <span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
 <span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -152,23 +143,22 @@ every response is automatically tidied when you call
 <code><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor()</a></code> generates the iterator function
 for this pattern, given the parameter name and the path to the cursor
 value in the response body:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iterate_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>  param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>  next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You can attach this iterator to the request via the
 <code>pagination_fn</code> argument in <code><a href="../reference/req_prepare.html">req_prepare()</a></code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
+<span>  <span class="op">)</span>,</span>
 <span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
 <span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
-<span>    param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
-<span>    next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span>  pagination_fn <span class="op">=</span> <span class="va">iterate_xref</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -184,7 +174,7 @@ to handle transient errors.</p>
 <p>The <code>max_reqs</code> argument controls how many pages to fetch
 (default: <code>2</code>). During development, keep it small. Set it to
 <code>Inf</code> once you are confident the request works:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_perform_opinionated.html">req_perform_opinionated</a></span><span class="op">(</span><span class="va">req</span>, max_reqs <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>The result is always a list of <code>httr2_response</code> objects
 with additional class <code>nectar_responses</code>, so downstream
@@ -199,7 +189,7 @@ object. Because the request was prepared with
 <code>tidy_fn = resp_tidy_json</code>, <code><a href="../reference/resp_parse.html">resp_parse()</a></code> will
 find that function automatically and apply it to each response, then
 combine the results:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="va">resps</span><span class="op">)</span></span>
 <span><span class="va">result</span></span></code></pre></div>
 </div>
@@ -208,10 +198,12 @@ combine the results:</p>
 </h2>
 <p>The three core functions compose naturally into a pipeline. Here is
 the full workflow in one expression:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fl">5</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="st">"DOI"</span><span class="op">)</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
+<span>  <span class="op">)</span>,</span>
 <span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
 <span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
@@ -219,10 +211,26 @@ the full workflow in one expression:</p>
 <span>    next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/req_perform_opinionated.html">req_perform_opinionated</a></span><span class="op">(</span>max_reqs <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/req_perform_opinionated.html">req_perform_opinionated</a></span><span class="op">(</span>max_reqs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">result</span></span></code></pre></div>
+<span><span class="va">result</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 30 × 2</span></span>
+<span><span class="co">#&gt;    publisher                         DOI                               </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                             &lt;chr&gt;                             </span></span>
+<span><span class="co">#&gt;  1 Springer Fachmedien Wiesbaden     10.1007/978-3-658-17671-6_18-1    </span></span>
+<span><span class="co">#&gt;  2 Springer International Publishing 10.1007/978-3-031-23161-2_300726  </span></span>
+<span><span class="co">#&gt;  3 Elsevier                          10.1016/b978-0-08-102696-0.00020-8</span></span>
+<span><span class="co">#&gt;  4 Springer International Publishing 10.1007/978-3-031-28170-9_6       </span></span>
+<span><span class="co">#&gt;  5 Springer Nature Singapore         10.1007/978-981-16-8679-5_306     </span></span>
+<span><span class="co">#&gt;  6 Springer Singapore                10.1007/978-981-15-1636-8_42      </span></span>
+<span><span class="co">#&gt;  7 Springer Berlin Heidelberg        10.1007/978-3-642-33832-8_41      </span></span>
+<span><span class="co">#&gt;  8 Springer Nature Switzerland       10.1007/978-3-031-72371-1_11      </span></span>
+<span><span class="co">#&gt;  9 Springer International Publishing 10.1007/978-3-319-18938-3         </span></span>
+<span><span class="co">#&gt; 10 Springer International Publishing 10.1007/978-3-319-19932-0_5       </span></span>
+<span><span class="co">#&gt; # i 20 more rows</span></span>
+<span><span class="co">#&gt; # i Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 <p>The resulting tibble contains the DOIs from the first two pages of
 Crossref works. Once you are ready to fetch all pages, replace
 <code>max_reqs = 2</code> with <code>max_reqs = Inf</code>.</p>
@@ -233,7 +241,7 @@ Crossref works. Once you are ready to fetch all pages, replace
 <p>In practice, you would wrap these calls inside exported functions in
 your own package. For example, a <code>crossref</code> package might
 provide:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># R/works.R  (inside a hypothetical "crossref" package)</span></span>
 <span><span class="va">works</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
 <span>  <span class="va">rows</span> <span class="op">=</span> <span class="fl">20</span>,</span>
@@ -244,11 +252,7 @@ provide:</p>
 <span>    <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="va">rows</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="va">select</span><span class="op">)</span>,</span>
 <span>    auth_fn <span class="op">=</span> <span class="va">req_auth_api_key</span>,</span>
-<span>    auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      parameter_name <span class="op">=</span> <span class="st">"mailto"</span>,</span>
-<span>      api_key <span class="op">=</span> <span class="va">mailto</span>,</span>
-<span>      location <span class="op">=</span> <span class="st">"query"</span></span>
-<span>    <span class="op">)</span>,</span>
+<span>    auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="va">mailto</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span>,</span>
 <span>    tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
 <span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
