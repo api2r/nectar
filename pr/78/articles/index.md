@@ -1,5 +1,5 @@
 # Articles
 
-### Get started
+### All vignettes
 
 - [nectar](https://nectar.api2r.org/articles/nectar.md):

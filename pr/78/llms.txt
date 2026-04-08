@@ -72,6 +72,6 @@ contributing to this project, you agree to abide by its terms.
 
 # Articles
 
-### Get started
+### All vignettes
 
 - [nectar](https://nectar.api2r.org/articles/nectar.md):
