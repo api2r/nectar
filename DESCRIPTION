@@ -29,10 +29,13 @@ Imports:
 Suggests:
     astgrepr,
     covr,
+    knitr,
+    rmarkdown,
     stringi,
     testthat (>= 3.0.0),
     tibble,
     tibblify
+VignetteBuilder: knitr
 Remotes:
     wranglezone/tibblify
 Config/testthat/edition: 3
