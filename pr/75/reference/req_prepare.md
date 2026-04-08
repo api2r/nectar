@@ -58,8 +58,8 @@ req_prepare(
 
   (multiple types) An object to use as the body of the request. If any
   component of the body is a path, pass it through
-  [`fs::path()`](https://fs.r-lib.org/reference/path.html) or otherwise
-  give it the class "fs_path" to indicate that it is a path.
+  [`fs::path()`](https://rdrr.io/pkg/fs/man/path.html) or otherwise give
+  it the class "fs_path" to indicate that it is a path.
 
 - mime_type:
 
