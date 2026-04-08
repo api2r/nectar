@@ -1,17 +1,11 @@
 #' Parse one or more responses
 #'
-#' @description `r lifecycle::badge("questioning")`
-#'
-#'   If you have implemented the full `nectar` framework, use [resp_tidy()]
-#'   directly to parse your responses. We may continue to support
-#'   `resp_parse()`, but it is most useful as a bridge to the full framework.
-#'
-#'   `httr2` provides two methods for performing requests:
-#'   [httr2::req_perform()], which returns a single [httr2::response()] object,
-#'   and [httr2::req_perform_iterative()], which returns a list of
-#'   [httr2::response()] objects. This function automatically determines whether
-#'   a single response or multiple responses have been returned, and parses the
-#'   responses appropriately.
+#' `httr2` provides two methods for performing requests: [httr2::req_perform()],
+#' which returns a single [httr2::response()] object, and
+#' [httr2::req_perform_iterative()], which returns a list of [httr2::response()]
+#' objects. This function automatically determines whether a single response or
+#' multiple responses have been returned, and parses the responses
+#' appropriately.
 #'
 #' @inheritParams .shared-params
 #' @param ... Additional arguments passed on to the `response_parser` function

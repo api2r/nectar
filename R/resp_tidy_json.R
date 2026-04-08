@@ -23,7 +23,7 @@
 #' @returns The tibblified response body.
 #' @export
 #'
-#' @examples
+#' @examplesIf rlang::is_installed("tibblify")
 #' resp <- httr2::response_json(
 #'   body = list(list(id = 1, name = "Alice"), list(id = 2, name = "Bob"))
 #' )

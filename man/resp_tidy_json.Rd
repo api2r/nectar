@@ -36,6 +36,7 @@ Parse the body of a response with \code{\link[httr2:resp_body_raw]{httr2::resp_b
 subset of that body, and tidy the result with \code{\link[tibblify:tibblify]{tibblify::tibblify()}}.
 }
 \examples{
+\dontshow{if (rlang::is_installed("tibblify")) withAutoprint(\{ # examplesIf}
 resp <- httr2::response_json(
   body = list(list(id = 1, name = "Alice"), list(id = 2, name = "Bob"))
 )
@@ -46,4 +47,5 @@ resp_nested <- httr2::response_json(
   body = list(data = list(list(id = 1), list(id = 2)))
 )
 resp_tidy_json(resp_nested, subset_path = "data")
+\dontshow{\}) # examplesIf}
 }

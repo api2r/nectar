@@ -48,18 +48,12 @@ the parsed responses are concatenated when possible. Unlike
 responses.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
-
-If you have implemented the full \code{nectar} framework, use \code{\link[=resp_tidy]{resp_tidy()}}
-directly to parse your responses. We may continue to support
-\code{resp_parse()}, but it is most useful as a bridge to the full framework.
-
-\code{httr2} provides two methods for performing requests:
-\code{\link[httr2:req_perform]{httr2::req_perform()}}, which returns a single \code{\link[httr2:response]{httr2::response()}} object,
-and \code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}, which returns a list of
-\code{\link[httr2:response]{httr2::response()}} objects. This function automatically determines whether
-a single response or multiple responses have been returned, and parses the
-responses appropriately.
+\code{httr2} provides two methods for performing requests: \code{\link[httr2:req_perform]{httr2::req_perform()}},
+which returns a single \code{\link[httr2:response]{httr2::response()}} object, and
+\code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}, which returns a list of \code{\link[httr2:response]{httr2::response()}}
+objects. This function automatically determines whether a single response or
+multiple responses have been returned, and parses the responses
+appropriately.
 }
 \examples{
 resp <- httr2::response_json(body = list(a = 1, b = "hello"))
