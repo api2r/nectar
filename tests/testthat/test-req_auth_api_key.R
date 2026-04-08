@@ -12,10 +12,29 @@ test_that("req_auth_api_key errors informatively with unused arguments", {
   )
 })
 
-test_that("req_auth_api_key returns req unchanged if no api_key set", {
+test_that("req_auth_api_key returns req unchanged if api_key is NA or empty (#76)", {
   req <- httr2::request("https://example.com")
-  test_result <- req_auth_api_key(req, "parm")
-  expect_identical(req, test_result)
+  expect_identical(req, req_auth_api_key(req, "parm", api_key = NA_character_))
+  expect_identical(req, req_auth_api_key(req, "parm", api_key = ""))
+})
+
+test_that("req_auth_api_key removes the key when api_key is NULL (#76)", {
+  req <- httr2::request("https://example.com")
+
+  # Header: NULL removes a previously-set header
+  req_with_header <- req_auth_api_key(req, "parm", api_key = "my_key")
+  req_removed <- req_auth_api_key(req_with_header, "parm", api_key = NULL)
+  expect_false("parm" %in% names(req_removed$headers))
+
+  # Query: NULL removes a previously-set query parameter
+  req_with_query <- req_auth_api_key(req, "parm", api_key = "my_key", location = "query")
+  req_removed <- req_auth_api_key(req_with_query, "parm", api_key = NULL, location = "query")
+  expect_false(grepl("parm", req_removed$url))
+
+  # Cookie: NULL removes a previously-set cookie
+  req_with_cookie <- req_auth_api_key(req, "parm", api_key = "my_key", location = "cookie")
+  req_removed <- req_auth_api_key(req_with_cookie, "parm", api_key = NULL, location = "cookie")
+  expect_false(grepl("parm", req_removed$options$cookie %||% ""))
 })
 
 test_that("req_auth_api_key works for header (#8)", {

@@ -9,7 +9,8 @@
 #' @param parameter_name (`length-1 character`) The name of the parameter to use
 #'   in the header, query, or cookie.
 #' @param api_key (`length-1 character` or `NULL`) The API key to use. If this
-#'   value is `NULL`, `req` is returned unchanged.
+#'   value is `NULL`, the key will be removed from the request. If this value is
+#'   `NA` or an empty string, `req` is returned unchanged.
 #' @param location (`length-1 character`) Where the API key should be passed.
 #'   One of `"header"` (default), `"query"`, or `"cookie"`.
 #'
@@ -25,7 +26,7 @@
 #' # Add an API key named `"api_key"` as a query parameter
 #' req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
 #'
-#' # If `api_key` is NULL, the request is returned unchanged
+#' # If `api_key` is NULL, the key is removed from the request
 #' req_auth_api_key(req, "X-API-Key", api_key = NULL)
 req_auth_api_key <- function(
   req,
@@ -42,18 +43,20 @@ req_auth_api_key <- function(
     call = call
   )
   api_key <- stbl::to_chr_scalar(api_key, allow_null = TRUE, call = call)
-  # Return without failing if api_key isn't set. This makes it easier to set up
-  # APIs that change behavior when an API key is set, without failing when it
-  # isn't.
-  if (length(api_key) && nchar(api_key)) {
-    location <- rlang::arg_match(location, error_call = call)
-    req_api_key_set <- switch(
-      location,
-      header = httr2::req_headers_redacted,
-      query = httr2::req_url_query,
-      cookie = httr2::req_cookies_set
-    )
-    req <- rlang::exec(req_api_key_set, req, !!parameter_name := api_key)
+  # Return without failing if api_key is NA or empty. This makes it easier to
+  # set up APIs that change behavior when an API key is set, without failing
+  # when the key is empty or missing. Note: NULL is passed through to httr2,
+  # which will *remove* the api key from the request.
+  if (length(api_key) && (is.na(api_key) || !nzchar(api_key))) {
+    return(req)
   }
+  location <- rlang::arg_match(location, error_call = call)
+  req_api_key_set <- switch(
+    location,
+    header = httr2::req_headers_redacted,
+    query = httr2::req_url_query,
+    cookie = httr2::req_cookies_set
+  )
+  req <- rlang::exec(req_api_key_set, req, !!parameter_name := api_key)
   return(req)
 }
