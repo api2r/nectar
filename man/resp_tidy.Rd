@@ -28,7 +28,9 @@ request that includes a tidying policy defined via \code{\link[=req_tidy_policy]
 resp <- httr2::response_json(body = list(a = 1, b = "hello"))
 resp_tidy(resp)
 
-# With a tidy policy, resp_tidy() uses the policy's tidy function
+# With a tidy policy, resp_tidy() uses the policy's tidy function.
+# In practice, the request is attached automatically when the response is
+# fetched with req_perform() or req_perform_opinionated().
 req <- req_tidy_policy(
   httr2::request("https://example.com"),
   httr2::resp_body_json

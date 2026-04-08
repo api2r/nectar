@@ -28,8 +28,10 @@
 #' @export
 #'
 #' @examplesIf httr2::is_online()
+#' # Performs a single request and returns a list of responses
 #' req <- httr2::request("https://httr2.r-lib.org")
-#' req_perform_opinionated(req)
+#' resps <- req_perform_opinionated(req)
+#' httr2::resp_status(resps[[1]])
 req_perform_opinionated <- function(
   req,
   ...,

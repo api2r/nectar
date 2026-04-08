@@ -47,7 +47,9 @@ a \code{next_req_fn} function is supplied) or \code{\link[httr2:req_perform]{htt
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+# Performs a single request and returns a list of responses
 req <- httr2::request("https://httr2.r-lib.org")
-req_perform_opinionated(req)
+resps <- req_perform_opinionated(req)
+httr2::resp_status(resps[[1]])
 \dontshow{\}) # examplesIf}
 }
