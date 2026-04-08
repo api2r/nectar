@@ -25,3 +25,25 @@ resp_body_auto(resp)
 ## Value
 
 The parsed response body.
+
+## Examples
+
+``` r
+resp_json <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_body_auto(resp_json)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "hello"
+#> 
+
+resp_csv <- httr2::response(
+  headers = list("Content-Type" = "text/csv"),
+  body = charToRaw("a,b\n1,2\n3,4")
+)
+resp_body_auto(resp_csv)
+#>   a b
+#> 1 1 2
+#> 2 3 4
+```

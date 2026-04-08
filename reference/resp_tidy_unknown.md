@@ -32,3 +32,15 @@ resp_tidy_unknown(resp, call = rlang::caller_env())
 This function always throws an error. The error lists the names of the
 response pieces after parsing with
 [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md).
+
+## Examples
+
+``` r
+resp <- httr2::response_json(body = list(status = "ok", data = list(id = 1)))
+try(
+  resp_tidy_unknown(resp)
+)
+#> Error in eval(expr, envir) : 
+#>   No parser is defined for this response.
+#> ℹ Response pieces: status and data
+```

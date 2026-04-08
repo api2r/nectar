@@ -93,6 +93,31 @@ other functions.</p></dd>
     <p>A <code><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">httr2::request()</a></code> object with additional class <code>nectar_request</code>.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span><span class="op">(</span><span class="st">"https://example.com"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add an API key named `"X-API-Key"` as a header (default)</span></span></span>
+<span class="r-in"><span><span class="fu">req_auth_api_key</span><span class="op">(</span><span class="va">req</span>, <span class="st">"X-API-Key"</span>, api_key <span class="op">=</span> <span class="st">"my-api-key"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_request&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Headers:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">X-API-Key</span>: <span style="color: #555555;">&lt;REDACTED&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add an API key named `"api_key"` as a query parameter</span></span></span>
+<span class="r-in"><span><span class="fu">req_auth_api_key</span><span class="op">(</span><span class="va">req</span>, <span class="st">"api_key"</span>, api_key <span class="op">=</span> <span class="st">"my-api-key"</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_request&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com/?api_key=my-api-key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If `api_key` is NULL, the request is returned unchanged</span></span></span>
+<span class="r-in"><span><span class="fu">req_auth_api_key</span><span class="op">(</span><span class="va">req</span>, <span class="st">"X-API-Key"</span>, api_key <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_request&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

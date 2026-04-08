@@ -57,3 +57,29 @@ req_auth_api_key(
 
 A [`httr2::request()`](https://httr2.r-lib.org/reference/request.html)
 object with additional class `nectar_request`.
+
+## Examples
+
+``` r
+req <- httr2::request("https://example.com")
+
+# Add an API key named `"X-API-Key"` as a header (default)
+req_auth_api_key(req, "X-API-Key", api_key = "my-api-key")
+#> <httr2_request>
+#> GET https://example.com
+#> Headers:
+#> * X-API-Key: <REDACTED>
+#> Body: empty
+
+# Add an API key named `"api_key"` as a query parameter
+req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
+#> <httr2_request>
+#> GET https://example.com/?api_key=my-api-key
+#> Body: empty
+
+# If `api_key` is NULL, the request is returned unchanged
+req_auth_api_key(req, "X-API-Key", api_key = NULL)
+#> <httr2_request>
+#> GET https://example.com
+#> Body: empty
+```

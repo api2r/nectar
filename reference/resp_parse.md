@@ -1,12 +1,5 @@
 # Parse one or more responses
 
-**\[questioning\]**
-
-If you have implemented the full `nectar` framework, use
-[`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md)
-directly to parse your responses. We may continue to support
-`resp_parse()`, but it is most useful as a bridge to the full framework.
-
 `httr2` provides two methods for performing requests:
 [`httr2::req_perform()`](https://httr2.r-lib.org/reference/req_perform.html),
 which returns a single
@@ -84,3 +77,42 @@ The response parsed by the `response_parser`. If `resps` was a list, the
 parsed responses are concatenated when possible. Unlike
 [httr2::resps_data](https://httr2.r-lib.org/reference/resps_successes.html),
 this function does not concatenate raw vector responses.
+
+## Examples
+
+``` r
+resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_parse(resp, response_parser = httr2::resp_body_json)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "hello"
+#> 
+
+resps <- list(
+  httr2::response_json(body = list(list(id = 1), list(id = 2))),
+  httr2::response_json(body = list(list(id = 3), list(id = 4)))
+)
+resp_parse(resps, response_parser = httr2::resp_body_json)
+#> [[1]]
+#> [[1]]$id
+#> [1] 1
+#> 
+#> 
+#> [[2]]
+#> [[2]]$id
+#> [1] 2
+#> 
+#> 
+#> [[3]]
+#> [[3]]$id
+#> [1] 3
+#> 
+#> 
+#> [[4]]
+#> [[4]]$id
+#> [1] 4
+#> 
+#> 
+```

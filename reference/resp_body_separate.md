@@ -1,6 +1,11 @@
 # Extract response body into list
 
-Extract response body into list
+Wrap the parsed response body in a
+[`list()`](https://rdrr.io/r/base/list.html). Unlike
+[`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md),
+this function prevents individual response bodies from being
+concatenated when combining multiple responses, which is useful for raw
+or otherwise non-concatenatable types.
 
 ## Usage
 
@@ -28,3 +33,18 @@ The parsed response body wrapped in a
 [`list()`](https://rdrr.io/r/base/list.html). This is useful for things
 like raw vectors that you wish to parse with
 [`httr2::resps_data()`](https://httr2.r-lib.org/reference/resps_successes.html).
+
+## Examples
+
+``` r
+resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_body_separate(resp)
+#> [[1]]
+#> [[1]]$a
+#> [1] 1
+#> 
+#> [[1]]$b
+#> [1] "hello"
+#> 
+#> 
+```

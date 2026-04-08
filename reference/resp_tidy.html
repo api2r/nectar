@@ -77,6 +77,35 @@ dealing with responses (particularly useful if the request does not include
 a <code>resp_tidy</code> policy).</p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Without a tidy policy, resp_tidy() uses resp_body_auto()</span></span></span>
+<span class="r-in"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">response_json</a></span><span class="op">(</span>body <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"hello"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">resp_tidy</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "hello"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With a tidy policy, resp_tidy() uses the policy's tidy function.</span></span></span>
+<span class="r-in"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="req_tidy_policy.html">req_tidy_policy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span><span class="op">(</span><span class="st">"https://example.com"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">httr2</span><span class="fu">::</span><span class="va"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># In practice, the request is attached automatically when the response is</span></span></span>
+<span class="r-in"><span><span class="co"># fetched with req_perform() or req_perform_opinionated().</span></span></span>
+<span class="r-in"><span><span class="va">resp</span><span class="op">$</span><span class="va">request</span> <span class="op">&lt;-</span> <span class="va">req</span></span></span>
+<span class="r-in"><span><span class="fu">resp_tidy</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "hello"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

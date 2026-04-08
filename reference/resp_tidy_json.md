@@ -52,3 +52,28 @@ resp_tidy_json(resp, spec = NULL, unspecified = "list", subset_path = NULL)
 ## Value
 
 The tibblified response body.
+
+## Examples
+
+``` r
+resp <- httr2::response_json(
+  body = list(list(id = 1, name = "Alice"), list(id = 2, name = "Bob"))
+)
+resp_tidy_json(resp)
+#> # A tibble: 2 × 2
+#>      id name 
+#>   <int> <chr>
+#> 1     1 Alice
+#> 2     2 Bob  
+
+# Extract a nested subset of the response body
+resp_nested <- httr2::response_json(
+  body = list(data = list(list(id = 1), list(id = 2)))
+)
+resp_tidy_json(resp_nested, subset_path = "data")
+#> # A tibble: 2 × 1
+#>      id
+#>   <int>
+#> 1     1
+#> 2     2
+```

@@ -130,3 +130,24 @@ Other opinionated request functions:
 [`req_modify()`](https://nectar.api2r.org/reference/req_modify.md),
 [`req_pagination_policy()`](https://nectar.api2r.org/reference/req_pagination_policy.md),
 [`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md)
+
+## Examples
+
+``` r
+req_prepare("https://example.com")
+#> <nectar_request/httr2_request>
+#> GET https://example.com/
+#> Body: empty
+#> Options:
+#> * useragent: "httr2/1.2.2 r-curl/7.0.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+req_prepare(
+  "https://example.com",
+  path = c("users/{user_id}", user_id = "42"),
+  query = list(format = "json")
+)
+#> <nectar_request/httr2_request>
+#> GET https://example.com/users/42?format=json
+#> Body: empty
+#> Options:
+#> * useragent: "httr2/1.2.2 r-curl/7.0.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+```

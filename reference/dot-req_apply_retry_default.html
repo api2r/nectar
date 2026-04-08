@@ -56,8 +56,10 @@ attempt each individual request. Passed to the <code>max_tries</code> argument o
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of <code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> objects, one for each request
-performed. The list has additional class <code>nectar_responses</code>.</p>
+    <p>Always returns a list of <code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> objects, one for each
+request performed, to ensure that downstream operations are the same
+regardless of the number of responses. The list has additional class
+<code>nectar_responses</code>.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

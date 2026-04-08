@@ -33,8 +33,8 @@
   : Extract tabular data from response body
 - [`resp_body_separate()`](https://nectar.api2r.org/reference/resp_body_separate.md)
   : Extract response body into list
-- [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
-  **\[questioning\]** : Parse one or more responses
+- [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md) :
+  Parse one or more responses
 - [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md) :
   Extract and clean an API response
 - [`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md)

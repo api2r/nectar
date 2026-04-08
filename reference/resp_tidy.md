@@ -45,3 +45,33 @@ select the appropriate parser based on the response content type,
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md) for
 an alternative approach to dealing with responses (particularly useful
 if the request does not include a `resp_tidy` policy).
+
+## Examples
+
+``` r
+# Without a tidy policy, resp_tidy() uses resp_body_auto()
+resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+resp_tidy(resp)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "hello"
+#> 
+
+# With a tidy policy, resp_tidy() uses the policy's tidy function.
+req <- req_tidy_policy(
+  httr2::request("https://example.com"),
+  httr2::resp_body_json
+)
+# In practice, the request is attached automatically when the response is
+# fetched with req_perform() or req_perform_opinionated().
+resp$request <- req
+resp_tidy(resp)
+#> $a
+#> [1] 1
+#> 
+#> $b
+#> [1] "hello"
+#> 
+```

@@ -29,3 +29,24 @@ resp_body_tsv(resp, check_type = TRUE)
 ## Value
 
 The parsed response body as a data frame.
+
+## Examples
+
+``` r
+resp_csv <- httr2::response(
+  headers = list("Content-Type" = "text/csv"),
+  body = charToRaw("a,b\n1,2\n3,4")
+)
+resp_body_csv(resp_csv)
+#>   a b
+#> 1 1 2
+#> 2 3 4
+resp_tsv <- httr2::response(
+  headers = list("Content-Type" = "text/tab-separated-values"),
+  body = charToRaw("a\tb\n1\t2\n3\t4")
+)
+resp_body_tsv(resp_tsv)
+#>   a b
+#> 1 1 2
+#> 2 3 4
+```
