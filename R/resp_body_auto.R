@@ -8,6 +8,16 @@
 #'
 #' @returns The parsed response body.
 #' @export
+#'
+#' @examples
+#' resp_json <- httr2::response_json(body = list(a = 1, b = "hello"))
+#' resp_body_auto(resp_json)
+#'
+#' resp_csv <- httr2::response(
+#'   headers = list("Content-Type" = "text/csv"),
+#'   body = charToRaw("a,b\n1,2\n3,4")
+#' )
+#' resp_body_auto(resp_csv)
 resp_body_auto <- function(resp) {
   content_type <- httr2::resp_content_type(resp)
   switch(

@@ -28,3 +28,23 @@ return a \code{NULL} \code{next_cursor} to indicate that there are no more pages
 results, while other endpoints might return \code{""}. This function normalizes
 all such results to \code{NULL}.
 }
+\examples{
+# Create a cursor iterator for the Slack API response structure
+iterate_with_json_cursor("cursor", c("response_metadata", "next_cursor"))
+
+# Create a cursor iterator for the Crossref API
+iterate_xref <- iterate_with_json_cursor("cursor", c("message", "next-cursor"))
+
+\dontrun{
+# Use the iterator to paginate through Crossref API results. The cursor must
+# be set to "*" for the initial request to trigger the api to return the next
+# cursor.
+req <- httr2::request("https://api.crossref.org/works") |>
+  httr2::req_url_query(rows = 5, cursor = "*", select = "DOI")
+
+resps <- req_perform_opinionated(
+  req, next_req_fn = iterate_xref, max_reqs = 2
+)
+resps
+}
+}

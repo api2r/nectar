@@ -87,6 +87,14 @@ This function implements an opinionated framework for preparing an API
 request. It is intended to be used inside an API client package. It serves as
 a wrapper around the \code{req_} family of functions, such as \code{\link[httr2:request]{httr2::request()}}.
 }
+\examples{
+req_prepare("https://example.com")
+req_prepare(
+  "https://example.com",
+  path = c("users/{user_id}", user_id = "42"),
+  query = list(format = "json")
+)
+}
 \seealso{
 Other opinionated request functions: 
 \code{\link{req_init}()},

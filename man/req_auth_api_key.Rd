@@ -41,3 +41,15 @@ Many APIs provide API keys that can be used to authenticate requests (or,
 often, provide other information about the user). This function helps to
 apply those keys to requests.
 }
+\examples{
+req <- httr2::request("https://example.com")
+
+# Add an API key named `"X-API-Key"` as a header (default)
+req_auth_api_key(req, "X-API-Key", api_key = "my-api-key")
+
+# Add an API key named `"api_key"` as a query parameter
+req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
+
+# If `api_key` is NULL, the request is returned unchanged
+req_auth_api_key(req, "X-API-Key", api_key = NULL)
+}

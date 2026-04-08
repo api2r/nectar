@@ -19,6 +19,26 @@
 #' @returns A function that takes the response and the previous request, and
 #'   returns the next request if there are more results.
 #' @export
+#'
+#' @examples
+#' # Create a cursor iterator for the Slack API response structure
+#' iterate_with_json_cursor("cursor", c("response_metadata", "next_cursor"))
+#'
+#' # Create a cursor iterator for the Crossref API
+#' iterate_xref <- iterate_with_json_cursor("cursor", c("message", "next-cursor"))
+#'
+#' \dontrun{
+#' # Use the iterator to paginate through Crossref API results. The cursor must
+#' # be set to "*" for the initial request to trigger the api to return the next
+#' # cursor.
+#' req <- httr2::request("https://api.crossref.org/works") |>
+#'   httr2::req_url_query(rows = 5, cursor = "*", select = "DOI")
+#'
+#' resps <- req_perform_opinionated(
+#'   req, next_req_fn = iterate_xref, max_reqs = 2
+#' )
+#' resps
+#' }
 iterate_with_json_cursor <- function(param_name = "cursor", next_cursor_path) {
   httr2::iterate_with_cursor(
     param_name = param_name,

@@ -23,7 +23,7 @@ Imports:
     lifecycle,
     purrr,
     rlang,
-    stbl,
+    stbl (>= 0.3.0),
     stringr,
     vctrs
 Suggests:

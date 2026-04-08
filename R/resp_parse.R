@@ -1,17 +1,11 @@
 #' Parse one or more responses
 #'
-#' @description `r lifecycle::badge("questioning")`
-#'
-#'   If you have implemented the full `nectar` framework, use [resp_tidy()]
-#'   directly to parse your responses. We may continue to support
-#'   `resp_parse()`, but it is most useful as a bridge to the full framework.
-#'
-#'   `httr2` provides two methods for performing requests:
-#'   [httr2::req_perform()], which returns a single [httr2::response()] object,
-#'   and [httr2::req_perform_iterative()], which returns a list of
-#'   [httr2::response()] objects. This function automatically determines whether
-#'   a single response or multiple responses have been returned, and parses the
-#'   responses appropriately.
+#' `httr2` provides two methods for performing requests: [httr2::req_perform()],
+#' which returns a single [httr2::response()] object, and
+#' [httr2::req_perform_iterative()], which returns a list of [httr2::response()]
+#' objects. This function automatically determines whether a single response or
+#' multiple responses have been returned, and parses the responses
+#' appropriately.
 #'
 #' @inheritParams .shared-params
 #' @param ... Additional arguments passed on to the `response_parser` function
@@ -22,6 +16,16 @@
 #'   [httr2::resps_data], this function does not concatenate raw vector
 #'   responses.
 #' @export
+#'
+#' @examples
+#' resp <- httr2::response_json(body = list(a = 1, b = "hello"))
+#' resp_parse(resp, response_parser = httr2::resp_body_json)
+#'
+#' resps <- list(
+#'   httr2::response_json(body = list(list(id = 1), list(id = 2))),
+#'   httr2::response_json(body = list(list(id = 3), list(id = 4)))
+#' )
+#' resp_parse(resps, response_parser = httr2::resp_body_json)
 resp_parse <- function(resps, ...) {
   UseMethod("resp_parse")
 }

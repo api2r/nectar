@@ -8,6 +8,12 @@
 #' @returns This function always throws an error. The error lists the names of
 #'   the response pieces after parsing with [resp_body_auto()].
 #' @export
+#'
+#' @examples
+#' resp <- httr2::response_json(body = list(status = "ok", data = list(id = 1)))
+#' try(
+#'   resp_tidy_unknown(resp)
+#' )
 resp_tidy_unknown <- function(resp, call = rlang::caller_env()) {
   results <- resp_body_auto(resp)
   .nectar_abort(

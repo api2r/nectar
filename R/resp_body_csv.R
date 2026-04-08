@@ -7,6 +7,13 @@
 #'
 #' @returns The parsed response body as a data frame.
 #' @export
+#'
+#' @examples
+#' resp_csv <- httr2::response(
+#'   headers = list("Content-Type" = "text/csv"),
+#'   body = charToRaw("a,b\n1,2\n3,4")
+#' )
+#' resp_body_csv(resp_csv)
 resp_body_csv <- function(resp, check_type = TRUE) {
   httr2::resp_check_content_type(
     resp,
@@ -19,6 +26,13 @@ resp_body_csv <- function(resp, check_type = TRUE) {
 
 #' @rdname resp_body_csv
 #' @export
+#'
+#' @examples
+#' resp_tsv <- httr2::response(
+#'   headers = list("Content-Type" = "text/tab-separated-values"),
+#'   body = charToRaw("a\tb\n1\t2\n3\t4")
+#' )
+#' resp_body_tsv(resp_tsv)
 resp_body_tsv <- function(resp, check_type = TRUE) {
   httr2::resp_check_content_type(
     resp,

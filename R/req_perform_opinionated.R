@@ -23,9 +23,18 @@
 #'   attempt each individual request. Passed to the `max_tries` argument of
 #'   [httr2::req_retry()].
 #'
-#' @return A list of [httr2::response()] objects, one for each request
-#'   performed. The list has additional class `nectar_responses`.
+#' @return Always returns a list of [httr2::response()] objects, one for each
+#'   request performed, to ensure that downstream operations are the same
+#'   regardless of the number of responses. The list has additional class
+#'   `nectar_responses`.
 #' @export
+#'
+#' @examplesIf httr2::is_online() && rlang::is_installed("tibblify")
+#' # Performs a single request and returns a list of responses
+#' req <- httr2::request("https://jsonplaceholder.typicode.com/posts")
+#' resps <- req_perform_opinionated(req)
+#' httr2::resp_status(resps[[1]])
+#' resp_parse(resps, response_parser = resp_tidy_json)
 req_perform_opinionated <- function(
   req,
   ...,

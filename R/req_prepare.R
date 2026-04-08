@@ -9,6 +9,14 @@
 #' @inherit .shared-request return
 #' @family opinionated request functions
 #' @export
+#'
+#' @examples
+#' req_prepare("https://example.com")
+#' req_prepare(
+#'   "https://example.com",
+#'   path = c("users/{user_id}", user_id = "42"),
+#'   query = list(format = "json")
+#' )
 req_prepare <- function(
   base_url,
   ...,
