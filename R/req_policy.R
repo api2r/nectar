@@ -5,7 +5,6 @@
 #' export this function, but that may change in the future.
 #'
 #' @inheritParams .shared-params
-#' @param ...
 #'
 #' @inherit .shared-request return
 #' @keywords internal

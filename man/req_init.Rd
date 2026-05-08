@@ -24,7 +24,7 @@ your package and nectar, but use this to provide additional details.
 Default \code{NULL}.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}
@@ -45,10 +45,10 @@ req_init(
 )
 }
 \seealso{
-Other opinionated request functions: 
-\code{\link{req_modify}()},
-\code{\link{req_pagination_policy}()},
-\code{\link{req_prepare}()},
-\code{\link{req_tidy_policy}()}
+Other opinionated request functions:
+\code{\link[=req_modify]{req_modify()}},
+\code{\link[=req_pagination_policy]{req_pagination_policy()}},
+\code{\link[=req_prepare]{req_prepare()}},
+\code{\link[=req_tidy_policy]{req_tidy_policy()}}
 }
 \concept{opinionated request functions}

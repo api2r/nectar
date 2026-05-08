@@ -14,7 +14,7 @@ list of such objects (as returned by \code{\link[=req_perform_opinionated]{req_p
 }
 \value{
 The extracted and cleaned response, or, for a list of responses,
-those responses cleaned then concatenated via \code{\link[httr2:resps_successes]{httr2::resps_data()}}. By
+those responses cleaned then concatenated via \code{\link[httr2:resps_data]{httr2::resps_data()}}. By
 default, the response is processed with \code{\link[=resp_body_auto]{resp_body_auto()}}.
 }
 \description{
@@ -34,7 +34,7 @@ req <- req_tidy_policy(
   httr2::resp_body_json
 )
 # In practice, the request is attached automatically when the response is
-# fetched with req_perform() or req_perform_opinionated().
+# fetched with httr2::req_perform() or req_perform_opinionated().
 resp$request <- req
 resp_tidy(resp)
 }

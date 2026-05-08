@@ -6,6 +6,8 @@
 \alias{nectar-package}
 \title{nectar: A Framework for Web API Packages}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 An opinionated framework for use within api-wrapping R packages.
 }
 \seealso{
@@ -19,6 +21,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Jon Harmon \email{jonthegeek@gmail.com} (\href{https://orcid.org/0000-0003-4781-4346}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Jon Harmon \email{jonthegeek@gmail.com} (\href{https://orcid.org/0000-0003-4781-4346}{ORCID}) [copyright holder]
+}
 
 Other contributors:
 \itemize{

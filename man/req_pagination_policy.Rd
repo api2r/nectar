@@ -18,7 +18,7 @@ request by \code{\link[=req_perform_opinionated]{req_perform_opinionated()}} and
 \code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}
@@ -39,10 +39,10 @@ req <- httr2::request("https://example.com")
 req_pagination_policy(req, httr2::iterate_with_offset("page"))
 }
 \seealso{
-Other opinionated request functions: 
-\code{\link{req_init}()},
-\code{\link{req_modify}()},
-\code{\link{req_prepare}()},
-\code{\link{req_tidy_policy}()}
+Other opinionated request functions:
+\code{\link[=req_init]{req_init()}},
+\code{\link[=req_modify]{req_modify()}},
+\code{\link[=req_prepare]{req_prepare()}},
+\code{\link[=req_tidy_policy]{req_tidy_policy()}}
 }
 \concept{opinionated request functions}

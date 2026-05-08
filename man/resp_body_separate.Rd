@@ -15,7 +15,7 @@ response. Default: \code{\link[=resp_body_auto]{resp_body_auto()}}.}
 }
 \value{
 The parsed response body wrapped in a \code{\link[=list]{list()}}. This is useful for
-things like raw vectors that you wish to parse with \code{\link[httr2:resps_successes]{httr2::resps_data()}}.
+things like raw vectors that you wish to parse with \code{\link[httr2:resps_data]{httr2::resps_data()}}.
 }
 \description{
 Wrap the parsed response body in a \code{\link[=list]{list()}}. Unlike \code{\link[=resp_body_auto]{resp_body_auto()}}, this

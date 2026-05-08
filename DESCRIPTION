@@ -14,7 +14,6 @@ BugReports: https://github.com/api2r/nectar/issues
 Depends:
     R (>= 4.1.0)
 Imports:
-    cli,
     curl,
     fs,
     glue,
@@ -27,7 +26,6 @@ Imports:
     stringr,
     vctrs
 Suggests:
-    astgrepr,
     covr,
     knitr,
     rmarkdown,
@@ -35,11 +33,12 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     tibblify
-VignetteBuilder: knitr
+VignetteBuilder:
+    knitr
 Remotes:
     wranglezone/tibblify
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3

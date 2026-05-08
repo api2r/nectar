@@ -27,7 +27,7 @@ a list or character vector with the path as one or more unnamed arguments
 
 \item{query}{(\code{character} or \code{list}) An optional list or character vector of
 parameters to pass in the query portion of the request. Can also include a
-\code{.multi} argument to pass to \code{\link[httr2:req_url]{httr2::req_url_query()}} to control how
+\code{.multi} argument to pass to \code{\link[httr2:req_url_query]{httr2::req_url_query()}} to control how
 elements containing multiple values are handled.}
 
 \item{body}{(multiple types) An object to use as the body of the request. If
@@ -41,7 +41,7 @@ the body. Some APIs allow you to leave this as NULL for them to guess.}
 other than \code{GET} or \code{POST}, supply it. Case is ignored.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}
@@ -59,10 +59,10 @@ req_modify(req_base, path = c("specific/{path}", path = "endpoint"))
 req_modify(req_base, query = c("param1" = "value1", "param2" = "value2"))
 }
 \seealso{
-Other opinionated request functions: 
-\code{\link{req_init}()},
-\code{\link{req_pagination_policy}()},
-\code{\link{req_prepare}()},
-\code{\link{req_tidy_policy}()}
+Other opinionated request functions:
+\code{\link[=req_init]{req_init()}},
+\code{\link[=req_pagination_policy]{req_pagination_policy()}},
+\code{\link[=req_prepare]{req_prepare()}},
+\code{\link[=req_tidy_policy]{req_tidy_policy()}}
 }
 \concept{opinionated request functions}

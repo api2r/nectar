@@ -31,7 +31,7 @@
 #'   httr2::resp_body_json
 #' )
 #' # In practice, the request is attached automatically when the response is
-#' # fetched with req_perform() or req_perform_opinionated().
+#' # fetched with httr2::req_perform() or req_perform_opinionated().
 #' resp$request <- req
 #' resp_tidy(resp)
 resp_tidy <- function(resps) {

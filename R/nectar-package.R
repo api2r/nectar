@@ -1,8 +1,10 @@
 #' @keywords internal
 "_PACKAGE"
 
+# All of these really need to be imported, either so the package is a hard
+# dependency for underlying usage, or to make mocking easier in tests.
+
 ## usethis namespace: start
-#' @importFrom cli cli_abort
 #' @importFrom fs path
 #' @importFrom httr2 req_perform
 #' @importFrom httr2 req_perform_iterative

@@ -21,7 +21,7 @@ A function that takes the response and the previous request, and
 returns the next request if there are more results.
 }
 \description{
-This function is intended as a replacement for \code{\link[httr2:iterate_with_offset]{httr2::iterate_with_cursor()}}
+This function is intended as a replacement for \code{\link[httr2:iterate_with_cursor]{httr2::iterate_with_cursor()}}
 for the common situation where the response body is json, and the cursor can
 be "empty" in various ways. Even within a single API, some endpoints might
 return a \code{NULL} \code{next_cursor} to indicate that there are no more pages of
