@@ -20,6 +20,8 @@ currently export this function, but that may change in the future.
 
 - ...:
 
+  These dots are for future extensions and must be empty.
+
 - call:
 
   (`environment`) The environment from which a function was called, e.g.
