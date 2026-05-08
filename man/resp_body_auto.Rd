@@ -16,7 +16,7 @@ The parsed response body.
 \description{
 Use the \code{Content-Type} header (extracted using \code{\link[httr2:resp_content_type]{httr2::resp_content_type()}})
 of a response to automatically choose and apply a body parser, such as
-\code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} or \code{\link[=resp_body_csv]{resp_body_csv()}}.
+\code{\link[httr2:resp_body_json]{httr2::resp_body_json()}} or \code{\link[=resp_body_csv]{resp_body_csv()}}.
 }
 \examples{
 resp_json <- httr2::response_json(body = list(a = 1, b = "hello"))

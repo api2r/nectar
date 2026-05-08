@@ -15,7 +15,7 @@ unchanged.}
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}

@@ -16,7 +16,7 @@ A modified URL.
 }
 \description{
 Append zero or more path elements to a URL without duplicating "/"
-characters. Based on \code{\link[httr2:req_url]{httr2::req_url_path_append()}}.
+characters. Based on \code{\link[httr2:req_url_path_append]{httr2::req_url_path_append()}}.
 }
 \examples{
 url_path_append("https://example.com", "api", "v1", "users")

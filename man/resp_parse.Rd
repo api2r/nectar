@@ -31,20 +31,20 @@ will be mentioned in error messages as the input that is at the origin of a
 problem.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}
 
 \item{response_parser}{(\code{function}) A function to parse the server response
-(\code{resp}). Defaults to \code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}}, since JSON responses are
+(\code{resp}). Defaults to \code{\link[httr2:resp_body_json]{httr2::resp_body_json()}}, since JSON responses are
 common. Set this to \code{NULL} to return the raw response from
 \code{\link[httr2:req_perform]{httr2::req_perform()}}.}
 }
 \value{
 The response parsed by the \code{response_parser}. If \code{resps} was a list,
 the parsed responses are concatenated when possible. Unlike
-\link[httr2:resps_successes]{httr2::resps_data}, this function does not concatenate raw vector
+\link[httr2:resps_data]{httr2::resps_data}, this function does not concatenate raw vector
 responses.
 }
 \description{

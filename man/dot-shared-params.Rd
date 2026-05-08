@@ -30,7 +30,7 @@ any component of the body is a path, pass it through \code{\link[fs:path]{fs::pa
 otherwise give it the class "fs_path" to indicate that it is a path.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:stack]{rlang::caller_env()}} (the default). The environment will be mentioned
+e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
 in error messages as the source of the error. This argument is particularly
 useful for functions that are intended to be called as utilities inside
 other functions.}
@@ -75,7 +75,7 @@ package (default \code{NULL}).}
 
 \item{query}{(\code{character} or \code{list}) An optional list or character vector of
 parameters to pass in the query portion of the request. Can also include a
-\code{.multi} argument to pass to \code{\link[httr2:req_url]{httr2::req_url_query()}} to control how
+\code{.multi} argument to pass to \code{\link[httr2:req_url_query]{httr2::req_url_query()}} to control how
 elements containing multiple values are handled.}
 
 \item{req}{(\code{httr2_request}) A \code{\link[httr2:request]{httr2::request()}} object.}
@@ -92,7 +92,7 @@ list of such objects (as returned by \code{\link[=req_perform_opinionated]{req_p
 response. Default: \code{\link[=resp_body_auto]{resp_body_auto()}}.}
 
 \item{response_parser}{(\code{function}) A function to parse the server response
-(\code{resp}). Defaults to \code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}}, since JSON responses are
+(\code{resp}). Defaults to \code{\link[httr2:resp_body_json]{httr2::resp_body_json()}}, since JSON responses are
 common. Set this to \code{NULL} to return the raw response from
 \code{\link[httr2:req_perform]{httr2::req_perform()}}.}
 

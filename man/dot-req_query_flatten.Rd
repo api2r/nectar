@@ -11,7 +11,7 @@
 
 \item{query}{(\code{character} or \code{list}) An optional list or character vector of
 parameters to pass in the query portion of the request. Can also include a
-\code{.multi} argument to pass to \code{\link[httr2:req_url]{httr2::req_url_query()}} to control how
+\code{.multi} argument to pass to \code{\link[httr2:req_url_query]{httr2::req_url_query()}} to control how
 elements containing multiple values are handled.}
 }
 \value{
