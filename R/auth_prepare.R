@@ -45,7 +45,10 @@ auth_prepare <- function(auth_fn, ..., call = rlang::caller_env()) {
     return(auth)
   }
   structure(
-    list(auth_fn = auth$auth_fn, auth_args = auth[setdiff(names(auth), "auth_fn")]),
+    list(
+      auth_fn = auth$auth_fn,
+      auth_args = auth[setdiff(names(auth), "auth_fn")]
+    ),
     class = "nectar_auth"
   )
 }
