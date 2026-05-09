@@ -45,7 +45,6 @@ auth_api_key("X-API-Key", api_key = "my-api-key")
 }
 \seealso{
 Other opinionated auth functions:
-\code{\link[=auth_prepare]{auth_prepare()}},
-\code{\link[=req_auth_api_key]{req_auth_api_key()}}
+\code{\link[=auth_prepare]{auth_prepare()}}
 }
 \concept{opinionated auth functions}

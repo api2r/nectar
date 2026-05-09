@@ -8,7 +8,7 @@
 #' @inheritParams rlang::args_dots_empty
 #'
 #' @inherit .shared-request return
-#' @family opinionated auth functions
+#' @family opinionated auth functions, opinionated request functions
 #' @export
 #'
 #' @examples
