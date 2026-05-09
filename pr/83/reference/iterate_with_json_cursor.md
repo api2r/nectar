@@ -47,8 +47,8 @@ iterate_with_json_cursor("cursor", c("response_metadata", "next_cursor"))
 #>         req_url_query(req, `:=`(!!param_name, value))
 #>     }
 #> }
-#> <bytecode: 0x564e0915a418>
-#> <environment: 0x564e09a7fc28>
+#> <bytecode: 0x557fa4689b80>
+#> <environment: 0x557fa468a590>
 
 # Create a cursor iterator for the Crossref API
 iterate_xref <- iterate_with_json_cursor("cursor", c("message", "next-cursor"))

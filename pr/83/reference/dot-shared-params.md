@@ -12,7 +12,10 @@ Reused parameter definitions are gathered here for easier editing.
 
 - api_key:
 
-  (`length-1 character`) The API key to use.
+  (`length-1 character` or `NULL`) The API key to use. If this value is
+  `NULL`, the key will be removed from the request. If this value is
+  `NA` or an empty string, the request is returned unchanged when the
+  prepared auth is applied.
 
 - arg:
 
@@ -71,6 +74,11 @@ Reused parameter definitions are gathered here for easier editing.
   (`length-1 character`) The mime type of any files present in the body.
   Some APIs allow you to leave this as NULL for them to guess.
 
+- location:
+
+  (`length-1 character`) Where the API key should be passed. One of
+  `"header"` (default), `"query"`, or `"cookie"`.
+
 - name:
 
   (`length-1 character`) The name of a package or other thing to add to
@@ -91,7 +99,8 @@ Reused parameter definitions are gathered here for easier editing.
 
 - parameter_name:
 
-  (`length-1 character`) The name to use for the API key.
+  (`length-1 character`) The name of the parameter to use in the header,
+  query, or cookie.
 
 - path:
 
