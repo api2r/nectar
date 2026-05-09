@@ -13,8 +13,7 @@ req_prepare(
   mime_type = NULL,
   method = NULL,
   additional_user_agent = NULL,
-  auth_fn = NULL,
-  auth_args = list(),
+  auth = NULL,
   tidy_fn = NULL,
   tidy_args = list(),
   pagination_fn = NULL,
@@ -53,11 +52,8 @@ where a request is coming from. We automatically include information about
 your package and nectar, but use this to provide additional details.
 Default \code{NULL}.}
 
-\item{auth_fn}{(\code{function}) A function to use to authenticate the request. By
-default (\code{NULL}), no authentication is performed.}
-
-\item{auth_args}{(\code{list}) An optional list of arguments to the \code{auth_fn}
-function.}
+\item{auth}{(\code{nectar_auth} or \code{NULL}) Authentication prepared with
+\code{\link[=auth_prepare]{auth_prepare()}}. By default (\code{NULL}), no authentication is performed.}
 
 \item{tidy_fn}{(\code{function}) A function that will be invoked by \code{\link[=resp_tidy]{resp_tidy()}}
 to tidy the response.}
@@ -97,6 +93,8 @@ req_prepare(
 }
 \seealso{
 Other opinionated request functions:
+\code{\link[=auth_api_key]{auth_api_key()}},
+\code{\link[=auth_prepare]{auth_prepare()}},
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},

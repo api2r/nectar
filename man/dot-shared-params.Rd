@@ -15,11 +15,8 @@ Default \code{NULL}.}
 will be mentioned in error messages as the input that is at the origin of a
 problem.}
 
-\item{auth_args}{(\code{list}) An optional list of arguments to the \code{auth_fn}
-function.}
-
-\item{auth_fn}{(\code{function}) A function to use to authenticate the request. By
-default (\code{NULL}), no authentication is performed.}
+\item{auth}{(\code{nectar_auth} or \code{NULL}) Authentication prepared with
+\code{\link[=auth_prepare]{auth_prepare()}}. By default (\code{NULL}), no authentication is performed.}
 
 \item{base_url}{(\verb{length-1 character}) The part of the url that is shared by
 all calls to the API. In some cases there may be a family of base URLs,

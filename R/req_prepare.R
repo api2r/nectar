@@ -26,8 +26,7 @@ req_prepare <- function(
   mime_type = NULL,
   method = NULL,
   additional_user_agent = NULL,
-  auth_fn = NULL,
-  auth_args = list(),
+  auth = NULL,
   tidy_fn = NULL,
   tidy_args = list(),
   pagination_fn = NULL,
@@ -48,7 +47,8 @@ req_prepare <- function(
     method = method,
     call = call
   )
-  req <- do_if_fn_defined(req, auth_fn, !!!auth_args, call = call)
+  auth <- .as_nectar_auth(auth, call = call)
+  req <- do_if_fn_defined(req, auth$auth_fn, !!!auth$auth_args, call = call)
   if (length(pagination_fn)) {
     req <- req_pagination_policy(req, pagination_fn, call = call)
   }

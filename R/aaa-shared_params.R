@@ -10,10 +10,8 @@
 #' @param arg (`length-1 character`) An argument name as a string. This argument
 #'   will be mentioned in error messages as the input that is at the origin of a
 #'   problem.
-#' @param auth_args (`list`) An optional list of arguments to the `auth_fn`
-#'   function.
-#' @param auth_fn (`function`) A function to use to authenticate the request. By
-#'   default (`NULL`), no authentication is performed.
+#' @param auth (`nectar_auth` or `NULL`) Authentication prepared with
+#'   [auth_prepare()]. By default (`NULL`), no authentication is performed.
 #' @param base_url (`length-1 character`) The part of the url that is shared by
 #'   all calls to the API. In some cases there may be a family of base URLs,
 #'   from which you will need to choose one.
