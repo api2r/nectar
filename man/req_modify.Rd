@@ -60,8 +60,6 @@ req_modify(req_base, query = c("param1" = "value1", "param2" = "value2"))
 }
 \seealso{
 Other opinionated request functions:
-\code{\link[=auth_api_key]{auth_api_key()}},
-\code{\link[=auth_prepare]{auth_prepare()}},
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},
 \code{\link[=req_prepare]{req_prepare()}},

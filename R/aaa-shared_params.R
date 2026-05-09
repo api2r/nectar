@@ -6,7 +6,10 @@
 #'   where a request is coming from. We automatically include information about
 #'   your package and nectar, but use this to provide additional details.
 #'   Default `NULL`.
-#' @param api_key (`length-1 character`) The API key to use.
+#' @param api_key (`length-1 character` or `NULL`) The API key to use. If this
+#'   value is `NULL`, the key will be removed from the request. If this value is
+#'   `NA` or an empty string, the request is returned unchanged when the
+#'   prepared auth is applied.
 #' @param arg (`length-1 character`) An argument name as a string. This argument
 #'   will be mentioned in error messages as the input that is at the origin of a
 #'   problem.
@@ -33,6 +36,8 @@
 #'   other than `GET` or `POST`, supply it. Case is ignored.
 #' @param mime_type (`length-1 character`) The mime type of any files present in
 #'   the body. Some APIs allow you to leave this as NULL for them to guess.
+#' @param location (`length-1 character`) Where the API key should be passed.
+#'   One of `"header"` (default), `"query"`, or `"cookie"`.
 #' @param name (`length-1 character`) The name of a package or other thing to
 #'   add to or remove from the user agent string.
 #' @param pagination_fn (`function`) A function that takes the previous response
@@ -42,7 +47,8 @@
 #'   [httr2::iterate_with_offset()]. This function will be extracted from the
 #'   request by [req_perform_opinionated()] and passed on as `next_req` to
 #'   [httr2::req_perform_iterative()].
-#' @param parameter_name (`length-1 character`) The name to use for the API key.
+#' @param parameter_name (`length-1 character`) The name of the parameter to use
+#'   in the header, query, or cookie.
 #' @param path (`character` or `list`) The route to an API endpoint. Optionally,
 #'   a list or character vector with the path as one or more unnamed arguments
 #'   (which will be concatenated with "/") plus named arguments to

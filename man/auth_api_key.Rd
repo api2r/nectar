@@ -44,12 +44,7 @@ This helper creates a reusable authentication object that can be passed to
 auth_api_key("X-API-Key", api_key = "my-api-key")
 }
 \seealso{
-Other opinionated request functions:
-\code{\link[=auth_prepare]{auth_prepare()}},
-\code{\link[=req_init]{req_init()}},
-\code{\link[=req_modify]{req_modify()}},
-\code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
-\code{\link[=req_tidy_policy]{req_tidy_policy()}}
+Other opinionated auth functions:
+\code{\link[=auth_prepare]{auth_prepare()}}
 }
-\concept{opinionated request functions}
+\concept{opinionated auth functions}
