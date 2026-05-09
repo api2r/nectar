@@ -4,8 +4,8 @@
 #' authentication strategy can be reused across requests.
 #'
 #' @inheritParams .shared-params
-#' @inheritParams rlang::args_dots_empty
 #' @param auth_fn (`function`) A function to use to authenticate a request.
+#' @param ... (`any`) Arguments to pass to `auth_fn`.
 #' @returns A list with class `"nectar_auth"` and elements `auth_fn` and
 #'   `auth_args`.
 #' @family opinionated auth functions
@@ -40,14 +40,26 @@ auth_prepare <- function(auth_fn, ..., call = rlang::caller_env()) {
   if (!("auth_fn" %in% names(auth))) {
     return(NextMethod())
   }
+  auth_args <- auth$auth_args %||% list()
+  if (!is.list(auth_args)) {
+    .nectar_abort(
+      c(
+        "{.arg auth$auth_args} must be a list.",
+        x = "{.arg auth$auth_args} is {.obj_type_friendly {auth_args}}."
+      ),
+      subclass = "bad_auth_args",
+      call = call
+    )
+  }
   if (setequal(names(auth), c("auth_fn", "auth_args"))) {
+    auth$auth_args <- auth_args
     class(auth) <- "nectar_auth"
     return(auth)
   }
   structure(
     list(
       auth_fn = auth$auth_fn,
-      auth_args = auth[setdiff(names(auth), "auth_fn")]
+      auth_args = c(auth_args, auth[setdiff(names(auth), c("auth_fn", "auth_args"))])
     ),
     class = "nectar_auth"
   )

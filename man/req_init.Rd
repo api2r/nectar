@@ -46,6 +46,7 @@ req_init(
 }
 \seealso{
 Other opinionated request functions:
+\code{\link[=req_auth_api_key]{req_auth_api_key()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},
 \code{\link[=req_prepare]{req_prepare()}},

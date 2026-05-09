@@ -9,7 +9,7 @@ auth_prepare(auth_fn, ..., call = rlang::caller_env())
 \arguments{
 \item{auth_fn}{(\code{function}) A function to use to authenticate a request.}
 
-\item{...}{These dots are for future extensions and must be empty.}
+\item{...}{(\code{any}) Arguments to pass to \code{auth_fn}.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
 e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
@@ -30,6 +30,7 @@ auth_prepare(req_auth_api_key, "X-API-Key", api_key = "my-api-key")
 }
 \seealso{
 Other opinionated auth functions:
-\code{\link[=auth_api_key]{auth_api_key()}}
+\code{\link[=auth_api_key]{auth_api_key()}},
+\code{\link[=req_auth_api_key]{req_auth_api_key()}}
 }
 \concept{opinionated auth functions}

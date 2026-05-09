@@ -93,6 +93,7 @@ req_prepare(
 }
 \seealso{
 Other opinionated request functions:
+\code{\link[=req_auth_api_key]{req_auth_api_key()}},
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},

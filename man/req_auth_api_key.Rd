@@ -55,4 +55,17 @@ req_auth_api_key(req, "api_key", api_key = "my-api-key", location = "query")
 # If `api_key` is NULL, the key is removed from the request
 req_auth_api_key(req, "X-API-Key", api_key = NULL)
 }
-\concept{opinionated auth functions, opinionated request functions}
+\seealso{
+Other opinionated auth functions:
+\code{\link[=auth_api_key]{auth_api_key()}},
+\code{\link[=auth_prepare]{auth_prepare()}}
+
+Other opinionated request functions:
+\code{\link[=req_init]{req_init()}},
+\code{\link[=req_modify]{req_modify()}},
+\code{\link[=req_pagination_policy]{req_pagination_policy()}},
+\code{\link[=req_prepare]{req_prepare()}},
+\code{\link[=req_tidy_policy]{req_tidy_policy()}}
+}
+\concept{opinionated auth functions}
+\concept{opinionated request functions}

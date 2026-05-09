@@ -159,8 +159,8 @@ test_that("req_prepare() applies prepared auth (#81)", {
     auth = auth_prepare(req_auth_api_key, "parm", api_key = "my_key")
   )
   expect_in(
-    names(test_result$headers),
-    "parm"
+    "parm",
+    names(test_result$headers)
   )
 })
 
