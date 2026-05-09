@@ -6,16 +6,9 @@
 #'
 #' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @param parameter_name (`length-1 character`) The name of the parameter to use
-#'   in the header, query, or cookie.
-#' @param api_key (`length-1 character` or `NULL`) The API key to use. If this
-#'   value is `NULL`, the key will be removed from the request. If this value is
-#'   `NA` or an empty string, the request is returned unchanged when the
-#'   prepared auth is applied.
-#' @param location (`length-1 character`) Where the API key should be passed.
-#'   One of `"header"` (default), `"query"`, or `"cookie"`.
 #'
 #' @inherit .shared-request return
+#' @family opinionated auth functions
 #' @export
 #'
 #' @examples
@@ -69,17 +62,9 @@ req_auth_api_key <- function(
 #'
 #' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @param parameter_name (`length-1 character`) The name of the parameter to use
-#'   in the header, query, or cookie.
-#' @param api_key (`length-1 character` or `NULL`) The API key to use. If this
-#'   value is `NULL`, the key will be removed from the request. If this value is
-#'   `NA` or an empty string, the request is returned unchanged when the
-#'   prepared auth is applied.
-#' @param location (`length-1 character`) Where the API key should be passed.
-#'   One of `"header"` (default), `"query"`, or `"cookie"`.
 #' @returns A list with class `"nectar_auth"` and elements `auth_fn` and
 #'   `auth_args`.
-#' @family opinionated request functions
+#' @family opinionated auth functions
 #' @export
 #'
 #' @examples

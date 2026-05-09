@@ -153,7 +153,7 @@ test_that("req_prepare() applies tidying", {
   )
 })
 
-test_that("req_prepare() applies prepared auth", {
+test_that("req_prepare() applies prepared auth (#81)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     auth = auth_prepare(req_auth_api_key, "parm", api_key = "my_key")
@@ -164,11 +164,11 @@ test_that("req_prepare() applies prepared auth", {
   )
 })
 
-test_that("req_prepare() errors for unsupported auth objects", {
+test_that("req_prepare() errors for unsupported auth objects (#81)", {
   expect_error(
     req_prepare(
       base_url = "https://example.com",
-      auth = list(auth_fn = req_auth_api_key, auth_args = list("parm"))
+      auth = "not_auth"
     ),
     class = "nectar-error-unsupported_auth_class"
   )

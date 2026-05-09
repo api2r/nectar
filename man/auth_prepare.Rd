@@ -29,12 +29,8 @@ authentication strategy can be reused across requests.
 auth_prepare(req_auth_api_key, "X-API-Key", api_key = "my-api-key")
 }
 \seealso{
-Other opinionated request functions:
+Other opinionated auth functions:
 \code{\link[=auth_api_key]{auth_api_key()}},
-\code{\link[=req_init]{req_init()}},
-\code{\link[=req_modify]{req_modify()}},
-\code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
-\code{\link[=req_tidy_policy]{req_tidy_policy()}}
+\code{\link[=req_auth_api_key]{req_auth_api_key()}}
 }
-\concept{opinionated request functions}
+\concept{opinionated auth functions}

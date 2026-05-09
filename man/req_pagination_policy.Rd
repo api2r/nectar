@@ -40,8 +40,6 @@ req_pagination_policy(req, httr2::iterate_with_offset("page"))
 }
 \seealso{
 Other opinionated request functions:
-\code{\link[=auth_api_key]{auth_api_key()}},
-\code{\link[=auth_prepare]{auth_prepare()}},
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_prepare]{req_prepare()}},

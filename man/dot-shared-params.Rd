@@ -9,7 +9,10 @@ where a request is coming from. We automatically include information about
 your package and nectar, but use this to provide additional details.
 Default \code{NULL}.}
 
-\item{api_key}{(\verb{length-1 character}) The API key to use.}
+\item{api_key}{(\verb{length-1 character} or \code{NULL}) The API key to use. If this
+value is \code{NULL}, the key will be removed from the request. If this value is
+\code{NA} or an empty string, the request is returned unchanged when the
+prepared auth is applied.}
 
 \item{arg}{(\verb{length-1 character}) An argument name as a string. This argument
 will be mentioned in error messages as the input that is at the origin of a
@@ -46,6 +49,9 @@ other than \code{GET} or \code{POST}, supply it. Case is ignored.}
 \item{mime_type}{(\verb{length-1 character}) The mime type of any files present in
 the body. Some APIs allow you to leave this as NULL for them to guess.}
 
+\item{location}{(\verb{length-1 character}) Where the API key should be passed.
+One of \code{"header"} (default), \code{"query"}, or \code{"cookie"}.}
+
 \item{name}{(\verb{length-1 character}) The name of a package or other thing to
 add to or remove from the user agent string.}
 
@@ -57,7 +63,8 @@ using one of the iteration helpers described in
 request by \code{\link[=req_perform_opinionated]{req_perform_opinionated()}} and passed on as \code{next_req} to
 \code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}.}
 
-\item{parameter_name}{(\verb{length-1 character}) The name to use for the API key.}
+\item{parameter_name}{(\verb{length-1 character}) The name of the parameter to use
+in the header, query, or cookie.}
 
 \item{path}{(\code{character} or \code{list}) The route to an API endpoint. Optionally,
 a list or character vector with the path as one or more unnamed arguments
