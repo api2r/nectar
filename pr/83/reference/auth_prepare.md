@@ -17,7 +17,7 @@ auth_prepare(auth_fn, ..., call = rlang::caller_env())
 
 - ...:
 
-  These dots are for future extensions and must be empty.
+  (`any`) Arguments to pass to `auth_fn`.
 
 - call:
 
@@ -36,7 +36,8 @@ A list with class `"nectar_auth"` and elements `auth_fn` and
 ## See also
 
 Other opinionated auth functions:
-[`auth_api_key()`](https://nectar.api2r.org/reference/auth_api_key.md)
+[`auth_api_key()`](https://nectar.api2r.org/reference/auth_api_key.md),
+[`req_auth_api_key()`](https://nectar.api2r.org/reference/req_auth_api_key.md)
 
 ## Examples
 
@@ -61,7 +62,7 @@ auth_prepare(req_auth_api_key, "X-API-Key", api_key = "my-api-key")
 #>         api_key))
 #>     return(req)
 #> }
-#> <bytecode: 0x557fa377d458>
+#> <bytecode: 0x55d60bf810c8>
 #> <environment: namespace:nectar>
 #> 
 #> $auth_args

@@ -60,6 +60,19 @@ req_auth_api_key(
 A [`httr2::request()`](https://httr2.r-lib.org/reference/request.html)
 object with additional class `nectar_request`.
 
+## See also
+
+Other opinionated auth functions:
+[`auth_api_key()`](https://nectar.api2r.org/reference/auth_api_key.md),
+[`auth_prepare()`](https://nectar.api2r.org/reference/auth_prepare.md)
+
+Other opinionated request functions:
+[`req_init()`](https://nectar.api2r.org/reference/req_init.md),
+[`req_modify()`](https://nectar.api2r.org/reference/req_modify.md),
+[`req_pagination_policy()`](https://nectar.api2r.org/reference/req_pagination_policy.md),
+[`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md),
+[`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md)
+
 ## Examples
 
 ``` r
