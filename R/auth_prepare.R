@@ -36,21 +36,16 @@ auth_prepare <- function(auth_fn, ..., call = rlang::caller_env()) {
 }
 
 #' @export
+.as_nectar_auth.function <- function(auth, call = rlang::caller_env()) {
+  .as_nectar_auth(list(auth_fn = auth), call = call)
+}
+
+#' @export
 .as_nectar_auth.list <- function(auth, call = rlang::caller_env()) {
   if (!("auth_fn" %in% names(auth))) {
     return(NextMethod())
   }
-  auth_args <- auth$auth_args %||% list()
-  if (!is.list(auth_args)) {
-    .nectar_abort(
-      c(
-        "{.arg auth$auth_args} must be a list.",
-        x = "{.arg auth$auth_args} is {.obj_type_friendly {auth_args}}."
-      ),
-      subclass = "bad_auth_args",
-      call = call
-    )
-  }
+  auth_args <- stbl::to_lst(auth$auth_args) %||% list()
   if (setequal(names(auth), c("auth_fn", "auth_args"))) {
     auth$auth_args <- auth_args
     class(auth) <- "nectar_auth"
@@ -59,7 +54,10 @@ auth_prepare <- function(auth_fn, ..., call = rlang::caller_env()) {
   structure(
     list(
       auth_fn = auth$auth_fn,
-      auth_args = c(auth_args, auth[setdiff(names(auth), c("auth_fn", "auth_args"))])
+      auth_args = c(
+        auth_args,
+        auth[setdiff(names(auth), c("auth_fn", "auth_args"))]
+      )
     ),
     class = "nectar_auth"
   )

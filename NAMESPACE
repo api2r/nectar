@@ -3,6 +3,7 @@
 S3method(.add_body,json)
 S3method(.add_body,multipart)
 S3method(.as_nectar_auth,"NULL")
+S3method(.as_nectar_auth,"function")
 S3method(.as_nectar_auth,default)
 S3method(.as_nectar_auth,list)
 S3method(.as_nectar_auth,nectar_auth)
