@@ -53,8 +53,7 @@ a wrapper around the <code>req_</code> family of functions, such as <code><a hre
 <span>  mime_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  additional_user_agent <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  auth_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  auth <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -113,14 +112,9 @@ your package and nectar, but use this to provide additional details.
 Default <code>NULL</code>.</p></dd>
 
 
-<dt id="arg-auth-fn">auth_fn<a class="anchor" aria-label="anchor" href="#arg-auth-fn"></a></dt>
-<dd><p>(<code>function</code>) A function to use to authenticate the request. By
-default (<code>NULL</code>), no authentication is performed.</p></dd>
-
-
-<dt id="arg-auth-args">auth_args<a class="anchor" aria-label="anchor" href="#arg-auth-args"></a></dt>
-<dd><p>(<code>list</code>) An optional list of arguments to the <code>auth_fn</code>
-function.</p></dd>
+<dt id="arg-auth">auth<a class="anchor" aria-label="anchor" href="#arg-auth"></a></dt>
+<dd><p>(<code>nectar_auth</code> or <code>NULL</code>) Authentication prepared with
+<code><a href="auth_prepare.html">auth_prepare()</a></code>. By default (<code>NULL</code>), no authentication is performed.</p></dd>
 
 
 <dt id="arg-tidy-fn">tidy_fn<a class="anchor" aria-label="anchor" href="#arg-tidy-fn"></a></dt>
@@ -158,6 +152,7 @@ other functions.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other opinionated request functions:
+<code><a href="req_auth_api_key.html">req_auth_api_key()</a></code>,
 <code><a href="req_init.html">req_init()</a></code>,
 <code><a href="req_modify.html">req_modify()</a></code>,
 <code><a href="req_pagination_policy.html">req_pagination_policy()</a></code>,

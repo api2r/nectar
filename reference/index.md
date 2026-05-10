@@ -2,6 +2,10 @@
 
 ## All functions
 
+- [`auth_api_key()`](https://nectar.api2r.org/reference/auth_api_key.md)
+  : Prepare API key authentication independent of a request
+- [`auth_prepare()`](https://nectar.api2r.org/reference/auth_prepare.md)
+  : Prepare authentication independent of a request
 - [`choose_pagination_fn()`](https://nectar.api2r.org/reference/choose_pagination_fn.md)
   : Extract a pagination policy from a request
 - [`compact_nested_list()`](https://nectar.api2r.org/reference/compact_nested_list.md)

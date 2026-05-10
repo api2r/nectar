@@ -31,15 +31,15 @@ ten results per page (`rows = 10`), select only the “publisher” and
 `select` parameter with commas (`.multi`), and set the `cursor`
 parameter to `"*"` to trigger cursor-based pagination:
 
-## Authentication with `req_auth_api_key()`
+## Authentication with `auth_api_key()`
 
 Many APIs accept an optional key (or, as in Crossref’s case, an email
 address) to identify your application and gain access to a higher rate
 limit. nectar provides
-[`req_auth_api_key()`](https://nectar.api2r.org/reference/req_auth_api_key.md)
-for this purpose. You can pass it through
+[`auth_api_key()`](https://nectar.api2r.org/reference/auth_api_key.md)
+to prepare this authentication and pass it through
 [`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md) via
-the `auth_fn` and `auth_args` arguments:
+the `auth` argument:
 
 ``` r
 req <- req_prepare(
@@ -47,8 +47,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  auth_fn = req_auth_api_key,
-  auth_args = list("mailto", api_key = "your@email.com", location = "query")
+  auth = auth_api_key("mailto", api_key = "your@email.com", location = "query")
 )
 ```
 
@@ -221,8 +220,7 @@ works <- function(
   req_prepare(
     "https://api.crossref.org/works",
     query = list(rows = rows, cursor = "*", select = select),
-    auth_fn = req_auth_api_key,
-    auth_args = list("mailto", api_key = mailto, location = "query"),
+    auth = auth_api_key("mailto", api_key = mailto, location = "query"),
     tidy_fn = resp_tidy_json,
     tidy_args = list(subset_path = c("message", "items")),
     pagination_fn = iterate_with_json_cursor(

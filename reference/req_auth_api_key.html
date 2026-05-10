@@ -74,7 +74,8 @@ in the header, query, or cookie.</p></dd>
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
 <dd><p>(<code>length-1 character</code> or <code>NULL</code>) The API key to use. If this
 value is <code>NULL</code>, the key will be removed from the request. If this value is
-<code>NA</code> or an empty string, <code>req</code> is returned unchanged.</p></dd>
+<code>NA</code> or an empty string, the request is returned unchanged when the
+prepared auth is applied.</p></dd>
 
 
 <dt id="arg-location">location<a class="anchor" aria-label="anchor" href="#arg-location"></a></dt>
@@ -93,6 +94,18 @@ other functions.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">httr2::request()</a></code> object with additional class <code>nectar_request</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other opinionated auth functions:
+<code><a href="auth_api_key.html">auth_api_key()</a></code>,
+<code><a href="auth_prepare.html">auth_prepare()</a></code></p>
+<p>Other opinionated request functions:
+<code><a href="req_init.html">req_init()</a></code>,
+<code><a href="req_modify.html">req_modify()</a></code>,
+<code><a href="req_pagination_policy.html">req_pagination_policy()</a></code>,
+<code><a href="req_prepare.html">req_prepare()</a></code>,
+<code><a href="req_tidy_policy.html">req_tidy_policy()</a></code></p></div>
     </div>
 
     <div class="section level2">

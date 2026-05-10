@@ -49,7 +49,10 @@ Default <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>(<code>length-1 character</code>) The API key to use.</p></dd>
+<dd><p>(<code>length-1 character</code> or <code>NULL</code>) The API key to use. If this
+value is <code>NULL</code>, the key will be removed from the request. If this value is
+<code>NA</code> or an empty string, the request is returned unchanged when the
+prepared auth is applied.</p></dd>
 
 
 <dt id="arg-arg">arg<a class="anchor" aria-label="anchor" href="#arg-arg"></a></dt>
@@ -58,14 +61,9 @@ will be mentioned in error messages as the input that is at the origin of a
 problem.</p></dd>
 
 
-<dt id="arg-auth-args">auth_args<a class="anchor" aria-label="anchor" href="#arg-auth-args"></a></dt>
-<dd><p>(<code>list</code>) An optional list of arguments to the <code>auth_fn</code>
-function.</p></dd>
-
-
-<dt id="arg-auth-fn">auth_fn<a class="anchor" aria-label="anchor" href="#arg-auth-fn"></a></dt>
-<dd><p>(<code>function</code>) A function to use to authenticate the request. By
-default (<code>NULL</code>), no authentication is performed.</p></dd>
+<dt id="arg-auth">auth<a class="anchor" aria-label="anchor" href="#arg-auth"></a></dt>
+<dd><p>(<code>nectar_auth</code> or <code>NULL</code>) Authentication prepared with
+<code><a href="auth_prepare.html">auth_prepare()</a></code>. By default (<code>NULL</code>), no authentication is performed.</p></dd>
 
 
 <dt id="arg-base-url">base_url<a class="anchor" aria-label="anchor" href="#arg-base-url"></a></dt>
@@ -110,6 +108,11 @@ other than <code>GET</code> or <code>POST</code>, supply it. Case is ignored.</p
 the body. Some APIs allow you to leave this as NULL for them to guess.</p></dd>
 
 
+<dt id="arg-location">location<a class="anchor" aria-label="anchor" href="#arg-location"></a></dt>
+<dd><p>(<code>length-1 character</code>) Where the API key should be passed.
+One of <code>"header"</code> (default), <code>"query"</code>, or <code>"cookie"</code>.</p></dd>
+
+
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>(<code>length-1 character</code>) The name of a package or other thing to
 add to or remove from the user agent string.</p></dd>
@@ -126,7 +129,8 @@ request by <code><a href="req_perform_opinionated.html">req_perform_opinionated(
 
 
 <dt id="arg-parameter-name">parameter_name<a class="anchor" aria-label="anchor" href="#arg-parameter-name"></a></dt>
-<dd><p>(<code>length-1 character</code>) The name to use for the API key.</p></dd>
+<dd><p>(<code>length-1 character</code>) The name of the parameter to use
+in the header, query, or cookie.</p></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>

@@ -17,8 +17,7 @@ req_prepare(
   mime_type = NULL,
   method = NULL,
   additional_user_agent = NULL,
-  auth_fn = NULL,
-  auth_args = list(),
+  auth = NULL,
   tidy_fn = NULL,
   tidy_args = list(),
   pagination_fn = NULL,
@@ -77,14 +76,11 @@ req_prepare(
   from. We automatically include information about your package and
   nectar, but use this to provide additional details. Default `NULL`.
 
-- auth_fn:
+- auth:
 
-  (`function`) A function to use to authenticate the request. By default
-  (`NULL`), no authentication is performed.
-
-- auth_args:
-
-  (`list`) An optional list of arguments to the `auth_fn` function.
+  (`nectar_auth` or `NULL`) Authentication prepared with
+  [`auth_prepare()`](https://nectar.api2r.org/reference/auth_prepare.md).
+  By default (`NULL`), no authentication is performed.
 
 - tidy_fn:
 
@@ -126,6 +122,7 @@ object with additional class `nectar_request`.
 ## See also
 
 Other opinionated request functions:
+[`req_auth_api_key()`](https://nectar.api2r.org/reference/req_auth_api_key.md),
 [`req_init()`](https://nectar.api2r.org/reference/req_init.md),
 [`req_modify()`](https://nectar.api2r.org/reference/req_modify.md),
 [`req_pagination_policy()`](https://nectar.api2r.org/reference/req_pagination_policy.md),

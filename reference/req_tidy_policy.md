@@ -52,6 +52,7 @@ object with additional class `nectar_request`.
 ## See also
 
 Other opinionated request functions:
+[`req_auth_api_key()`](https://nectar.api2r.org/reference/req_auth_api_key.md),
 [`req_init()`](https://nectar.api2r.org/reference/req_init.md),
 [`req_modify()`](https://nectar.api2r.org/reference/req_modify.md),
 [`req_pagination_policy()`](https://nectar.api2r.org/reference/req_pagination_policy.md),

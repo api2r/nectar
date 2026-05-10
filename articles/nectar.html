@@ -84,21 +84,20 @@ to concatenate the <code>select</code> parameter with commas
 <code>"*"</code> to trigger cursor-based pagination:</p>
 </div>
 <div class="section level2">
-<h2 id="authentication-with-req_auth_api_key">Authentication with <code>req_auth_api_key()</code><a class="anchor" aria-label="anchor" href="#authentication-with-req_auth_api_key"></a>
+<h2 id="authentication-with-auth_api_key">Authentication with <code>auth_api_key()</code><a class="anchor" aria-label="anchor" href="#authentication-with-auth_api_key"></a>
 </h2>
 <p>Many APIs accept an optional key (or, as in Crossref’s case, an email
 address) to identify your application and gain access to a higher rate
-limit. nectar provides <code><a href="../reference/req_auth_api_key.html">req_auth_api_key()</a></code> for this purpose.
-You can pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
-<code>auth_fn</code> and <code>auth_args</code> arguments:</p>
+limit. nectar provides <code><a href="../reference/auth_api_key.html">auth_api_key()</a></code> to prepare this
+authentication and pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
+<code>auth</code> argument:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  auth_fn <span class="op">=</span> <span class="va">req_auth_api_key</span>,</span>
-<span>  auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="st">"your@email.com"</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span></span>
+<span>  auth <span class="op">=</span> <span class="fu"><a href="../reference/auth_api_key.html">auth_api_key</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="st">"your@email.com"</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>If you need to remove the key (for example, to fall back to anonymous
 access), pass <code>api_key = NULL</code>:</p>
@@ -251,8 +250,7 @@ provide:</p>
 <span>  <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="va">rows</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="va">select</span><span class="op">)</span>,</span>
-<span>    auth_fn <span class="op">=</span> <span class="va">req_auth_api_key</span>,</span>
-<span>    auth_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="va">mailto</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span>,</span>
+<span>    auth <span class="op">=</span> <span class="fu"><a href="../reference/auth_api_key.html">auth_api_key</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="va">mailto</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span>,</span>
 <span>    tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
 <span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
