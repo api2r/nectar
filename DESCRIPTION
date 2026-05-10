@@ -17,7 +17,7 @@ Imports:
     curl,
     fs,
     glue,
-    httr2 (>= 1.0.0),
+    httr2 (>= 1.1.0),
     jsonlite,
     lifecycle,
     purrr,

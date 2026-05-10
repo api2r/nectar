@@ -18,5 +18,5 @@
       <error/nectar-error-unsupported_response_class>
       Error in `resp_tidy()`:
       ! No method is available to `nectar::resp_tidy()` this object.
-      i You might want to try `nectar::resp_parse()` instead.
+      i `nectar::resp_tidy()` expects <httr2_response> objects, or lists thereof.
 
