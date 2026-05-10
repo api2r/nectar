@@ -12,6 +12,20 @@ test_that("req_auth_api_key errors informatively with unused arguments", {
   )
 })
 
+test_that("auth_api_key() prepares req_auth_api_key auth (#81)", {
+  test_result <- auth_api_key(
+    parameter_name = "parm",
+    api_key = "my_key",
+    location = "query"
+  )
+  expect_s3_class(test_result, "nectar_auth")
+  expect_identical(test_result$auth_fn, req_auth_api_key)
+  expect_identical(
+    test_result$auth_args[c("parameter_name", "api_key", "location")],
+    list(parameter_name = "parm", api_key = "my_key", location = "query")
+  )
+})
+
 test_that("req_auth_api_key returns req unchanged if api_key is NA or empty (#76)", {
   req <- httr2::request("https://example.com")
   expect_identical(req, req_auth_api_key(req, "parm", api_key = NA_character_))
