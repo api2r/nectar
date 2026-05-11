@@ -47,36 +47,28 @@ request that includes a tidying policy defined via <code><a href="req_tidy_polic
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">resp_tidy</span><span class="op">(</span><span class="va">resps</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">resp_tidy</span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-resps">resps<a class="anchor" aria-label="anchor" href="#arg-resps"></a></dt>
-<dd><p>(<code>httr2_response</code>, <code>nectar_responses</code>, or <code>list</code>) A single
-<code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> object (as returned by <code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code>) or a
-list of such objects (as returned by <code><a href="req_perform_opinionated.html">req_perform_opinionated()</a></code> or
-<code><a href="https://httr2.r-lib.org/reference/req_perform_iterative.html" class="external-link">httr2::req_perform_iterative()</a></code>).</p></dd>
+<dl><dt id="arg-resp">resp<a class="anchor" aria-label="anchor" href="#arg-resp"></a></dt>
+<dd><p>(<code>httr2_response</code>) A single <code><a href="https://httr2.r-lib.org/reference/response.html" class="external-link">httr2::response()</a></code> object (as
+returned by <code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The extracted and cleaned response, or, for a list of responses,
-those responses cleaned then concatenated via <code><a href="https://httr2.r-lib.org/reference/resps_successes.html" class="external-link">httr2::resps_data()</a></code>. By
-default, the response is processed with <code><a href="resp_body_auto.html">resp_body_auto()</a></code>.</p>
+    <p>The extracted and cleaned response, or <code>NULL</code> if <code>resp</code> is <code>NULL</code>.
+By default, the response is processed with <code><a href="resp_body_auto.html">resp_body_auto()</a></code>. If the
+request includes a <code>resp_tidy</code> policy (set via <code><a href="req_tidy_policy.html">req_tidy_policy()</a></code>), that
+policy's function and arguments are used instead.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="resp_tidy_json.html">resp_tidy_json()</a></code> for an opinionated response parser for JSON
-responses, <code><a href="resp_body_auto.html">resp_body_auto()</a></code> (etc) for a family of response parsers that
-attempts to automatically select the appropriate parser based on the
-response content type, <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_raw()</a></code> (etc) for the underlying
-httr2 response parsers, and <code><a href="resp_parse.html">resp_parse()</a></code> for an alternative approach to
-dealing with responses (particularly useful if the request does not include
-a <code>resp_tidy</code> policy).</p>
-<p>Other opinionated response parsers:
+    <div class="dont-index"><p>Other opinionated response parsers:
 <code><a href="req_tidy_policy.html">req_tidy_policy()</a></code>,
 <code><a href="resp_tidy_json.html">resp_tidy_json()</a></code>,
 <code><a href="resp_tidy_unknown.html">resp_tidy_unknown()</a></code>,

@@ -62,7 +62,7 @@ auth_prepare(req_auth_api_key, "X-API-Key", api_key = "my-api-key")
 #>         api_key))
 #>     return(req)
 #> }
-#> <bytecode: 0x5591a1f3a9b0>
+#> <bytecode: 0x56549cabfbc8>
 #> <environment: namespace:nectar>
 #> 
 #> $auth_args
