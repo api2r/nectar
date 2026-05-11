@@ -37,7 +37,7 @@ tidy_policy_prepare <- function(tidy_fn, ...) {
   tidy_policy,
   call = rlang::caller_env()
 ) {
-  return(list(tidy_fn = NULL, tidy_args = list()))
+  return(NULL)
 }
 
 #' @export

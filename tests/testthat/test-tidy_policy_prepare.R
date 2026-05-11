@@ -20,10 +20,9 @@ test_that(".as_nectar_tidy_policy() returns nectar_tidy_policy objects unchanged
   expect_identical(test_result, test_input)
 })
 
-test_that(".as_nectar_tidy_policy() returns NULL tidy_fn and empty tidy_args for NULL input (#86)", {
+test_that(".as_nectar_tidy_policy() returns NULL for NULL input (#86)", {
   test_result <- .as_nectar_tidy_policy(NULL)
-  expect_identical(test_result$tidy_fn, NULL)
-  expect_identical(test_result$tidy_args, list())
+  expect_null(test_result)
 })
 
 test_that(".as_nectar_tidy_policy() errors for list without tidy_fn (#86)", {

@@ -56,7 +56,7 @@ req <- req_auth_api_key(
 
 The Crossref API returns JSON. nectar's `resp_tidy_json()` function parses the JSON response body and converts the result to a tibble using `tibblify::tibblify()`. You can extract a nested path from the response at the same time with the `subset_path` argument.
 
-For Crossref, the actual work items live at `message$items` in the response body. You can attach `resp_tidy_json()` to the request via the `tidy_policy` argument in `req_prepare()`, so that every response is automatically tidied when you call `resp_parse()` later:
+For Crossref, the actual work items live at `message$items` in the response body. To have `req_prepare()` automatically tidy each response when you call `resp_parse()` later, supply a prepared tidying policy object via the `tidy_policy` argument, such as `tidy_policy_json(subset_path = c("message", "items"))`:
 
 ```{r tidy, eval = FALSE}
 req <- req_prepare(
