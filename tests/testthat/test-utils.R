@@ -1,13 +1,13 @@
-# check_httr2_response ---------------------------------------------------------
+# .check_httr2_response --------------------------------------------------------
 
-test_that("check_httr2_response returns input for valid httr2_response (#noissue)", {
+test_that(".check_httr2_response returns input for valid httr2_response (#noissue)", {
   mock_response <- httr2::response_json(body = list(a = 1))
-  expect_identical(check_httr2_response(mock_response), mock_response)
+  expect_identical(.check_httr2_response(mock_response), mock_response)
 })
 
-test_that("check_httr2_response errors with not_httr2_response for non-response (#noissue)", {
+test_that(".check_httr2_response errors with not_httr2_response for non-response (#noissue)", {
   expect_nectar_error_snapshot(
-    check_httr2_response(1),
+    .check_httr2_response(1),
     "not_httr2_response"
   )
 })

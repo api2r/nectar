@@ -30,8 +30,10 @@
 #' resp$request <- req
 #' resp_tidy(resp)
 resp_tidy <- function(resp) {
-  if (is.null(resp)) return(NULL)
-  check_httr2_response(resp)
+  if (is.null(resp)) {
+    return(NULL)
+  }
+  .check_httr2_response(resp)
   req <- httr2::resp_request(resp)
   if (length(req$policies$resp_tidy)) {
     return(

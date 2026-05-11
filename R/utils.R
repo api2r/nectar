@@ -5,9 +5,9 @@
 #' @param x An object to check.
 #' @param call The calling environment for error reporting.
 #'
-#' @return `x`, invisibly, if it passes the check.
+#' @return `x`, if it passes the check.
 #' @keywords internal
-check_httr2_response <- function(x, call = rlang::caller_env()) {
+.check_httr2_response <- function(x, call = rlang::caller_env()) {
   if (!inherits(x, "httr2_response")) {
     .nectar_abort(
       c(
