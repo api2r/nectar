@@ -66,9 +66,11 @@ resp_parse(resps, ..., response_parser = resp_tidy)
 
   (`function`) A function to parse the server response (`resp`).
   Defaults to
-  [`httr2::resp_body_json()`](https://httr2.r-lib.org/reference/resp_body_raw.html),
-  since JSON responses are common. Set this to `NULL` to return the raw
-  response from
+  [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
+  which applies a tidying policy from the request when available and
+  otherwise uses
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md).
+  Set this to `NULL` to return the raw response from
   [`httr2::req_perform()`](https://httr2.r-lib.org/reference/req_perform.html).
 
 ## Value

@@ -180,9 +180,9 @@ response. Default: <code><a href="resp_body_auto.html">resp_body_auto()</a></cod
 
 <dt id="arg-response-parser">response_parser<a class="anchor" aria-label="anchor" href="#arg-response-parser"></a></dt>
 <dd><p>(<code>function</code>) A function to parse the server response
-(<code>resp</code>). Defaults to <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code>, since JSON responses are
-common. Set this to <code>NULL</code> to return the raw response from
-<code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code>.</p></dd>
+(<code>resp</code>). Defaults to <code><a href="resp_tidy.html">resp_tidy()</a></code>, which applies a tidying policy from
+the request when available and otherwise uses <code><a href="resp_body_auto.html">resp_body_auto()</a></code>. Set this
+to <code>NULL</code> to return the raw response from <code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code>.</p></dd>
 
 
 <dt id="arg-response-parser-args">response_parser_args<a class="anchor" aria-label="anchor" href="#arg-response-parser-args"></a></dt>

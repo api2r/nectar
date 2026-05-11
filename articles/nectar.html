@@ -82,6 +82,13 @@ select only the “publisher” and “DOI” fields, tell <a href="https://httr
 to concatenate the <code>select</code> parameter with commas
 (<code>.multi</code>), and set the <code>cursor</code> parameter to
 <code>"*"</code> to trigger cursor-based pagination:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="authentication-with-auth_api_key">Authentication with <code>auth_api_key()</code><a class="anchor" aria-label="anchor" href="#authentication-with-auth_api_key"></a>
@@ -91,7 +98,7 @@ address) to identify your application and gain access to a higher rate
 limit. nectar provides <code><a href="../reference/auth_api_key.html">auth_api_key()</a></code> to prepare this
 authentication and pass it through <code><a href="../reference/req_prepare.html">req_prepare()</a></code> via the
 <code>auth</code> argument:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -101,7 +108,7 @@ authentication and pass it through <code><a href="../reference/req_prepare.html"
 <span><span class="op">)</span></span></code></pre></div>
 <p>If you need to remove the key (for example, to fall back to anonymous
 access), pass <code>api_key = NULL</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_auth_api_key.html">req_auth_api_key</a></span><span class="op">(</span></span>
 <span>  <span class="va">req</span>, <span class="co"># From above, with "your@email.com" attached as the key.</span></span>
 <span>  parameter_name <span class="op">=</span> <span class="st">"mailto"</span>,</span>
@@ -123,7 +130,7 @@ path from the response at the same time with the
 call <code><a href="../reference/resp_parse.html">resp_parse()</a></code> later, supply a prepared tidying policy
 object via the <code>tidy_policy</code> argument, such as
 <code>tidy_policy_json(subset_path = c("message", "items"))</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -141,14 +148,14 @@ object via the <code>tidy_policy</code> argument, such as
 <code><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor()</a></code> generates the iterator function
 for this pattern, given the parameter name and the path to the cursor
 value in the response body:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iterate_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>  param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>  next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You can attach this iterator to the request via the
 <code>pagination_fn</code> argument in <code><a href="../reference/req_prepare.html">req_prepare()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -171,7 +178,7 @@ to handle transient errors.</p>
 <p>The <code>max_reqs</code> argument controls how many pages to fetch
 (default: <code>2</code>). During development, keep it small. Set it to
 <code>Inf</code> once you are confident the request works:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_perform_opinionated.html">req_perform_opinionated</a></span><span class="op">(</span><span class="va">req</span>, max_reqs <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>The result is always a list of <code>httr2_response</code> objects
 with additional class <code>nectar_responses</code>, so downstream
@@ -186,7 +193,7 @@ object. Because the request was prepared with
 <code>tidy_policy = tidy_policy_json(...)</code>,
 <code><a href="../reference/resp_parse.html">resp_parse()</a></code> will find that function automatically and
 apply it to each response, then combine the results:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="va">resps</span><span class="op">)</span></span>
 <span><span class="va">result</span></span></code></pre></div>
 </div>
@@ -195,7 +202,7 @@ apply it to each response, then combine the results:</p>
 </h2>
 <p>The three core functions compose naturally into a pipeline. Here is
 the full workflow in one expression:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -237,7 +244,7 @@ Crossref works. Once you are ready to fetch all pages, replace
 <p>In practice, you would wrap these calls inside exported functions in
 your own package. For example, a <code>crossref</code> package might
 provide:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># R/works.R  (inside a hypothetical "crossref" package)</span></span>
 <span><span class="va">works</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
 <span>  <span class="va">rows</span> <span class="op">=</span> <span class="fl">20</span>,</span>

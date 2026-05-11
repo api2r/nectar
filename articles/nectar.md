@@ -31,6 +31,15 @@ ten results per page (`rows = 10`), select only the “publisher” and
 `select` parameter with commas (`.multi`), and set the `cursor`
 parameter to `"*"` to trigger cursor-based pagination:
 
+``` r
+req <- req_prepare(
+  "https://api.crossref.org/works",
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  )
+)
+```
+
 ## Authentication with `auth_api_key()`
 
 Many APIs accept an optional key (or, as in Crossref’s case, an email
