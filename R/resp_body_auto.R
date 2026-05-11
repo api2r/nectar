@@ -47,8 +47,7 @@ resp_body_auto <- function(resp) {
 #' @examples
 #' tidy_policy_body_auto()
 tidy_policy_body_auto <- function(call = rlang::caller_env()) {
-  force(call)
-  tidy_policy_prepare(resp_body_auto)
+  tidy_policy_prepare(rlang::as_function(resp_body_auto, call = call))
 }
 
 #' Automatically choose more body parsers

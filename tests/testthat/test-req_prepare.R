@@ -145,7 +145,6 @@ test_that("req_prepare() applies prepared tidying (#86)", {
       simplifyVector = TRUE
     )
   )
-  test_result$policies$resp_tidy$tidy_fn
   expect_s3_class(test_result$policies$resp_tidy, "nectar_tidy_policy")
   expect_identical(
     test_result$policies$resp_tidy,
