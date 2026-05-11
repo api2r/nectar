@@ -76,13 +76,13 @@
 #'   [httr2::req_perform()].
 #' @param response_parser_args (`list`) An optional list of arguments to pass to
 #'   the `response_parser` function (in addition to `resp`).
-#' @param tidy_policy (`nectar_tidy_policy` or `NULL`) A tidying policy prepared
-#'   with [tidy_policy_prepare()]. By default (`NULL`), no tidying policy is
-#'   added to the request.
 #' @param spec (`tspec` or `NULL`) A specification used by
 #'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
 #'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
 #'   spec.
+#' @param tidy_policy (`nectar_tidy_policy` or `NULL`) A tidying policy prepared
+#'   with [tidy_policy_prepare()]. By default, [tidy_policy_body_auto()] is used
+#'   to automatically apply [resp_body_auto()] to responses.
 #' @param unspecified (`length-1 character`) A string that describes what
 #'   happens if the extracted body of `resp` contains fields that are not
 #'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for

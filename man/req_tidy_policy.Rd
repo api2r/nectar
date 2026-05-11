@@ -14,8 +14,8 @@ req_tidy_policy(
 \item{req}{(\code{httr2_request}) A \code{\link[httr2:request]{httr2::request()}} object.}
 
 \item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
-with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
-added to the request.}
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default, \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}} is used
+to automatically apply \code{\link[=resp_body_auto]{resp_body_auto()}} to responses.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
 e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned

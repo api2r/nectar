@@ -103,14 +103,14 @@ common. Set this to \code{NULL} to return the raw response from
 \item{response_parser_args}{(\code{list}) An optional list of arguments to pass to
 the \code{response_parser} function (in addition to \code{resp}).}
 
-\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
-with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
-added to the request.}
-
 \item{spec}{(\code{tspec} or \code{NULL}) A specification used by
 \code{\link[tibblify:tibblify]{tibblify::tibblify()}} to parse the extracted body of \code{resp}. When \code{spec}
 is \code{NULL} (the default), \code{\link[tibblify:tibblify]{tibblify::tibblify()}} will attempt to guess a
 spec.}
+
+\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default, \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}} is used
+to automatically apply \code{\link[=resp_body_auto]{resp_body_auto()}} to responses.}
 
 \item{unspecified}{(\verb{length-1 character}) A string that describes what
 happens if the extracted body of \code{resp} contains fields that are not

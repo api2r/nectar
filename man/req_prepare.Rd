@@ -14,7 +14,7 @@ req_prepare(
   method = NULL,
   additional_user_agent = NULL,
   auth = NULL,
-  tidy_policy = NULL,
+  tidy_policy = tidy_policy_body_auto(),
   pagination_fn = NULL,
   call = rlang::caller_env()
 )
@@ -55,8 +55,8 @@ Default \code{NULL}.}
 \code{\link[=auth_prepare]{auth_prepare()}}. By default (\code{NULL}), no authentication is performed.}
 
 \item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
-with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
-added to the request.}
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default, \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}} is used
+to automatically apply \code{\link[=resp_body_auto]{resp_body_auto()}} to responses.}
 
 \item{pagination_fn}{(\code{function}) A function that takes the previous response
 (\code{resp}) to generate the next request in a call to
