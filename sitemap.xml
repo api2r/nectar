@@ -54,6 +54,10 @@
 <url><loc>https://nectar.api2r.org/reference/resp_tidy.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/resp_tidy_json.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/resp_tidy_unknown.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/tidy_policy_body_auto.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/tidy_policy_json.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/tidy_policy_prepare.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/tidy_policy_unknown.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/url_normalize.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/url_path_append.html</loc></url>
 </urlset>

@@ -190,14 +190,34 @@ common. Set this to <code>NULL</code> to return the raw response from
 the <code>response_parser</code> function (in addition to <code>resp</code>).</p></dd>
 
 
-<dt id="arg-tidy-fn">tidy_fn<a class="anchor" aria-label="anchor" href="#arg-tidy-fn"></a></dt>
-<dd><p>(<code>function</code>) A function that will be invoked by <code><a href="resp_tidy.html">resp_tidy()</a></code>
-to tidy the response.</p></dd>
+<dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
+<dd><p>(<code>tspec</code> or <code>NULL</code>) A specification used by
+<code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code> to parse the extracted body of <code>resp</code>. When <code>spec</code>
+is <code>NULL</code> (the default), <code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code> will attempt to guess a
+spec.</p></dd>
 
 
-<dt id="arg-tidy-args">tidy_args<a class="anchor" aria-label="anchor" href="#arg-tidy-args"></a></dt>
-<dd><p>(<code>list</code>) A list of additional arguments to pass to
-<code>tidy_fn</code>.</p></dd>
+<dt id="arg-tidy-policy">tidy_policy<a class="anchor" aria-label="anchor" href="#arg-tidy-policy"></a></dt>
+<dd><p>(<code>nectar_tidy_policy</code> or <code>NULL</code>) A tidying policy prepared
+with <code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>. By default, <code><a href="tidy_policy_body_auto.html">tidy_policy_body_auto()</a></code> is used
+to automatically apply <code><a href="resp_body_auto.html">resp_body_auto()</a></code> to responses.</p></dd>
+
+
+<dt id="arg-unspecified">unspecified<a class="anchor" aria-label="anchor" href="#arg-unspecified"></a></dt>
+<dd><p>(<code>length-1 character</code>) A string that describes what
+happens if the extracted body of <code>resp</code> contains fields that are not
+specified in <code>spec</code>. While <code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code> defaults to <code>NULL</code> for
+this value, we set it to <code>list</code> so that the body will still parse when
+<code>resp</code> contains extra data without throwing errors.</p></dd>
+
+
+<dt id="arg-subset-path">subset_path<a class="anchor" aria-label="anchor" href="#arg-subset-path"></a></dt>
+<dd><p>(<code>character</code>) An optional vector indicating the path to
+the "real" object within the body of <code>resp</code>. For example, many APIs return
+a body with information about the status of the response, cache
+information, perhaps pagination information, and then the actual data in a
+field such as <code>data</code>. If the desired part of the response body is in
+<code>data$objects</code>, the value of this argument should be <code>c("data", "object")</code>.</p></dd>
 
 
 <dt id="arg-url">url<a class="anchor" aria-label="anchor" href="#arg-url"></a></dt>

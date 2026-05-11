@@ -74,13 +74,13 @@ You can extract a nested path from the response at the same time with
 the `subset_path` argument.
 
 For Crossref, the actual work items live at `message$items` in the
-response body. You can attach
-[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md)
-to the request via the `tidy_fn` argument in
-[`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md), so
-that every response is automatically tidied when you call
+response body. To have
+[`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md)
+automatically tidy each response when you call
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
-later:
+later, supply a prepared tidying policy object via the `tidy_policy`
+argument, such as
+`tidy_policy_json(subset_path = c("message", "items"))`:
 
 ``` r
 req <- req_prepare(
@@ -88,8 +88,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_fn = resp_tidy_json,
-  tidy_args = list(subset_path = c("message", "items"))
+  tidy_policy = tidy_policy_json(subset_path = c("message", "items"))
 )
 ```
 
@@ -119,8 +118,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_fn = resp_tidy_json,
-  tidy_args = list(subset_path = c("message", "items")),
+  tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
   pagination_fn = iterate_xref
 )
 ```
@@ -151,7 +149,7 @@ regardless of whether one or many pages were fetched.
 
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
 converts the raw responses into a usable R object. Because the request
-was prepared with `tidy_fn = resp_tidy_json`,
+was prepared with `tidy_policy = tidy_policy_json(...)`,
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md) will
 find that function automatically and apply it to each response, then
 combine the results:
@@ -172,8 +170,7 @@ result <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_fn = resp_tidy_json,
-  tidy_args = list(subset_path = c("message", "items")),
+  tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
   pagination_fn = iterate_with_json_cursor(
     param_name = "cursor",
     next_cursor_path = c("message", "next-cursor")
@@ -221,8 +218,7 @@ works <- function(
     "https://api.crossref.org/works",
     query = list(rows = rows, cursor = "*", select = select),
     auth = auth_api_key("mailto", api_key = mailto, location = "query"),
-    tidy_fn = resp_tidy_json,
-    tidy_args = list(subset_path = c("message", "items")),
+    tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
     pagination_fn = iterate_with_json_cursor(
       param_name = "cursor",
       next_cursor_path = c("message", "next-cursor")

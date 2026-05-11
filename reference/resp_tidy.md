@@ -46,6 +46,15 @@ select the appropriate parser based on the response content type,
 an alternative approach to dealing with responses (particularly useful
 if the request does not include a `resp_tidy` policy).
 
+Other opinionated response parsers:
+[`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md),
+[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
+[`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
+[`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md),
+[`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
+[`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md),
+[`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
+
 ## Examples
 
 ``` r
@@ -62,7 +71,7 @@ resp_tidy(resp)
 # With a tidy policy, resp_tidy() uses the policy's tidy function.
 req <- req_tidy_policy(
   httr2::request("https://example.com"),
-  httr2::resp_body_json
+  tidy_policy_prepare(httr2::resp_body_json)
 )
 # In practice, the request is attached automatically when the response is
 # fetched with httr2::req_perform() or req_perform_opinionated().

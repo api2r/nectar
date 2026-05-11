@@ -1,24 +1,15 @@
-# Extract and clean a JSON API response
+# A policy to parse a response body as JSON
 
-Parse the body of a response with
-[`httr2::resp_body_json()`](https://httr2.r-lib.org/reference/resp_body_raw.html),
-extract a named subset of that body, and tidy the result with
-[`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html).
+Create a reusable tidy policy that applies
+[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md).
 
 ## Usage
 
 ``` r
-resp_tidy_json(resp, spec = NULL, unspecified = "list", subset_path = NULL)
+tidy_policy_json(spec = NULL, unspecified = "list", subset_path = NULL)
 ```
 
 ## Arguments
-
-- resp:
-
-  (`httr2_response`) A single
-  [`httr2::response()`](https://httr2.r-lib.org/reference/response.html)
-  object (as returned by
-  [`httr2::req_perform()`](https://httr2.r-lib.org/reference/req_perform.html)).
 
 - spec:
 
@@ -51,40 +42,50 @@ resp_tidy_json(resp, spec = NULL, unspecified = "list", subset_path = NULL)
 
 ## Value
 
-The tibblified response body.
+A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
+`tidy_args`.
 
 ## See also
 
 Other opinionated response parsers:
 [`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md),
 [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
+[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
 [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
 [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md),
-[`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
 [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md),
 [`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
 
 ## Examples
 
 ``` r
-resp <- httr2::response_json(
-  body = list(list(id = 1, name = "Alice"), list(id = 2, name = "Bob"))
-)
-resp_tidy_json(resp)
-#> # A tibble: 2 × 2
-#>      id name 
-#>   <int> <chr>
-#> 1     1 Alice
-#> 2     2 Bob  
-
-# Extract a nested subset of the response body
-resp_nested <- httr2::response_json(
-  body = list(data = list(list(id = 1), list(id = 2)))
-)
-resp_tidy_json(resp_nested, subset_path = "data")
-#> # A tibble: 2 × 1
-#>      id
-#>   <int>
-#> 1     1
-#> 2     2
+tidy_policy_json(subset_path = "data")
+#> $tidy_fn
+#> function (resp, spec = NULL, unspecified = "list", subset_path = NULL) 
+#> {
+#>     rlang::check_installed("tibblify", "to tidy the JSON response body.")
+#>     subset_path <- stbl::to_chr(subset_path)
+#>     result <- httr2::resp_body_json(resp)
+#>     result <- purrr::pluck(result, !!!subset_path)
+#>     if (length(result)) {
+#>         return(tibblify::tibblify(result, spec = spec, unspecified = unspecified))
+#>     }
+#>     return(NULL)
+#> }
+#> <bytecode: 0x55919d510990>
+#> <environment: namespace:nectar>
+#> 
+#> $tidy_args
+#> $tidy_args$spec
+#> NULL
+#> 
+#> $tidy_args$unspecified
+#> [1] "list"
+#> 
+#> $tidy_args$subset_path
+#> [1] "data"
+#> 
+#> 
+#> attr(,"class")
+#> [1] "nectar_tidy_policy"
 ```

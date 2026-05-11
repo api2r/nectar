@@ -171,15 +171,44 @@ Reused parameter definitions are gathered here for easier editing.
   (`list`) An optional list of arguments to pass to the
   `response_parser` function (in addition to `resp`).
 
-- tidy_fn:
+- spec:
 
-  (`function`) A function that will be invoked by
-  [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md) to
-  tidy the response.
+  (`tspec` or `NULL`) A specification used by
+  [`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html)
+  to parse the extracted body of `resp`. When `spec` is `NULL` (the
+  default),
+  [`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html)
+  will attempt to guess a spec.
 
-- tidy_args:
+- tidy_policy:
 
-  (`list`) A list of additional arguments to pass to `tidy_fn`.
+  (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
+  [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
+  By default,
+  [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  is used to automatically apply
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md)
+  to responses.
+
+- unspecified:
+
+  (`length-1 character`) A string that describes what happens if the
+  extracted body of `resp` contains fields that are not specified in
+  `spec`. While
+  [`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html)
+  defaults to `NULL` for this value, we set it to `list` so that the
+  body will still parse when `resp` contains extra data without throwing
+  errors.
+
+- subset_path:
+
+  (`character`) An optional vector indicating the path to the "real"
+  object within the body of `resp`. For example, many APIs return a body
+  with information about the status of the response, cache information,
+  perhaps pagination information, and then the actual data in a field
+  such as `data`. If the desired part of the response body is in
+  `data$objects`, the value of this argument should be
+  `c("data", "object")`.
 
 - url:
 

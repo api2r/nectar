@@ -118,19 +118,18 @@ tibble using <code><a href="https://tibblify.wrangle.zone/reference/tibblify.htm
 path from the response at the same time with the
 <code>subset_path</code> argument.</p>
 <p>For Crossref, the actual work items live at
-<code>message$items</code> in the response body. You can attach
-<code><a href="../reference/resp_tidy_json.html">resp_tidy_json()</a></code> to the request via the
-<code>tidy_fn</code> argument in <code><a href="../reference/req_prepare.html">req_prepare()</a></code>, so that
-every response is automatically tidied when you call
-<code><a href="../reference/resp_parse.html">resp_parse()</a></code> later:</p>
+<code>message$items</code> in the response body. To have
+<code><a href="../reference/req_prepare.html">req_prepare()</a></code> automatically tidy each response when you
+call <code><a href="../reference/resp_parse.html">resp_parse()</a></code> later, supply a prepared tidying policy
+object via the <code>tidy_policy</code> argument, such as
+<code>tidy_policy_json(subset_path = c("message", "items"))</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -155,8 +154,7 @@ value in the response body:</p>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="va">iterate_xref</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -185,9 +183,9 @@ fetched.</p>
 </h2>
 <p><code><a href="../reference/resp_parse.html">resp_parse()</a></code> converts the raw responses into a usable R
 object. Because the request was prepared with
-<code>tidy_fn = resp_tidy_json</code>, <code><a href="../reference/resp_parse.html">resp_parse()</a></code> will
-find that function automatically and apply it to each response, then
-combine the results:</p>
+<code>tidy_policy = tidy_policy_json(...)</code>,
+<code><a href="../reference/resp_parse.html">resp_parse()</a></code> will find that function automatically and
+apply it to each response, then combine the results:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/resp_parse.html">resp_parse</a></span><span class="op">(</span><span class="va">resps</span><span class="op">)</span></span>
 <span><span class="va">result</span></span></code></pre></div>
@@ -203,8 +201,7 @@ the full workflow in one expression:</p>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>    param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>    next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
@@ -251,8 +248,7 @@ provide:</p>
 <span>    <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="va">rows</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="va">select</span><span class="op">)</span>,</span>
 <span>    auth <span class="op">=</span> <span class="fu"><a href="../reference/auth_api_key.html">auth_api_key</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="va">mailto</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span>,</span>
-<span>    tidy_fn <span class="op">=</span> <span class="va">resp_tidy_json</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>      param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>      next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>

@@ -54,8 +54,7 @@ a wrapper around the <code>req_</code> family of functions, such as <code><a hre
 <span>  method <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  additional_user_agent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  auth <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="tidy_policy_body_auto.html">tidy_policy_body_auto</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -117,14 +116,10 @@ Default <code>NULL</code>.</p></dd>
 <code><a href="auth_prepare.html">auth_prepare()</a></code>. By default (<code>NULL</code>), no authentication is performed.</p></dd>
 
 
-<dt id="arg-tidy-fn">tidy_fn<a class="anchor" aria-label="anchor" href="#arg-tidy-fn"></a></dt>
-<dd><p>(<code>function</code>) A function that will be invoked by <code><a href="resp_tidy.html">resp_tidy()</a></code>
-to tidy the response.</p></dd>
-
-
-<dt id="arg-tidy-args">tidy_args<a class="anchor" aria-label="anchor" href="#arg-tidy-args"></a></dt>
-<dd><p>(<code>list</code>) A list of additional arguments to pass to
-<code>tidy_fn</code>.</p></dd>
+<dt id="arg-tidy-policy">tidy_policy<a class="anchor" aria-label="anchor" href="#arg-tidy-policy"></a></dt>
+<dd><p>(<code>nectar_tidy_policy</code> or <code>NULL</code>) A tidying policy prepared
+with <code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>. By default, <code><a href="tidy_policy_body_auto.html">tidy_policy_body_auto()</a></code> is used
+to automatically apply <code><a href="resp_body_auto.html">resp_body_auto()</a></code> to responses.</p></dd>
 
 
 <dt id="arg-pagination-fn">pagination_fn<a class="anchor" aria-label="anchor" href="#arg-pagination-fn"></a></dt>
@@ -167,6 +162,8 @@ other functions.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Options:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">useragent</span>: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Policies:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">resp_tidy</span>: &lt;nectar_tidy_policy&gt;</span>
 <span class="r-in"><span><span class="fu">req_prepare</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"https://example.com"</span>,</span></span>
 <span class="r-in"><span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"users/{user_id}"</span>, user_id <span class="op">=</span> <span class="st">"42"</span><span class="op">)</span>,</span></span>
@@ -177,6 +174,8 @@ other functions.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Options:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">useragent</span>: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Policies:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">resp_tidy</span>: &lt;nectar_tidy_policy&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

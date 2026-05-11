@@ -45,6 +45,14 @@
   : Extract and clean a JSON API response
 - [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md)
   : Error informatively for unknown response types
+- [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  : A policy to automatically parse a response body
+- [`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md)
+  : A policy to parse a response body as JSON
+- [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md)
+  : Prepare tidying independent of a request
+- [`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
+  : A policy to error for unknown response bodies
 - [`url_normalize()`](https://nectar.api2r.org/reference/url_normalize.md)
   : Normalize a URL
 - [`url_path_append()`](https://nectar.api2r.org/reference/url_path_append.md)

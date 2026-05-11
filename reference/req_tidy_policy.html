@@ -46,8 +46,7 @@ portion of a response and wrangle it into a desired format.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">req_tidy_policy</span><span class="op">(</span></span>
 <span>  <span class="va">req</span>,</span>
-<span>  tidy_fn <span class="op">=</span> <span class="va">resp_body_auto</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="tidy_policy_body_auto.html">tidy_policy_body_auto</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -60,14 +59,10 @@ portion of a response and wrangle it into a desired format.</p>
 <dd><p>(<code>httr2_request</code>) A <code><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">httr2::request()</a></code> object.</p></dd>
 
 
-<dt id="arg-tidy-fn">tidy_fn<a class="anchor" aria-label="anchor" href="#arg-tidy-fn"></a></dt>
-<dd><p>(<code>function</code>) A function that will be invoked by <code><a href="resp_tidy.html">resp_tidy()</a></code>
-to tidy the response.</p></dd>
-
-
-<dt id="arg-tidy-args">tidy_args<a class="anchor" aria-label="anchor" href="#arg-tidy-args"></a></dt>
-<dd><p>(<code>list</code>) A list of additional arguments to pass to
-<code>tidy_fn</code>.</p></dd>
+<dt id="arg-tidy-policy">tidy_policy<a class="anchor" aria-label="anchor" href="#arg-tidy-policy"></a></dt>
+<dd><p>(<code>nectar_tidy_policy</code> or <code>NULL</code>) A tidying policy prepared
+with <code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>. By default, <code><a href="tidy_policy_body_auto.html">tidy_policy_body_auto()</a></code> is used
+to automatically apply <code><a href="resp_body_auto.html">resp_body_auto()</a></code> to responses.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
@@ -89,18 +84,29 @@ other functions.</p></dd>
 <code><a href="req_init.html">req_init()</a></code>,
 <code><a href="req_modify.html">req_modify()</a></code>,
 <code><a href="req_pagination_policy.html">req_pagination_policy()</a></code>,
-<code><a href="req_prepare.html">req_prepare()</a></code></p></div>
+<code><a href="req_prepare.html">req_prepare()</a></code></p>
+<p>Other opinionated response parsers:
+<code><a href="resp_tidy.html">resp_tidy()</a></code>,
+<code><a href="resp_tidy_json.html">resp_tidy_json()</a></code>,
+<code><a href="resp_tidy_unknown.html">resp_tidy_unknown()</a></code>,
+<code><a href="tidy_policy_body_auto.html">tidy_policy_body_auto()</a></code>,
+<code><a href="tidy_policy_json.html">tidy_policy_json()</a></code>,
+<code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>,
+<code><a href="tidy_policy_unknown.html">tidy_policy_unknown()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span><span class="op">(</span><span class="st">"https://example.com"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">req_tidy_policy</span><span class="op">(</span><span class="va">req</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="va"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>simplifyVector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">req_tidy_policy</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">req</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;nectar_request/httr2_request&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span> https://example.com</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Body</span>: empty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Policies:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">resp_tidy</span>: &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * <span style="color: #00BB00;">resp_tidy</span>: &lt;nectar_tidy_policy&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

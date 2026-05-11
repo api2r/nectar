@@ -11,8 +11,7 @@ format.
 ``` r
 req_tidy_policy(
   req,
-  tidy_fn = resp_body_auto,
-  tidy_args = list(),
+  tidy_policy = tidy_policy_body_auto(),
   call = rlang::caller_env()
 )
 ```
@@ -25,15 +24,15 @@ req_tidy_policy(
   [`httr2::request()`](https://httr2.r-lib.org/reference/request.html)
   object.
 
-- tidy_fn:
+- tidy_policy:
 
-  (`function`) A function that will be invoked by
-  [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md) to
-  tidy the response.
-
-- tidy_args:
-
-  (`list`) A list of additional arguments to pass to `tidy_fn`.
+  (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
+  [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
+  By default,
+  [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  is used to automatically apply
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md)
+  to responses.
 
 - call:
 
@@ -58,14 +57,26 @@ Other opinionated request functions:
 [`req_pagination_policy()`](https://nectar.api2r.org/reference/req_pagination_policy.md),
 [`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md)
 
+Other opinionated response parsers:
+[`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
+[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
+[`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
+[`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md),
+[`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
+[`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md),
+[`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
+
 ## Examples
 
 ``` r
 req <- httr2::request("https://example.com")
-req_tidy_policy(req, httr2::resp_body_json, list(simplifyVector = TRUE))
+req_tidy_policy(
+  req,
+  tidy_policy_json()
+)
 #> <nectar_request/httr2_request>
 #> GET https://example.com
 #> Body: empty
 #> Policies:
-#> * resp_tidy: <list>
+#> * resp_tidy: <nectar_tidy_policy>
 ```
