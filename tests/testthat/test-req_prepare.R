@@ -137,19 +137,31 @@ test_that("req_prepare() applies pagination", {
   )
 })
 
-test_that("req_prepare() applies tidying", {
+test_that("req_prepare() applies prepared tidying (#86)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
-    tidy_fn = httr2::resp_body_json,
-    tidy_args = list(simplifyVector = TRUE)
+    tidy_policy = tidy_policy_prepare(
+      httr2::resp_body_json,
+      simplifyVector = TRUE
+    )
   )
-  test_result$policies$resp_tidy$tidy_fn
+  expect_s3_class(test_result$policies$resp_tidy, "nectar_tidy_policy")
   expect_identical(
     test_result$policies$resp_tidy,
-    list(
-      tidy_fn = httr2::resp_body_json,
-      tidy_args = list(simplifyVector = TRUE)
+    tidy_policy_prepare(
+      httr2::resp_body_json,
+      simplifyVector = TRUE
     )
+  )
+})
+
+test_that("req_prepare() errors for unsupported tidy policy objects (#86)", {
+  expect_error(
+    req_prepare(
+      base_url = "https://example.com",
+      tidy_policy = "not_tidy_policy"
+    ),
+    class = "nectar-error-unsupported_tidy_policy_class"
   )
 })
 

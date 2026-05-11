@@ -76,10 +76,24 @@
 #'   [httr2::req_perform()].
 #' @param response_parser_args (`list`) An optional list of arguments to pass to
 #'   the `response_parser` function (in addition to `resp`).
-#' @param tidy_fn (`function`) A function that will be invoked by [resp_tidy()]
-#'   to tidy the response.
-#' @param tidy_args (`list`) A list of additional arguments to pass to
-#'   `tidy_fn`.
+#' @param spec (`tspec` or `NULL`) A specification used by
+#'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
+#'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
+#'   spec.
+#' @param tidy_policy (`nectar_tidy_policy` or `NULL`) A tidying policy prepared
+#'   with [tidy_policy_prepare()]. By default, [tidy_policy_body_auto()] is used
+#'   to automatically apply [resp_body_auto()] to responses.
+#' @param unspecified (`length-1 character`) A string that describes what
+#'   happens if the extracted body of `resp` contains fields that are not
+#'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for
+#'   this value, we set it to `list` so that the body will still parse when
+#'   `resp` contains extra data without throwing errors.
+#' @param subset_path (`character`) An optional vector indicating the path to
+#'   the "real" object within the body of `resp`. For example, many APIs return
+#'   a body with information about the status of the response, cache
+#'   information, perhaps pagination information, and then the actual data in a
+#'   field such as `data`. If the desired part of the response body is in
+#'   `data$objects`, the value of this argument should be `c("data", "object")`.
 #' @param url (`length-1 character`) An optional url associated with `name`.
 #' @param version (`length-1 character`) The version of `name`.
 #' @param x (multiple types) The object to update.

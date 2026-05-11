@@ -46,11 +46,6 @@ auth_prepare <- function(auth_fn, ..., call = rlang::caller_env()) {
     return(NextMethod())
   }
   auth_args <- stbl::to_lst(auth$auth_args) %||% list()
-  if (setequal(names(auth), c("auth_fn", "auth_args"))) {
-    auth$auth_args <- auth_args
-    class(auth) <- "nectar_auth"
-    return(auth)
-  }
   structure(
     list(
       auth_fn = auth$auth_fn,

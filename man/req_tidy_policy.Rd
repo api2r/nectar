@@ -6,19 +6,16 @@
 \usage{
 req_tidy_policy(
   req,
-  tidy_fn = resp_body_auto,
-  tidy_args = list(),
+  tidy_policy = tidy_policy_body_auto(),
   call = rlang::caller_env()
 )
 }
 \arguments{
 \item{req}{(\code{httr2_request}) A \code{\link[httr2:request]{httr2::request()}} object.}
 
-\item{tidy_fn}{(\code{function}) A function that will be invoked by \code{\link[=resp_tidy]{resp_tidy()}}
-to tidy the response.}
-
-\item{tidy_args}{(\code{list}) A list of additional arguments to pass to
-\code{tidy_fn}.}
+\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default, \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}} is used
+to automatically apply \code{\link[=resp_body_auto]{resp_body_auto()}} to responses.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
 e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
@@ -36,7 +33,10 @@ portion of a response and wrangle it into a desired format.
 }
 \examples{
 req <- httr2::request("https://example.com")
-req_tidy_policy(req, httr2::resp_body_json, list(simplifyVector = TRUE))
+req_tidy_policy(
+  req,
+  tidy_policy_json()
+)
 }
 \seealso{
 Other opinionated request functions:
@@ -45,5 +45,15 @@ Other opinionated request functions:
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},
 \code{\link[=req_prepare]{req_prepare()}}
+
+Other opinionated response parsers:
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
+\code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
+\code{\link[=tidy_policy_json]{tidy_policy_json()}},
+\code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
+\code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
 \concept{opinionated request functions}
+\concept{opinionated response parsers}

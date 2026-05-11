@@ -103,11 +103,27 @@ common. Set this to \code{NULL} to return the raw response from
 \item{response_parser_args}{(\code{list}) An optional list of arguments to pass to
 the \code{response_parser} function (in addition to \code{resp}).}
 
-\item{tidy_fn}{(\code{function}) A function that will be invoked by \code{\link[=resp_tidy]{resp_tidy()}}
-to tidy the response.}
+\item{spec}{(\code{tspec} or \code{NULL}) A specification used by
+\code{\link[tibblify:tibblify]{tibblify::tibblify()}} to parse the extracted body of \code{resp}. When \code{spec}
+is \code{NULL} (the default), \code{\link[tibblify:tibblify]{tibblify::tibblify()}} will attempt to guess a
+spec.}
 
-\item{tidy_args}{(\code{list}) A list of additional arguments to pass to
-\code{tidy_fn}.}
+\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default, \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}} is used
+to automatically apply \code{\link[=resp_body_auto]{resp_body_auto()}} to responses.}
+
+\item{unspecified}{(\verb{length-1 character}) A string that describes what
+happens if the extracted body of \code{resp} contains fields that are not
+specified in \code{spec}. While \code{\link[tibblify:tibblify]{tibblify::tibblify()}} defaults to \code{NULL} for
+this value, we set it to \code{list} so that the body will still parse when
+\code{resp} contains extra data without throwing errors.}
+
+\item{subset_path}{(\code{character}) An optional vector indicating the path to
+the "real" object within the body of \code{resp}. For example, many APIs return
+a body with information about the status of the response, cache
+information, perhaps pagination information, and then the actual data in a
+field such as \code{data}. If the desired part of the response body is in
+\code{data$objects}, the value of this argument should be \code{c("data", "object")}.}
 
 \item{url}{(\verb{length-1 character}) An optional url associated with \code{name}.}
 

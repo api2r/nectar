@@ -34,6 +34,21 @@ resp_body_auto <- function(resp) {
   )
 }
 
+#' A policy to automatically parse a response body
+#'
+#' Create a reusable tidy policy that applies [resp_body_auto()].
+#'
+#' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
+#'   `tidy_args`.
+#' @family opinionated response parsers
+#' @export
+#'
+#' @examples
+#' tidy_policy_body_auto()
+tidy_policy_body_auto <- function() {
+  tidy_policy_prepare(resp_body_auto)
+}
+
 #' Automatically choose more body parsers
 #'
 #' This helper function exists to find somewhat variable content types and

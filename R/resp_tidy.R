@@ -18,6 +18,7 @@
 #'   httr2 response parsers, and [resp_parse()] for an alternative approach to
 #'   dealing with responses (particularly useful if the request does not include
 #'   a `resp_tidy` policy).
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples
@@ -28,7 +29,7 @@
 #' # With a tidy policy, resp_tidy() uses the policy's tidy function.
 #' req <- req_tidy_policy(
 #'   httr2::request("https://example.com"),
-#'   httr2::resp_body_json
+#'   tidy_policy_prepare(httr2::resp_body_json)
 #' )
 #' # In practice, the request is attached automatically when the response is
 #' # fetched with httr2::req_perform() or req_perform_opinionated().

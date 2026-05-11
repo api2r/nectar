@@ -31,7 +31,7 @@ resp_tidy(resp)
 # With a tidy policy, resp_tidy() uses the policy's tidy function.
 req <- req_tidy_policy(
   httr2::request("https://example.com"),
-  httr2::resp_body_json
+  tidy_policy_prepare(httr2::resp_body_json)
 )
 # In practice, the request is attached automatically when the response is
 # fetched with httr2::req_perform() or req_perform_opinionated().
@@ -46,4 +46,14 @@ response content type, \code{\link[httr2:resp_body_raw]{httr2::resp_body_raw()}}
 httr2 response parsers, and \code{\link[=resp_parse]{resp_parse()}} for an alternative approach to
 dealing with responses (particularly useful if the request does not include
 a \code{resp_tidy} policy).
+
+Other opinionated response parsers:
+\code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
+\code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
+\code{\link[=tidy_policy_json]{tidy_policy_json()}},
+\code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
+\code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
+\concept{opinionated response parsers}
