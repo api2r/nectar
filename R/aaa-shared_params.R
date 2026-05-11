@@ -73,8 +73,7 @@
 #' @param response_parser (`function`) A function to parse the server response
 #'   (`resp`). Defaults to [resp_tidy()], which applies a tidying policy from
 #'   the request when available and otherwise uses [resp_body_auto()]. Set this
-#'   to `NULL` to return the raw response from
-#'   [httr2::req_perform()].
+#'   to `NULL` to return the raw response from [httr2::req_perform()].
 #' @param response_parser_args (`list`) An optional list of arguments to pass to
 #'   the `response_parser` function (in addition to `resp`).
 #' @param spec (`tspec` or `NULL`) A specification used by
