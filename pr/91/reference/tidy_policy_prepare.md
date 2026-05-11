@@ -58,7 +58,7 @@ tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
 #>         ...)
 #>     resp$cache[[key]]
 #> }
-#> <bytecode: 0x5572a6812eb0>
+#> <bytecode: 0x55b972a5c478>
 #> <environment: namespace:httr2>
 #> 
 #> $tidy_args
