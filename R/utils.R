@@ -1,3 +1,26 @@
+# check_httr2_response ---------------------------------------------------------
+
+#' Check that an object is an httr2_response
+#'
+#' @param x An object to check.
+#' @param call The calling environment for error reporting.
+#'
+#' @return `x`, if it passes the check.
+#' @keywords internal
+.check_httr2_response <- function(x, call = rlang::caller_env()) {
+  if (!inherits(x, "httr2_response")) {
+    .nectar_abort(
+      c(
+        "{.arg x} must be a {.cls httr2_response} object.",
+        x = "{.arg x} is {.obj_type_friendly {x}}."
+      ),
+      subclass = "not_httr2_response",
+      call = call
+    )
+  }
+  x
+}
+
 # compact_nested_list ----------------------------------------------------------
 
 #' Discard empty elements
