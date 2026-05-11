@@ -8,7 +8,7 @@
 #' @param ... (`any`) Arguments to pass to `tidy_fn`.
 #' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
 #'   `tidy_args`.
-#' @family opinionated request functions
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples
@@ -57,21 +57,13 @@ tidy_policy_prepare <- function(tidy_fn, ...) {
     return(NextMethod())
   }
   tidy_args <- stbl::to_lst(tidy_policy$tidy_args) %||% list()
-  if (setequal(names(tidy_policy), c("tidy_fn", "tidy_args"))) {
-    tidy_policy$tidy_args <- tidy_args
-    class(tidy_policy) <- "nectar_tidy_policy"
-    return(tidy_policy)
-  }
-  structure(
-    list(
-      tidy_fn = tidy_policy$tidy_fn,
-      tidy_args = c(
-        tidy_args,
-        tidy_policy[setdiff(names(tidy_policy), c("tidy_fn", "tidy_args"))]
-      )
-    ),
-    class = "nectar_tidy_policy"
+  tidy_policy$tidy_args <- c(
+    tidy_args,
+    tidy_policy[setdiff(names(tidy_policy), c("tidy_fn", "tidy_args"))]
   )
+  tidy_policy <- tidy_policy[c("tidy_fn", "tidy_args")]
+  class(tidy_policy) <- "nectar_tidy_policy"
+  return(tidy_policy)
 }
 
 #' @export

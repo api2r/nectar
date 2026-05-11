@@ -35,7 +35,7 @@ portion of a response and wrangle it into a desired format.
 req <- httr2::request("https://example.com")
 req_tidy_policy(
   req,
-  tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
+  tidy_policy_json()
 )
 }
 \seealso{
@@ -44,10 +44,16 @@ Other opinionated request functions:
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
+\code{\link[=req_prepare]{req_prepare()}}
+
+Other opinionated response parsers:
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
 \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
 \code{\link[=tidy_policy_json]{tidy_policy_json()}},
 \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
 \code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
 \concept{opinionated request functions}
+\concept{opinionated response parsers}

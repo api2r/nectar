@@ -4,23 +4,9 @@
 #' subset of that body, and tidy the result with [tibblify::tibblify()].
 #'
 #' @inheritParams .shared-params
-#' @param spec (`tspec` or `NULL`) A specification used by
-#'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
-#'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
-#'   spec.
-#' @param unspecified (`length-1 character`) A string that describes what
-#'   happens if the extracted body of `resp` contains fields that are not
-#'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for
-#'   this value, we set it to `list` so that the body will still parse when
-#'   `resp` contains extra data without throwing errors.
-#' @param subset_path (`character`) An optional vector indicating the path to
-#'   the "real" object within the body of `resp`. For example, many APIs return
-#'   a body with information about the status of the response, cache
-#'   information, perhaps pagination information, and then the actual data in a
-#'   field such as `data`. If the desired part of the response body is in
-#'   `data$objects`, the value of this argument should be `c("data", "object")`.
 #'
 #' @returns The tibblified response body.
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examplesIf rlang::is_installed("tibblify")
@@ -60,24 +46,14 @@ resp_tidy_json <- function(
   return(NULL)
 }
 
-#' Prepare a JSON tidy policy independent of a request
+#' A policy to parse a response body as JSON
 #'
-#' This helper creates a reusable tidy policy that applies [resp_tidy_json()].
+#' Create a reusable tidy policy that applies [resp_tidy_json()].
 #'
-#' @param spec (`tspec` or `NULL`) A specification used by
-#'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
-#'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
-#'   spec.
-#' @param unspecified (`length-1 character`) A string that describes what
-#'   happens if the extracted body of `resp` contains fields that are not
-#'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for
-#'   this value, we set it to `list` so that the body will still parse when
-#'   `resp` contains extra data without throwing errors.
-#' @param subset_path (`character`) An optional vector indicating the path to
-#'   the "real" object within the body of `resp`.
+#' @inheritParams .shared-params
 #' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
 #'   `tidy_args`.
-#' @family opinionated request functions
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examplesIf rlang::is_installed("tibblify")

@@ -79,6 +79,21 @@
 #' @param tidy_policy (`nectar_tidy_policy` or `NULL`) A tidying policy prepared
 #'   with [tidy_policy_prepare()]. By default (`NULL`), no tidying policy is
 #'   added to the request.
+#' @param spec (`tspec` or `NULL`) A specification used by
+#'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
+#'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
+#'   spec.
+#' @param unspecified (`length-1 character`) A string that describes what
+#'   happens if the extracted body of `resp` contains fields that are not
+#'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for
+#'   this value, we set it to `list` so that the body will still parse when
+#'   `resp` contains extra data without throwing errors.
+#' @param subset_path (`character`) An optional vector indicating the path to
+#'   the "real" object within the body of `resp`. For example, many APIs return
+#'   a body with information about the status of the response, cache
+#'   information, perhaps pagination information, and then the actual data in a
+#'   field such as `data`. If the desired part of the response body is in
+#'   `data$objects`, the value of this argument should be `c("data", "object")`.
 #' @param url (`length-1 character`) An optional url associated with `name`.
 #' @param version (`length-1 character`) The version of `name`.
 #' @param x (multiple types) The object to update.

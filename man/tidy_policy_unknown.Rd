@@ -2,38 +2,29 @@
 % Please edit documentation in R/resp_tidy_unknown.R
 \name{tidy_policy_unknown}
 \alias{tidy_policy_unknown}
-\title{Prepare an unknown-response tidy policy independent of a request}
+\title{A policy to error for unknown response bodies}
 \usage{
-tidy_policy_unknown(call = rlang::caller_env())
-}
-\arguments{
-\item{call}{(\code{environment}) The environment from which a function was called,
-e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
-in error messages as the source of the error. This argument is particularly
-useful for functions that are intended to be called as utilities inside
-other functions.}
+tidy_policy_unknown()
 }
 \value{
 A list with class \code{"nectar_tidy_policy"} and elements \code{tidy_fn} and
 \code{tidy_args}.
 }
 \description{
-This helper creates a reusable tidy policy that applies
-\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}}.
+Create a reusable tidy policy that applies \code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}}, signaling
+an informative error.
 }
 \examples{
 tidy_policy_unknown()
 }
 \seealso{
-Other opinionated request functions:
-\code{\link[=req_auth_api_key]{req_auth_api_key()}},
-\code{\link[=req_init]{req_init()}},
-\code{\link[=req_modify]{req_modify()}},
-\code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
+Other opinionated response parsers:
 \code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
 \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
 \code{\link[=tidy_policy_json]{tidy_policy_json()}},
 \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}
 }
-\concept{opinionated request functions}
+\concept{opinionated response parsers}

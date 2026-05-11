@@ -49,3 +49,14 @@ resp_nested <- httr2::response_json(
 resp_tidy_json(resp_nested, subset_path = "data")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other opinionated response parsers:
+\code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
+\code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
+\code{\link[=tidy_policy_json]{tidy_policy_json()}},
+\code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
+\code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
+}
+\concept{opinionated response parsers}

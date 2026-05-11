@@ -16,7 +16,7 @@
       "unknown_response_type"))
     Output
       <error/nectar-error-unknown_response_type>
-      Error:
+      Error in `resp_tidy()`:
       ! No parser is defined for this response.
       i Response pieces: status and data
 

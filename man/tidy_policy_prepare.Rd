@@ -24,15 +24,13 @@ tidying strategy can be reused across requests.
 tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
 }
 \seealso{
-Other opinionated request functions:
-\code{\link[=req_auth_api_key]{req_auth_api_key()}},
-\code{\link[=req_init]{req_init()}},
-\code{\link[=req_modify]{req_modify()}},
-\code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
+Other opinionated response parsers:
 \code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
 \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
 \code{\link[=tidy_policy_json]{tidy_policy_json()}},
 \code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
-\concept{opinionated request functions}
+\concept{opinionated response parsers}

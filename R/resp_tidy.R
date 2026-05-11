@@ -18,6 +18,7 @@
 #'   httr2 response parsers, and [resp_parse()] for an alternative approach to
 #'   dealing with responses (particularly useful if the request does not include
 #'   a `resp_tidy` policy).
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples

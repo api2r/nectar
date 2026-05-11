@@ -2,7 +2,7 @@
 % Please edit documentation in R/resp_tidy_json.R
 \name{tidy_policy_json}
 \alias{tidy_policy_json}
-\title{Prepare a JSON tidy policy independent of a request}
+\title{A policy to parse a response body as JSON}
 \usage{
 tidy_policy_json(spec = NULL, unspecified = "list", subset_path = NULL)
 }
@@ -19,14 +19,18 @@ this value, we set it to \code{list} so that the body will still parse when
 \code{resp} contains extra data without throwing errors.}
 
 \item{subset_path}{(\code{character}) An optional vector indicating the path to
-the "real" object within the body of \code{resp}.}
+the "real" object within the body of \code{resp}. For example, many APIs return
+a body with information about the status of the response, cache
+information, perhaps pagination information, and then the actual data in a
+field such as \code{data}. If the desired part of the response body is in
+\code{data$objects}, the value of this argument should be \code{c("data", "object")}.}
 }
 \value{
 A list with class \code{"nectar_tidy_policy"} and elements \code{tidy_fn} and
 \code{tidy_args}.
 }
 \description{
-This helper creates a reusable tidy policy that applies \code{\link[=resp_tidy_json]{resp_tidy_json()}}.
+Create a reusable tidy policy that applies \code{\link[=resp_tidy_json]{resp_tidy_json()}}.
 }
 \examples{
 \dontshow{if (rlang::is_installed("tibblify")) withAutoprint(\{ # examplesIf}
@@ -34,15 +38,13 @@ tidy_policy_json(subset_path = "data")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other opinionated request functions:
-\code{\link[=req_auth_api_key]{req_auth_api_key()}},
-\code{\link[=req_init]{req_init()}},
-\code{\link[=req_modify]{req_modify()}},
-\code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_prepare]{req_prepare()}},
+Other opinionated response parsers:
 \code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=resp_tidy]{resp_tidy()}},
+\code{\link[=resp_tidy_json]{resp_tidy_json()}},
+\code{\link[=resp_tidy_unknown]{resp_tidy_unknown()}},
 \code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
 \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
 \code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
-\concept{opinionated request functions}
+\concept{opinionated response parsers}

@@ -7,13 +7,14 @@
 #' @inheritParams .shared-params
 #' @inherit .shared-request return
 #' @family opinionated request functions
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples
 #' req <- httr2::request("https://example.com")
 #' req_tidy_policy(
 #'   req,
-#'   tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
+#'   tidy_policy_json()
 #' )
 req_tidy_policy <- function(
   req,

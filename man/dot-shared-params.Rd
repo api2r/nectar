@@ -107,6 +107,24 @@ the \code{response_parser} function (in addition to \code{resp}).}
 with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
 added to the request.}
 
+\item{spec}{(\code{tspec} or \code{NULL}) A specification used by
+\code{\link[tibblify:tibblify]{tibblify::tibblify()}} to parse the extracted body of \code{resp}. When \code{spec}
+is \code{NULL} (the default), \code{\link[tibblify:tibblify]{tibblify::tibblify()}} will attempt to guess a
+spec.}
+
+\item{unspecified}{(\verb{length-1 character}) A string that describes what
+happens if the extracted body of \code{resp} contains fields that are not
+specified in \code{spec}. While \code{\link[tibblify:tibblify]{tibblify::tibblify()}} defaults to \code{NULL} for
+this value, we set it to \code{list} so that the body will still parse when
+\code{resp} contains extra data without throwing errors.}
+
+\item{subset_path}{(\code{character}) An optional vector indicating the path to
+the "real" object within the body of \code{resp}. For example, many APIs return
+a body with information about the status of the response, cache
+information, perhaps pagination information, and then the actual data in a
+field such as \code{data}. If the desired part of the response body is in
+\code{data$objects}, the value of this argument should be \code{c("data", "object")}.}
+
 \item{url}{(\verb{length-1 character}) An optional url associated with \code{name}.}
 
 \item{version}{(\verb{length-1 character}) The version of \code{name}.}

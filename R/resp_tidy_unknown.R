@@ -7,6 +7,7 @@
 #'
 #' @returns This function always throws an error. The error lists the names of
 #'   the response pieces after parsing with [resp_body_auto()].
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples
@@ -26,19 +27,18 @@ resp_tidy_unknown <- function(resp, call = rlang::caller_env()) {
   )
 }
 
-#' Prepare an unknown-response tidy policy independent of a request
+#' A policy to error for unknown response bodies
 #'
-#' This helper creates a reusable tidy policy that applies
-#' [resp_tidy_unknown()].
+#' Create a reusable tidy policy that applies [resp_tidy_unknown()], signaling
+#' an informative error.
 #'
-#' @inheritParams .shared-params
 #' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
 #'   `tidy_args`.
-#' @family opinionated request functions
+#' @family opinionated response parsers
 #' @export
 #'
 #' @examples
 #' tidy_policy_unknown()
-tidy_policy_unknown <- function(call = rlang::caller_env()) {
-  tidy_policy_prepare(resp_tidy_unknown, call = call)
+tidy_policy_unknown <- function() {
+  tidy_policy_prepare(resp_tidy_unknown)
 }
