@@ -26,6 +26,14 @@ The main entry point in nectar is `req_prepare()`. It wraps `httr2::request()` a
 
 Here we prepare a request to the Crossref `/works` endpoint. We ask for ten results per page (`rows = 10`), select only the "publisher" and "DOI" fields, tell `{httr2}` to concatenate the `select` parameter with commas (`.multi`), and set the `cursor` parameter to `"*"` to trigger cursor-based pagination:
 
+```{r prepare, eval = FALSE}
+req <- req_prepare(
+  "https://api.crossref.org/works",
+  query = list(
+    rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
+  )
+)
+```
 
 ## Authentication with `auth_api_key()`
 
