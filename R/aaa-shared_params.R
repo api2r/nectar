@@ -71,8 +71,9 @@
 #' @param resp_body_fn (`function`) A function to extract the body of the
 #'   response. Default: [resp_body_auto()].
 #' @param response_parser (`function`) A function to parse the server response
-#'   (`resp`). Defaults to [httr2::resp_body_json()], since JSON responses are
-#'   common. Set this to `NULL` to return the raw response from
+#'   (`resp`). Defaults to [resp_tidy()], which applies a tidying policy from
+#'   the request when available and otherwise uses [resp_body_auto()]. Set this
+#'   to `NULL` to return the raw response from
 #'   [httr2::req_perform()].
 #' @param response_parser_args (`list`) An optional list of arguments to pass to
 #'   the `response_parser` function (in addition to `resp`).

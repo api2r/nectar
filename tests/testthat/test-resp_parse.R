@@ -61,6 +61,39 @@ test_that("resp_parse parses lists of httr2_responses (#10)", {
   expect_identical(test_result, 1:6)
 })
 
+test_that("resp_parse drops NULL parsed pages before combining (#89)", {
+  resps <- list(
+    httr2::response_json(body = 1:2),
+    httr2::response_json(body = list()),
+    httr2::response_json(body = 3:4)
+  )
+  parser <- function(resp) {
+    body <- httr2::resp_body_json(resp)
+    if (!length(body)) {
+      return(NULL)
+    }
+    body
+  }
+  test_result <- resp_parse(resps, response_parser = parser)
+  expect_identical(test_result, as.list(1:4))
+})
+
+test_that("resp_parse returns NULL when all parsed pages are NULL (#89)", {
+  resps <- list(
+    httr2::response_json(body = list()),
+    httr2::response_json(body = list())
+  )
+  parser <- function(resp) {
+    body <- httr2::resp_body_json(resp)
+    if (!length(body)) {
+      return(NULL)
+    }
+    body
+  }
+  test_result <- resp_parse(resps, response_parser = parser)
+  expect_null(test_result)
+})
+
 test_that("resp_parse works for raw results (#11)", {
   # reqs <- list(
   #   httr2::request("https://httr2.r-lib.org/logo.png"),

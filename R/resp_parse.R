@@ -84,7 +84,10 @@ resp_parse.list <- function(resps, ..., response_parser = resp_tidy) {
 }
 
 .resps_combine <- function(resps_parsed) {
-  purrr::discard(resps_parsed, is.null)
+  resps_parsed <- purrr::discard(resps_parsed, is.null)
+  if (!length(resps_parsed)) {
+    return(NULL)
+  }
   if (inherits(resps_parsed[[1]], "raw")) {
     # This is tested, but covr doesn't believe it.
     return(resps_parsed) # nocov

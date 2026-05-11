@@ -37,8 +37,9 @@ useful for functions that are intended to be called as utilities inside
 other functions.}
 
 \item{response_parser}{(\code{function}) A function to parse the server response
-(\code{resp}). Defaults to \code{\link[httr2:resp_body_json]{httr2::resp_body_json()}}, since JSON responses are
-common. Set this to \code{NULL} to return the raw response from
+(\code{resp}). Defaults to \code{\link[=resp_tidy]{resp_tidy()}}, which applies a tidying policy from
+the request when available and otherwise uses \code{\link[=resp_body_auto]{resp_body_auto()}}. Set this
+to \code{NULL} to return the raw response from
 \code{\link[httr2:req_perform]{httr2::req_perform()}}.}
 }
 \value{
