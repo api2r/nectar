@@ -40,9 +40,7 @@ resp_tidy <- function(resps) {
 
 #' @export
 resp_tidy.httr2_response <- function(resps) {
-  # TODO: Replace this with httr2::resp_request() after
-  # https://github.com/r-lib/httr2/pull/615
-  req <- resps$request
+  req <- httr2::resp_request(resps)
   if (length(req$policies$resp_tidy)) {
     return(
       rlang::exec(
@@ -66,13 +64,7 @@ resp_tidy.list <- function(resps) {
     class(resps) <- c("nectar_responses", "list")
     return(resp_tidy(resps))
   }
-  .nectar_abort(
-    c(
-      "No method is available to {.fn nectar::resp_tidy} this object.",
-      i = "You might want to try {.fn nectar::resp_parse} instead."
-    ),
-    "unsupported_response_class"
-  )
+  NextMethod()
 }
 
 #' @export
