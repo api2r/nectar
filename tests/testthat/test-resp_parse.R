@@ -61,7 +61,7 @@ test_that("resp_parse parses lists of httr2_responses (#10)", {
   expect_identical(test_result, 1:6)
 })
 
-test_that("resp_parse drops NULL parsed pages before combining (#89)", {
+test_that("resp_parse drops NULL parsed pages before combining (#90)", {
   resps <- list(
     httr2::response_json(body = 1:2),
     httr2::response_json(body = list()),
@@ -78,7 +78,7 @@ test_that("resp_parse drops NULL parsed pages before combining (#89)", {
   expect_identical(test_result, as.list(1:4))
 })
 
-test_that("resp_parse returns NULL when all parsed pages are NULL (#89)", {
+test_that("resp_parse returns NULL when all parsed pages are NULL (#90)", {
   resps <- list(
     httr2::response_json(body = list()),
     httr2::response_json(body = list())
