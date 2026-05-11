@@ -4,18 +4,17 @@
 \alias{resp_tidy}
 \title{Extract and clean an API response}
 \usage{
-resp_tidy(resps)
+resp_tidy(resp)
 }
 \arguments{
-\item{resps}{(\code{httr2_response}, \code{nectar_responses}, or \code{list}) A single
-\code{\link[httr2:response]{httr2::response()}} object (as returned by \code{\link[httr2:req_perform]{httr2::req_perform()}}) or a
-list of such objects (as returned by \code{\link[=req_perform_opinionated]{req_perform_opinionated()}} or
-\code{\link[httr2:req_perform_iterative]{httr2::req_perform_iterative()}}).}
+\item{resp}{(\code{httr2_response}) A single \code{\link[httr2:response]{httr2::response()}} object (as
+returned by \code{\link[httr2:req_perform]{httr2::req_perform()}}).}
 }
 \value{
-The extracted and cleaned response, or, for a list of responses,
-those responses cleaned then concatenated via \code{\link[httr2:resps_data]{httr2::resps_data()}}. By
-default, the response is processed with \code{\link[=resp_body_auto]{resp_body_auto()}}.
+The extracted and cleaned response, or \code{NULL} if \code{resp} is \code{NULL}.
+By default, the response is processed with \code{\link[=resp_body_auto]{resp_body_auto()}}. If the
+request includes a \code{resp_tidy} policy (set via \code{\link[=req_tidy_policy]{req_tidy_policy()}}), that
+policy's function and arguments are used instead.
 }
 \description{
 API responses generally follow a structured format. Use this function to
@@ -39,14 +38,6 @@ resp$request <- req
 resp_tidy(resp)
 }
 \seealso{
-\code{\link[=resp_tidy_json]{resp_tidy_json()}} for an opinionated response parser for JSON
-responses, \code{\link[=resp_body_auto]{resp_body_auto()}} (etc) for a family of response parsers that
-attempts to automatically select the appropriate parser based on the
-response content type, \code{\link[httr2:resp_body_raw]{httr2::resp_body_raw()}} (etc) for the underlying
-httr2 response parsers, and \code{\link[=resp_parse]{resp_parse()}} for an alternative approach to
-dealing with responses (particularly useful if the request does not include
-a \code{resp_tidy} policy).
-
 Other opinionated response parsers:
 \code{\link[=req_tidy_policy]{req_tidy_policy()}},
 \code{\link[=resp_tidy_json]{resp_tidy_json()}},

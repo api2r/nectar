@@ -2,13 +2,20 @@ test_that("resp_parse fails gracefully for unsupported classes (#40)", {
   expect_nectar_error_snapshot(resp_parse(1), "unsupported_response_class")
 })
 
-test_that("resp_parse parses json-containing httr2_response objects", {
+test_that("resp_parse fails gracefully for list of non-responses (#88)", {
+  expect_nectar_error_snapshot(
+    resp_parse(list(1, 2)),
+    "unsupported_response_class"
+  )
+})
+
+test_that("resp_parse parses json-containing httr2_response objects (#10)", {
   mock_response <- httr2::response_json(body = 1:3)
   test_result <- resp_parse(mock_response)
   expect_identical(test_result, as.list(1:3))
 })
 
-test_that("resp_parse parses httr2_response objects with specified parser", {
+test_that("resp_parse parses httr2_response objects with specified parser (#10)", {
   mock_response <- httr2::response_json(body = 1:3)
   parser <- function(resp) {
     unlist(httr2::resp_body_json(resp))
@@ -17,13 +24,13 @@ test_that("resp_parse parses httr2_response objects with specified parser", {
   expect_identical(test_result, 1:3)
 })
 
-test_that("resp_parse returns raw resp if NULL parser specified", {
+test_that("resp_parse returns raw resp if NULL parser specified (#10)", {
   mock_response <- httr2::response_json(body = 1:3)
   test_result <- resp_parse(mock_response, response_parser = NULL)
   expect_identical(test_result, mock_response)
 })
 
-test_that("resp_parse accepts parser args", {
+test_that("resp_parse accepts parser args (#10)", {
   mock_response <- httr2::response_json(body = 1:3)
   parser <- function(resp, unlist = FALSE) {
     x <- httr2::resp_body_json(resp)
@@ -42,7 +49,7 @@ test_that("resp_parse accepts parser args", {
   expect_identical(test_result, 1:3)
 })
 
-test_that("resp_parse parses lists of httr2_responses", {
+test_that("resp_parse parses lists of httr2_responses (#10)", {
   mock_response <- list(
     httr2::response_json(body = 1:3),
     httr2::response_json(body = 4:6)
@@ -54,7 +61,7 @@ test_that("resp_parse parses lists of httr2_responses", {
   expect_identical(test_result, 1:6)
 })
 
-test_that("resp_parse works for raw results", {
+test_that("resp_parse works for raw results (#11)", {
   # reqs <- list(
   #   httr2::request("https://httr2.r-lib.org/logo.png"),
   #   httr2::request("https://docs.ropensci.org/magick/logo.png")

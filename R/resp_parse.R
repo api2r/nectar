@@ -41,7 +41,7 @@ resp_parse.default <- function(
 ) {
   .nectar_abort(
     c(
-      "{.arg {arg}} must be a {.cls list} or a {.cls httr2_response}.",
+      "{.arg {arg}} must be a {.cls httr2_response} or a {.cls list} of {.cls httr2_response} objects.",
       x = "{.arg {arg}} is {.obj_type_friendly {resps}}."
     ),
     subclass = "unsupported_response_class",
@@ -58,6 +58,15 @@ resp_parse.httr2_response <- function(resps, ..., response_parser = resp_tidy) {
 
 #' @export
 resp_parse.list <- function(resps, ..., response_parser = resp_tidy) {
+  if (!purrr::every(resps, \(x) inherits(x, "httr2_response"))) {
+    .nectar_abort(
+      c(
+        "{.arg resps} must be a list of {.cls httr2_response} objects.",
+        x = "Not all elements of {.arg resps} are {.cls httr2_response} objects."
+      ),
+      subclass = "unsupported_response_class"
+    )
+  }
   resps_parsed <- .resp_parse_impl(resps, response_parser, ...)
   .resps_combine(resps_parsed)
 }

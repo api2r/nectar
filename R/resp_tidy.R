@@ -7,17 +7,11 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns The extracted and cleaned response, or, for a list of responses,
-#'   those responses cleaned then concatenated via [httr2::resps_data()]. By
-#'   default, the response is processed with [resp_body_auto()].
+#' @returns The extracted and cleaned response, or `NULL` if `resp` is `NULL`.
+#'   By default, the response is processed with [resp_body_auto()]. If the
+#'   request includes a `resp_tidy` policy (set via [req_tidy_policy()]), that
+#'   policy's function and arguments are used instead.
 #'
-#' @seealso [resp_tidy_json()] for an opinionated response parser for JSON
-#'   responses, [resp_body_auto()] (etc) for a family of response parsers that
-#'   attempts to automatically select the appropriate parser based on the
-#'   response content type, [httr2::resp_body_raw()] (etc) for the underlying
-#'   httr2 response parsers, and [resp_parse()] for an alternative approach to
-#'   dealing with responses (particularly useful if the request does not include
-#'   a `resp_tidy` policy).
 #' @family opinionated response parsers
 #' @export
 #'
@@ -35,46 +29,18 @@
 #' # fetched with httr2::req_perform() or req_perform_opinionated().
 #' resp$request <- req
 #' resp_tidy(resp)
-resp_tidy <- function(resps) {
-  UseMethod("resp_tidy")
-}
-
-#' @export
-resp_tidy.httr2_response <- function(resps) {
-  req <- httr2::resp_request(resps)
+resp_tidy <- function(resp) {
+  if (is.null(resp)) return(NULL)
+  check_httr2_response(resp)
+  req <- httr2::resp_request(resp)
   if (length(req$policies$resp_tidy)) {
     return(
       rlang::exec(
         req$policies$resp_tidy$tidy_fn,
-        resps,
+        resp,
         !!!req$policies$resp_tidy$tidy_args
       )
     )
   }
-  resp_body_auto(resps)
-}
-
-#' @export
-resp_tidy.nectar_responses <- function(resps) {
-  httr2::resps_data(resps, resp_tidy)
-}
-
-#' @export
-resp_tidy.list <- function(resps) {
-  if (length(resps) && inherits(resps[[1]], "httr2_response")) {
-    class(resps) <- c("nectar_responses", "list")
-    return(resp_tidy(resps))
-  }
-  NextMethod()
-}
-
-#' @export
-resp_tidy.default <- function(resps) {
-  .nectar_abort(
-    c(
-      "No method is available to {.fn nectar::resp_tidy} this object.",
-      i = "{.fn nectar::resp_tidy} expects {.cls httr2_response} objects, or lists thereof."
-    ),
-    "unsupported_response_class"
-  )
+  resp_body_auto(resp)
 }
