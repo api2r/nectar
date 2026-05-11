@@ -76,10 +76,9 @@
 #'   [httr2::req_perform()].
 #' @param response_parser_args (`list`) An optional list of arguments to pass to
 #'   the `response_parser` function (in addition to `resp`).
-#' @param tidy_fn (`function`) A function that will be invoked by [resp_tidy()]
-#'   to tidy the response.
-#' @param tidy_args (`list`) A list of additional arguments to pass to
-#'   `tidy_fn`.
+#' @param tidy_policy (`nectar_tidy_policy` or `NULL`) A tidying policy prepared
+#'   with [tidy_policy_prepare()]. By default (`NULL`), no tidying policy is
+#'   added to the request.
 #' @param url (`length-1 character`) An optional url associated with `name`.
 #' @param version (`length-1 character`) The version of `name`.
 #' @param x (multiple types) The object to update.

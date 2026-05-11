@@ -86,3 +86,14 @@ test_that("resp_body_auto works for other things (#40)", {
   resp <- httr2::response(headers = list(`Content-Type` = "weird/thing"))
   expect_identical(resp_body_auto(resp), "raw")
 })
+
+test_that("tidy_policy_body_auto() prepares resp_body_auto for resp_tidy() (#86)", {
+  mock_response <- httr2::response_json(body = list(a = 1, b = 2))
+  mock_response$request <- list(
+    policies = list(
+      resp_tidy = tidy_policy_body_auto()
+    )
+  )
+
+  expect_identical(resp_tidy(mock_response), list(a = 1L, b = 2L))
+})

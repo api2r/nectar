@@ -1,35 +1,26 @@
-test_that("req_tidy_policy errors informatively for bad fn (#44)", {
-  expect_error(
-    req_tidy_policy(
-      httr2::request("https://example.com"),
-      tidy_fn = "not a function"
-    ),
-    "was not found"
-  )
-})
-
-test_that("req_tidy_policy applies resp_body_auto by default (#44)", {
+test_that("req_tidy_policy applies resp_body_auto by default (#86)", {
   req <- req_tidy_policy(httr2::request("https://example.com"))
+  expect_s3_class(req$policies$resp_tidy, "nectar_tidy_policy")
   expect_identical(
     req$policies$resp_tidy,
-    list(
-      tidy_fn = resp_body_auto,
-      tidy_args = list()
-    )
+    tidy_policy_body_auto()
   )
 })
 
-test_that("req_tidy_policy applies the specified policy (#44)", {
+test_that("req_tidy_policy applies the specified policy (#86)", {
   req <- req_tidy_policy(
     httr2::request("https://example.com"),
-    tidy_fn = httr2::resp_body_json,
-    tidy_args = list(simplifyVector = TRUE)
+    tidy_policy = tidy_policy_prepare(
+      httr2::resp_body_json,
+      simplifyVector = TRUE
+    )
   )
+  expect_s3_class(req$policies$resp_tidy, "nectar_tidy_policy")
   expect_identical(
     req$policies$resp_tidy,
-    list(
-      tidy_fn = httr2::resp_body_json,
-      tidy_args = list(simplifyVector = TRUE)
+    tidy_policy_prepare(
+      httr2::resp_body_json,
+      simplifyVector = TRUE
     )
   )
 })

@@ -72,7 +72,7 @@ test_that("resp_tidy_json tidies a response with a spec (#40)", {
   )
 })
 
-test_that("resp_tidy_json works with resp_tidy (#40)", {
+test_that("tidy_policy_json() prepares resp_tidy_json for resp_tidy() (#40, #86)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -88,14 +88,11 @@ test_that("resp_tidy_json works with resp_tidy (#40)", {
   )
   mock_response$request <- list(
     policies = list(
-      resp_tidy = list(
-        tidy_fn = resp_tidy_json,
-        tidy_args = list(
-          spec = tibblify::tspec_df(
-            lc = tibblify::tib_chr("a"),
-            uc = tibblify::tib_chr("b"),
-            n = tibblify::tib_int("c"),
-          )
+      resp_tidy = tidy_policy_json(
+        spec = tibblify::tspec_df(
+          lc = tibblify::tib_chr("a"),
+          uc = tibblify::tib_chr("b"),
+          n = tibblify::tib_int("c"),
         )
       )
     )

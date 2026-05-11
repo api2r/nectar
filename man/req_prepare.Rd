@@ -14,8 +14,7 @@ req_prepare(
   method = NULL,
   additional_user_agent = NULL,
   auth = NULL,
-  tidy_fn = NULL,
-  tidy_args = list(),
+  tidy_policy = NULL,
   pagination_fn = NULL,
   call = rlang::caller_env()
 )
@@ -55,11 +54,9 @@ Default \code{NULL}.}
 \item{auth}{(\code{nectar_auth} or \code{NULL}) Authentication prepared with
 \code{\link[=auth_prepare]{auth_prepare()}}. By default (\code{NULL}), no authentication is performed.}
 
-\item{tidy_fn}{(\code{function}) A function that will be invoked by \code{\link[=resp_tidy]{resp_tidy()}}
-to tidy the response.}
-
-\item{tidy_args}{(\code{list}) A list of additional arguments to pass to
-\code{tidy_fn}.}
+\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
+added to the request.}
 
 \item{pagination_fn}{(\code{function}) A function that takes the previous response
 (\code{resp}) to generate the next request in a call to
@@ -97,6 +94,10 @@ Other opinionated request functions:
 \code{\link[=req_init]{req_init()}},
 \code{\link[=req_modify]{req_modify()}},
 \code{\link[=req_pagination_policy]{req_pagination_policy()}},
-\code{\link[=req_tidy_policy]{req_tidy_policy()}}
+\code{\link[=req_tidy_policy]{req_tidy_policy()}},
+\code{\link[=tidy_policy_body_auto]{tidy_policy_body_auto()}},
+\code{\link[=tidy_policy_json]{tidy_policy_json()}},
+\code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}},
+\code{\link[=tidy_policy_unknown]{tidy_policy_unknown()}}
 }
 \concept{opinionated request functions}

@@ -25,3 +25,20 @@ resp_tidy_unknown <- function(resp, call = rlang::caller_env()) {
     call = call
   )
 }
+
+#' Prepare an unknown-response tidy policy independent of a request
+#'
+#' This helper creates a reusable tidy policy that applies
+#' [resp_tidy_unknown()].
+#'
+#' @inheritParams .shared-params
+#' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
+#'   `tidy_args`.
+#' @family opinionated request functions
+#' @export
+#'
+#' @examples
+#' tidy_policy_unknown()
+tidy_policy_unknown <- function(call = rlang::caller_env()) {
+  tidy_policy_prepare(resp_tidy_unknown, call = call)
+}

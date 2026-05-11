@@ -34,6 +34,22 @@ resp_body_auto <- function(resp) {
   )
 }
 
+#' Prepare an automatic body tidy policy independent of a request
+#'
+#' This helper creates a reusable tidy policy that applies [resp_body_auto()].
+#'
+#' @inheritParams .shared-params
+#' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
+#'   `tidy_args`.
+#' @family opinionated request functions
+#' @export
+#'
+#' @examples
+#' tidy_policy_body_auto()
+tidy_policy_body_auto <- function(call = rlang::caller_env()) {
+  tidy_policy_prepare(resp_body_auto)
+}
+
 #' Automatically choose more body parsers
 #'
 #' This helper function exists to find somewhat variable content types and

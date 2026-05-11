@@ -59,3 +59,38 @@ resp_tidy_json <- function(
   }
   return(NULL)
 }
+
+#' Prepare a JSON tidy policy independent of a request
+#'
+#' This helper creates a reusable tidy policy that applies [resp_tidy_json()].
+#'
+#' @param spec (`tspec` or `NULL`) A specification used by
+#'   [tibblify::tibblify()] to parse the extracted body of `resp`. When `spec`
+#'   is `NULL` (the default), [tibblify::tibblify()] will attempt to guess a
+#'   spec.
+#' @param unspecified (`length-1 character`) A string that describes what
+#'   happens if the extracted body of `resp` contains fields that are not
+#'   specified in `spec`. While [tibblify::tibblify()] defaults to `NULL` for
+#'   this value, we set it to `list` so that the body will still parse when
+#'   `resp` contains extra data without throwing errors.
+#' @param subset_path (`character`) An optional vector indicating the path to
+#'   the "real" object within the body of `resp`.
+#' @returns A list with class `"nectar_tidy_policy"` and elements `tidy_fn` and
+#'   `tidy_args`.
+#' @family opinionated request functions
+#' @export
+#'
+#' @examplesIf rlang::is_installed("tibblify")
+#' tidy_policy_json(subset_path = "data")
+tidy_policy_json <- function(
+  spec = NULL,
+  unspecified = "list",
+  subset_path = NULL
+) {
+  tidy_policy_prepare(
+    resp_tidy_json,
+    spec = spec,
+    unspecified = unspecified,
+    subset_path = subset_path
+  )
+}

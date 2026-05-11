@@ -103,11 +103,9 @@ common. Set this to \code{NULL} to return the raw response from
 \item{response_parser_args}{(\code{list}) An optional list of arguments to pass to
 the \code{response_parser} function (in addition to \code{resp}).}
 
-\item{tidy_fn}{(\code{function}) A function that will be invoked by \code{\link[=resp_tidy]{resp_tidy()}}
-to tidy the response.}
-
-\item{tidy_args}{(\code{list}) A list of additional arguments to pass to
-\code{tidy_fn}.}
+\item{tidy_policy}{(\code{nectar_tidy_policy} or \code{NULL}) A tidying policy prepared
+with \code{\link[=tidy_policy_prepare]{tidy_policy_prepare()}}. By default (\code{NULL}), no tidying policy is
+added to the request.}
 
 \item{url}{(\verb{length-1 character}) An optional url associated with \code{name}.}
 

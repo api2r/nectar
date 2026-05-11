@@ -11,17 +11,19 @@
 #'
 #' @examples
 #' req <- httr2::request("https://example.com")
-#' req_tidy_policy(req, httr2::resp_body_json, list(simplifyVector = TRUE))
+#' req_tidy_policy(
+#'   req,
+#'   tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
+#' )
 req_tidy_policy <- function(
   req,
-  tidy_fn = resp_body_auto,
-  tidy_args = list(),
+  tidy_policy = tidy_policy_body_auto(),
   call = rlang::caller_env()
 ) {
-  tidy_fn <- rlang::as_function(tidy_fn, call = call)
+  tidy_policy <- .as_nectar_tidy_policy(tidy_policy, call = call)
   .req_policy(
     req,
-    resp_tidy = list(tidy_fn = tidy_fn, tidy_args = tidy_args),
+    resp_tidy = tidy_policy,
     call = call
   )
 }

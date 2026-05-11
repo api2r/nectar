@@ -27,8 +27,7 @@ req_prepare <- function(
   method = NULL,
   additional_user_agent = NULL,
   auth = NULL,
-  tidy_fn = NULL,
-  tidy_args = list(),
+  tidy_policy = NULL,
   pagination_fn = NULL,
   call = rlang::caller_env()
 ) {
@@ -52,8 +51,8 @@ req_prepare <- function(
   if (length(pagination_fn)) {
     req <- req_pagination_policy(req, pagination_fn, call = call)
   }
-  if (length(tidy_fn)) {
-    req <- req_tidy_policy(req, tidy_fn, tidy_args = tidy_args, call = call)
+  if (length(tidy_policy)) {
+    req <- req_tidy_policy(req, tidy_policy = tidy_policy, call = call)
   }
   return(.as_nectar_request(req))
 }
