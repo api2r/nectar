@@ -190,17 +190,17 @@ common. Set this to <code>NULL</code> to return the raw response from
 the <code>response_parser</code> function (in addition to <code>resp</code>).</p></dd>
 
 
-<dt id="arg-tidy-policy">tidy_policy<a class="anchor" aria-label="anchor" href="#arg-tidy-policy"></a></dt>
-<dd><p>(<code>nectar_tidy_policy</code> or <code>NULL</code>) A tidying policy prepared
-with <code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>. By default (<code>NULL</code>), no tidying policy is
-added to the request.</p></dd>
-
-
 <dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
 <dd><p>(<code>tspec</code> or <code>NULL</code>) A specification used by
 <code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code> to parse the extracted body of <code>resp</code>. When <code>spec</code>
 is <code>NULL</code> (the default), <code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code> will attempt to guess a
 spec.</p></dd>
+
+
+<dt id="arg-tidy-policy">tidy_policy<a class="anchor" aria-label="anchor" href="#arg-tidy-policy"></a></dt>
+<dd><p>(<code>nectar_tidy_policy</code> or <code>NULL</code>) A tidying policy prepared
+with <code><a href="tidy_policy_prepare.html">tidy_policy_prepare()</a></code>. By default, <code><a href="tidy_policy_body_auto.html">tidy_policy_body_auto()</a></code> is used
+to automatically apply <code><a href="resp_body_auto.html">resp_body_auto()</a></code> to responses.</p></dd>
 
 
 <dt id="arg-unspecified">unspecified<a class="anchor" aria-label="anchor" href="#arg-unspecified"></a></dt>

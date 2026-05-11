@@ -171,12 +171,6 @@ Reused parameter definitions are gathered here for easier editing.
   (`list`) An optional list of arguments to pass to the
   `response_parser` function (in addition to `resp`).
 
-- tidy_policy:
-
-  (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
-  [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
-  By default (`NULL`), no tidying policy is added to the request.
-
 - spec:
 
   (`tspec` or `NULL`) A specification used by
@@ -185,6 +179,16 @@ Reused parameter definitions are gathered here for easier editing.
   default),
   [`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html)
   will attempt to guess a spec.
+
+- tidy_policy:
+
+  (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
+  [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
+  By default,
+  [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  is used to automatically apply
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md)
+  to responses.
 
 - unspecified:
 

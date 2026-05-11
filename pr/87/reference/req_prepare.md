@@ -18,7 +18,7 @@ req_prepare(
   method = NULL,
   additional_user_agent = NULL,
   auth = NULL,
-  tidy_policy = NULL,
+  tidy_policy = tidy_policy_body_auto(),
   pagination_fn = NULL,
   call = rlang::caller_env()
 )
@@ -85,7 +85,11 @@ req_prepare(
 
   (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
   [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
-  By default (`NULL`), no tidying policy is added to the request.
+  By default,
+  [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  is used to automatically apply
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md)
+  to responses.
 
 - pagination_fn:
 
@@ -132,6 +136,8 @@ req_prepare("https://example.com")
 #> Body: empty
 #> Options:
 #> * useragent: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+#> Policies:
+#> * resp_tidy: <nectar_tidy_policy>
 req_prepare(
   "https://example.com",
   path = c("users/{user_id}", user_id = "42"),
@@ -142,4 +148,6 @@ req_prepare(
 #> Body: empty
 #> Options:
 #> * useragent: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+#> Policies:
+#> * resp_tidy: <nectar_tidy_policy>
 ```

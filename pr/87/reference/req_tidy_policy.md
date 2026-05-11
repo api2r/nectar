@@ -28,7 +28,11 @@ req_tidy_policy(
 
   (`nectar_tidy_policy` or `NULL`) A tidying policy prepared with
   [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md).
-  By default (`NULL`), no tidying policy is added to the request.
+  By default,
+  [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
+  is used to automatically apply
+  [`resp_body_auto()`](https://nectar.api2r.org/reference/resp_body_auto.md)
+  to responses.
 
 - call:
 
