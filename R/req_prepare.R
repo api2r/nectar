@@ -27,7 +27,7 @@ req_prepare <- function(
   method = NULL,
   additional_user_agent = NULL,
   auth = NULL,
-  tidy_policy = tidy_policy_body_auto,
+  tidy_policy = tidy_policy_body_auto(),
   pagination_fn = NULL,
   call = rlang::caller_env()
 ) {
