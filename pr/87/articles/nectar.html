@@ -118,11 +118,11 @@ tibble using <code><a href="https://tibblify.wrangle.zone/reference/tibblify.htm
 path from the response at the same time with the
 <code>subset_path</code> argument.</p>
 <p>For Crossref, the actual work items live at
-<code>message$items</code> in the response body. You can attach
-<code><a href="../reference/resp_tidy_json.html">resp_tidy_json()</a></code> to the request via the
-<code>tidy_policy</code> argument in <code><a href="../reference/req_prepare.html">req_prepare()</a></code>, so that
-every response is automatically tidied when you call
-<code><a href="../reference/resp_parse.html">resp_parse()</a></code> later:</p>
+<code>message$items</code> in the response body. To have
+<code><a href="../reference/req_prepare.html">req_prepare()</a></code> automatically tidy each response when you
+call <code><a href="../reference/resp_parse.html">resp_parse()</a></code> later, supply a prepared tidying policy
+object via the <code>tidy_policy</code> argument, such as
+<code>tidy_policy_json(subset_path = c("message", "items"))</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>

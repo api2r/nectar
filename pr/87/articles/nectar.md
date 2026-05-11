@@ -74,13 +74,13 @@ You can extract a nested path from the response at the same time with
 the `subset_path` argument.
 
 For Crossref, the actual work items live at `message$items` in the
-response body. You can attach
-[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md)
-to the request via the `tidy_policy` argument in
-[`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md), so
-that every response is automatically tidied when you call
+response body. To have
+[`req_prepare()`](https://nectar.api2r.org/reference/req_prepare.md)
+automatically tidy each response when you call
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
-later:
+later, supply a prepared tidying policy object via the `tidy_policy`
+argument, such as
+`tidy_policy_json(subset_path = c("message", "items"))`:
 
 ``` r
 req <- req_prepare(
