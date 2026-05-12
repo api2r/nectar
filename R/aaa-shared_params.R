@@ -21,8 +21,6 @@
 #' @param body (multiple types) An object to use as the body of the request. If
 #'   any component of the body is a path, pass it through [fs::path()] or
 #'   otherwise give it the class "fs_path" to indicate that it is a path.
-#' @param cookie (`list` or `NULL`) An optional list of cookies to set on the
-#'   request using [httr2::req_cookies_set()]. `NULL` elements are removed.
 #' @param call (`environment`) The environment from which a function was called,
 #'   e.g. [rlang::caller_env()] (the default). The environment will be mentioned
 #'   in error messages as the source of the error. This argument is particularly
@@ -31,18 +29,19 @@
 #' @param check_type (`length-1 logical`) Whether to check that the response has
 #'   the expected content type. Set to `FALSE` if the response is not
 #'   specifically tagged as the proper type.
+#' @param cookie (`list` or `NULL`) An optional list of cookies to set on the
+#'   request using [httr2::req_cookies_set()]. `NULL` elements are removed.
 #' @param existing_user_agent (`length-1 character`, optional) An existing user
 #'   agent, such as the value of `req$options$useragent` in a [httr2::request()]
 #'   object.
-#' @param method (`length-1 character`, optional) If the method is something
-#'   other than `GET` or `POST`, supply it. Case is ignored.
-#' @param mime_type (`length-1 character`) The mime type of any files present in
-#'   the body. Some APIs allow you to leave this as NULL for them to guess.
 #' @param header (`list` or `NULL`) An optional list of headers to add to the
 #'   request using [httr2::req_headers()]. `NULL` elements are removed.
 #' @param location (`length-1 character`) Where the API key should be passed.
 #'   One of `"header"` (default), `"query"`, or `"cookie"`.
-#' @param name (`length-1 character`) The name of a package or other thing to
+#' @param method (`length-1 character`, optional) If the method is something
+#'   other than `GET` or `POST`, supply it. Case is ignored.
+#' @param mime_type (`length-1 character`) The mime type of any files present in
+#'   the body. Some APIs allow you to leave this as NULL for them to guess.#' @param name (`length-1 character`) The name of a package or other thing to
 #'   add to or remove from the user agent string.
 #' @param pagination_fn (`function`) A function that takes the previous response
 #'   (`resp`) to generate the next request in a call to

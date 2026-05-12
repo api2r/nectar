@@ -226,7 +226,6 @@ test_that("req_prepare() removes NULL cookies", {
   expect_false(grepl("empty_cookie", test_result$options$cookie))
 })
 
-
 test_that("req_prepare() errors for unsupported auth objects (#81)", {
   expect_error(
     req_prepare(
