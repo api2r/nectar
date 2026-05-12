@@ -41,7 +41,8 @@
 #' @param method (`length-1 character`, optional) If the method is something
 #'   other than `GET` or `POST`, supply it. Case is ignored.
 #' @param mime_type (`length-1 character`) The mime type of any files present in
-#'   the body. Some APIs allow you to leave this as NULL for them to guess.#' @param name (`length-1 character`) The name of a package or other thing to
+#'   the body. Some APIs allow you to leave this as NULL for them to guess.
+#' @param name (`length-1 character`) The name of a package or other thing to
 #'   add to or remove from the user agent string.
 #' @param pagination_fn (`function`) A function that takes the previous response
 #'   (`resp`) to generate the next request in a call to
