@@ -176,7 +176,7 @@ test_that("req_prepare() applies prepared auth (#81)", {
   )
 })
 
-test_that("req_prepare() applies headers", {
+test_that("req_prepare() applies headers (#92)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     header = list(
@@ -190,7 +190,7 @@ test_that("req_prepare() applies headers", {
   expect_identical(test_result$headers[["X-Another-Header"]], "value2")
 })
 
-test_that("req_prepare() uses NULL headers to remove previously-set headers", {
+test_that("req_prepare() uses NULL headers to remove previously-set headers (#92)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     header = list(
@@ -202,7 +202,7 @@ test_that("req_prepare() uses NULL headers to remove previously-set headers", {
   expect_false("X-Null-Header" %in% names(test_result$headers))
 })
 
-test_that("req_prepare() applies cookies", {
+test_that("req_prepare() applies cookies (#92)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     cookie = list(
@@ -214,7 +214,7 @@ test_that("req_prepare() applies cookies", {
   expect_true(grepl("user_pref=dark_mode", test_result$options$cookie))
 })
 
-test_that("req_prepare() removes NULL cookies", {
+test_that("req_prepare() removes NULL cookies (#92)", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     cookie = list(

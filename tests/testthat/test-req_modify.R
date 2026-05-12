@@ -108,7 +108,7 @@ test_that("req_modify() applies methods", {
   expect_null(test_result$method)
 })
 
-test_that("req_modify() applies headers", {
+test_that("req_modify() applies headers (#92)", {
   req_base <- req_init("https://example.com")
   test_result <- req_modify(
     req_base,
@@ -123,7 +123,7 @@ test_that("req_modify() applies headers", {
   expect_identical(test_result$headers[["X-Another-Header"]], "value2")
 })
 
-test_that("req_modify() uses NULL headers to remove previously-set headers", {
+test_that("req_modify() uses NULL headers to remove previously-set headers (#92)", {
   req_base <- httr2::req_headers(
     req_init("https://example.com"),
     `X-Remove-Me` = "old-value"
@@ -139,7 +139,7 @@ test_that("req_modify() uses NULL headers to remove previously-set headers", {
   expect_false("X-Remove-Me" %in% names(test_result$headers))
 })
 
-test_that("req_modify() applies cookies", {
+test_that("req_modify() applies cookies (#92)", {
   req_base <- req_init("https://example.com")
   test_result <- req_modify(
     req_base,
@@ -149,7 +149,7 @@ test_that("req_modify() applies cookies", {
   expect_true(grepl("user_pref=dark_mode", test_result$options$cookie))
 })
 
-test_that("req_modify() removes NULL cookies", {
+test_that("req_modify() removes NULL cookies (#92)", {
   req_base <- req_init("https://example.com")
   test_result <- req_modify(
     req_base,
