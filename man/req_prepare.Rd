@@ -12,6 +12,8 @@ req_prepare(
   body = NULL,
   mime_type = NULL,
   method = NULL,
+  header = NULL,
+  cookie = NULL,
   additional_user_agent = NULL,
   auth = NULL,
   tidy_policy = tidy_policy_body_auto(),
@@ -45,6 +47,12 @@ the body. Some APIs allow you to leave this as NULL for them to guess.}
 
 \item{method}{(\verb{length-1 character}, optional) If the method is something
 other than \code{GET} or \code{POST}, supply it. Case is ignored.}
+
+\item{header}{(\code{list} or \code{NULL}) An optional list of headers to add to the
+request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. \code{NULL} elements are removed.}
+
+\item{cookie}{(\code{list} or \code{NULL}) An optional list of cookies to set on the
+request using \code{\link[httr2:req_cookies_set]{httr2::req_cookies_set()}}. \code{NULL} elements are removed.}
 
 \item{additional_user_agent}{(\verb{length-1 character}) A string to identify
 where a request is coming from. We automatically include information about

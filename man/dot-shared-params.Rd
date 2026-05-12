@@ -39,18 +39,24 @@ other functions.}
 the expected content type. Set to \code{FALSE} if the response is not
 specifically tagged as the proper type.}
 
+\item{cookie}{(\code{list} or \code{NULL}) An optional list of cookies to set on the
+request using \code{\link[httr2:req_cookies_set]{httr2::req_cookies_set()}}. \code{NULL} elements are removed.}
+
 \item{existing_user_agent}{(\verb{length-1 character}, optional) An existing user
 agent, such as the value of \code{req$options$useragent} in a \code{\link[httr2:request]{httr2::request()}}
 object.}
+
+\item{header}{(\code{list} or \code{NULL}) An optional list of headers to add to the
+request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. \code{NULL} elements are removed.}
+
+\item{location}{(\verb{length-1 character}) Where the API key should be passed.
+One of \code{"header"} (default), \code{"query"}, or \code{"cookie"}.}
 
 \item{method}{(\verb{length-1 character}, optional) If the method is something
 other than \code{GET} or \code{POST}, supply it. Case is ignored.}
 
 \item{mime_type}{(\verb{length-1 character}) The mime type of any files present in
 the body. Some APIs allow you to leave this as NULL for them to guess.}
-
-\item{location}{(\verb{length-1 character}) Where the API key should be passed.
-One of \code{"header"} (default), \code{"query"}, or \code{"cookie"}.}
 
 \item{name}{(\verb{length-1 character}) The name of a package or other thing to
 add to or remove from the user agent string.}
