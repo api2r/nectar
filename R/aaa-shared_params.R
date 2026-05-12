@@ -35,7 +35,8 @@
 #'   agent, such as the value of `req$options$useragent` in a [httr2::request()]
 #'   object.
 #' @param header (`list` or `NULL`) An optional list of headers to add to the
-#'   request using [httr2::req_headers()]. `NULL` elements are removed.
+#'   request using [httr2::req_headers()]. A `NULL` value for an individual
+#'   header will explicitly remove that header if it was previously set.
 #' @param location (`length-1 character`) Where the API key should be passed.
 #'   One of `"header"` (default), `"query"`, or `"cookie"`.
 #' @param method (`length-1 character`, optional) If the method is something

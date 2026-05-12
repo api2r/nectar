@@ -190,7 +190,7 @@ test_that("req_prepare() applies headers", {
   expect_identical(test_result$headers[["X-Another-Header"]], "value2")
 })
 
-test_that("req_prepare() removes NULL headers", {
+test_that("req_prepare() uses NULL headers to remove previously-set headers", {
   test_result <- req_prepare(
     base_url = "https://example.com",
     header = list(
