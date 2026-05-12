@@ -99,7 +99,8 @@ other than <code>GET</code> or <code>POST</code>, supply it. Case is ignored.</p
 
 <dt id="arg-header">header<a class="anchor" aria-label="anchor" href="#arg-header"></a></dt>
 <dd><p>(<code>list</code> or <code>NULL</code>) An optional list of headers to add to the
-request using <code><a href="https://httr2.r-lib.org/reference/req_headers.html" class="external-link">httr2::req_headers()</a></code>. <code>NULL</code> elements are removed.</p></dd>
+request using <code><a href="https://httr2.r-lib.org/reference/req_headers.html" class="external-link">httr2::req_headers()</a></code>. A <code>NULL</code> value for an individual
+header will explicitly remove that header if it was previously set.</p></dd>
 
 
 <dt id="arg-cookie">cookie<a class="anchor" aria-label="anchor" href="#arg-cookie"></a></dt>

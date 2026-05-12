@@ -42,6 +42,6 @@ choose_pagination_fn(req)
 #>         req_url_query(req, `:=`(!!param_name, i))
 #>     }
 #> }
-#> <bytecode: 0x560753bab2a8>
-#> <environment: 0x560753bac700>
+#> <bytecode: 0x5600a41c5dc8>
+#> <environment: 0x5600a41bd690>
 ```

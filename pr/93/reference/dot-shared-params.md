@@ -76,7 +76,8 @@ Reused parameter definitions are gathered here for easier editing.
   (`list` or `NULL`) An optional list of headers to add to the request
   using
   [`httr2::req_headers()`](https://httr2.r-lib.org/reference/req_headers.html).
-  `NULL` elements are removed.
+  A `NULL` value for an individual header will explicitly remove that
+  header if it was previously set.
 
 - location:
 
