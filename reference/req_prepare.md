@@ -16,6 +16,8 @@ req_prepare(
   body = NULL,
   mime_type = NULL,
   method = NULL,
+  header = NULL,
+  cookie = NULL,
   additional_user_agent = NULL,
   auth = NULL,
   tidy_policy = tidy_policy_body_auto(),
@@ -68,6 +70,21 @@ req_prepare(
 
   (`length-1 character`, optional) If the method is something other than
   `GET` or `POST`, supply it. Case is ignored.
+
+- header:
+
+  (`list` or `NULL`) An optional list of headers to add to the request
+  using
+  [`httr2::req_headers()`](https://httr2.r-lib.org/reference/req_headers.html).
+  A `NULL` value for an individual header will explicitly remove that
+  header if it was previously set.
+
+- cookie:
+
+  (`list` or `NULL`) An optional list of cookies to set on the request
+  using
+  [`httr2::req_cookies_set()`](https://httr2.r-lib.org/reference/req_cookie_preserve.html).
+  `NULL` elements are removed.
 
 - additional_user_agent:
 

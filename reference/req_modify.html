@@ -49,6 +49,8 @@ path-specific properties.</p>
 <span>  body <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mime_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  method <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  header <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cookie <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/stack.html" class="external-link">caller_env</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -93,6 +95,17 @@ the body. Some APIs allow you to leave this as NULL for them to guess.</p></dd>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>(<code>length-1 character</code>, optional) If the method is something
 other than <code>GET</code> or <code>POST</code>, supply it. Case is ignored.</p></dd>
+
+
+<dt id="arg-header">header<a class="anchor" aria-label="anchor" href="#arg-header"></a></dt>
+<dd><p>(<code>list</code> or <code>NULL</code>) An optional list of headers to add to the
+request using <code><a href="https://httr2.r-lib.org/reference/req_headers.html" class="external-link">httr2::req_headers()</a></code>. A <code>NULL</code> value for an individual
+header will explicitly remove that header if it was previously set.</p></dd>
+
+
+<dt id="arg-cookie">cookie<a class="anchor" aria-label="anchor" href="#arg-cookie"></a></dt>
+<dd><p>(<code>list</code> or <code>NULL</code>) An optional list of cookies to set on the
+request using <code><a href="https://httr2.r-lib.org/reference/req_cookie_preserve.html" class="external-link">httr2::req_cookies_set()</a></code>. <code>NULL</code> elements are removed.</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
