@@ -57,12 +57,31 @@ Reused parameter definitions are gathered here for easier editing.
   expected content type. Set to `FALSE` if the response is not
   specifically tagged as the proper type.
 
+- cookie:
+
+  (`list` or `NULL`) An optional list of cookies to set on the request
+  using
+  [`httr2::req_cookies_set()`](https://httr2.r-lib.org/reference/req_cookie_preserve.html).
+  `NULL` elements are removed.
+
 - existing_user_agent:
 
   (`length-1 character`, optional) An existing user agent, such as the
   value of `req$options$useragent` in a
   [`httr2::request()`](https://httr2.r-lib.org/reference/request.html)
   object.
+
+- header:
+
+  (`list` or `NULL`) An optional list of headers to add to the request
+  using
+  [`httr2::req_headers()`](https://httr2.r-lib.org/reference/req_headers.html).
+  `NULL` elements are removed.
+
+- location:
+
+  (`length-1 character`) Where the API key should be passed. One of
+  `"header"` (default), `"query"`, or `"cookie"`.
 
 - method:
 
@@ -73,11 +92,6 @@ Reused parameter definitions are gathered here for easier editing.
 
   (`length-1 character`) The mime type of any files present in the body.
   Some APIs allow you to leave this as NULL for them to guess.
-
-- location:
-
-  (`length-1 character`) Where the API key should be passed. One of
-  `"header"` (default), `"query"`, or `"cookie"`.
 
 - name:
 

@@ -28,6 +28,8 @@
 <url><loc>https://nectar.api2r.org/reference/dot-pkg_user_agent_append.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/dot-req_apply_retry_default.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/dot-req_body_auto.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/dot-req_cookies_flatten.html</loc></url>
+<url><loc>https://nectar.api2r.org/reference/dot-req_headers_flatten.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/dot-req_method_apply.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/dot-req_path_append.html</loc></url>
 <url><loc>https://nectar.api2r.org/reference/dot-req_policy.html</loc></url>
