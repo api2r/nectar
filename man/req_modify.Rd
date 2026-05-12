@@ -12,6 +12,8 @@ req_modify(
   body = NULL,
   mime_type = NULL,
   method = NULL,
+  header = NULL,
+  cookie = NULL,
   call = rlang::caller_env()
 )
 }
@@ -39,6 +41,13 @@ the body. Some APIs allow you to leave this as NULL for them to guess.}
 
 \item{method}{(\verb{length-1 character}, optional) If the method is something
 other than \code{GET} or \code{POST}, supply it. Case is ignored.}
+
+\item{header}{(\code{list} or \code{NULL}) An optional list of headers to add to the
+request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. A \code{NULL} value for an individual
+header will explicitly remove that header if it was previously set.}
+
+\item{cookie}{(\code{list} or \code{NULL}) An optional list of cookies to set on the
+request using \code{\link[httr2:req_cookies_set]{httr2::req_cookies_set()}}. \code{NULL} elements are removed.}
 
 \item{call}{(\code{environment}) The environment from which a function was called,
 e.g. \code{\link[rlang:caller_env]{rlang::caller_env()}} (the default). The environment will be mentioned
