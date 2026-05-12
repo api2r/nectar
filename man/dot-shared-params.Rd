@@ -47,7 +47,8 @@ agent, such as the value of \code{req$options$useragent} in a \code{\link[httr2:
 object.}
 
 \item{header}{(\code{list} or \code{NULL}) An optional list of headers to add to the
-request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. \code{NULL} elements are removed.}
+request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. A \code{NULL} value for an individual
+header will explicitly remove that header if it was previously set.}
 
 \item{location}{(\verb{length-1 character}) Where the API key should be passed.
 One of \code{"header"} (default), \code{"query"}, or \code{"cookie"}.}

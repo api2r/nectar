@@ -43,7 +43,8 @@ the body. Some APIs allow you to leave this as NULL for them to guess.}
 other than \code{GET} or \code{POST}, supply it. Case is ignored.}
 
 \item{header}{(\code{list} or \code{NULL}) An optional list of headers to add to the
-request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. \code{NULL} elements are removed.}
+request using \code{\link[httr2:req_headers]{httr2::req_headers()}}. A \code{NULL} value for an individual
+header will explicitly remove that header if it was previously set.}
 
 \item{cookie}{(\code{list} or \code{NULL}) An optional list of cookies to set on the
 request using \code{\link[httr2:req_cookies_set]{httr2::req_cookies_set()}}. \code{NULL} elements are removed.}
