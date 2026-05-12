@@ -25,6 +25,8 @@ req_prepare <- function(
   body = NULL,
   mime_type = NULL,
   method = NULL,
+  header = NULL,
+  cookie = NULL,
   additional_user_agent = NULL,
   auth = NULL,
   tidy_policy = tidy_policy_body_auto(),
@@ -44,6 +46,8 @@ req_prepare <- function(
     body = body,
     mime_type = mime_type,
     method = method,
+    header = header,
+    cookie = cookie,
     call = call
   )
   auth <- .as_nectar_auth(auth, call = call)

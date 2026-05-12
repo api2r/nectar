@@ -176,6 +176,57 @@ test_that("req_prepare() applies prepared auth (#81)", {
   )
 })
 
+test_that("req_prepare() applies headers", {
+  test_result <- req_prepare(
+    base_url = "https://example.com",
+    header = list(
+      `X-Custom-Header` = "value1",
+      `X-Another-Header` = "value2"
+    )
+  )
+  expect_in("X-Custom-Header", names(test_result$headers))
+  expect_in("X-Another-Header", names(test_result$headers))
+  expect_identical(test_result$headers[["X-Custom-Header"]], "value1")
+  expect_identical(test_result$headers[["X-Another-Header"]], "value2")
+})
+
+test_that("req_prepare() removes NULL headers", {
+  test_result <- req_prepare(
+    base_url = "https://example.com",
+    header = list(
+      `X-Custom-Header` = "value1",
+      `X-Null-Header` = NULL
+    )
+  )
+  expect_in("X-Custom-Header", names(test_result$headers))
+  expect_false("X-Null-Header" %in% names(test_result$headers))
+})
+
+test_that("req_prepare() applies cookies", {
+  test_result <- req_prepare(
+    base_url = "https://example.com",
+    cookie = list(
+      session_id = "abc123",
+      user_pref = "dark_mode"
+    )
+  )
+  expect_true(grepl("session_id=abc123", test_result$options$cookie))
+  expect_true(grepl("user_pref=dark_mode", test_result$options$cookie))
+})
+
+test_that("req_prepare() removes NULL cookies", {
+  test_result <- req_prepare(
+    base_url = "https://example.com",
+    cookie = list(
+      session_id = "abc123",
+      empty_cookie = NULL
+    )
+  )
+  expect_true(grepl("session_id=abc123", test_result$options$cookie))
+  expect_false(grepl("empty_cookie", test_result$options$cookie))
+})
+
+
 test_that("req_prepare() errors for unsupported auth objects (#81)", {
   expect_error(
     req_prepare(

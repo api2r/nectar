@@ -22,6 +22,8 @@ req_modify <- function(
   body = NULL,
   mime_type = NULL,
   method = NULL,
+  header = NULL,
+  cookie = NULL,
   call = rlang::caller_env()
 ) {
   rlang::check_dots_empty()
@@ -29,6 +31,8 @@ req_modify <- function(
   req <- .req_query_flatten(req, query)
   req <- .req_body_auto(req, body, mime_type, call = call)
   req <- .req_method_apply(req, method, call = call)
+  req <- .req_headers_flatten(req, header)
+  req <- .req_cookies_flatten(req, cookie)
   return(.as_nectar_request(req))
 }
 
@@ -55,6 +59,26 @@ req_modify <- function(
 .req_query_flatten <- function(req, query) {
   query <- purrr::discard(query, is.null)
   rlang::inject(httr2::req_url_query(req, !!!query))
+}
+
+#' Add non-empty header elements to a request
+#'
+#' @inheritParams .shared-params
+#' @inherit .shared-request return
+#' @keywords internal
+.req_headers_flatten <- function(req, header) {
+  header <- purrr::discard(header, is.null)
+  rlang::inject(httr2::req_headers(req, !!!header))
+}
+
+#' Add non-empty cookie elements to a request
+#'
+#' @inheritParams .shared-params
+#' @inherit .shared-request return
+#' @keywords internal
+.req_cookies_flatten <- function(req, cookie) {
+  cookie <- purrr::discard(cookie, is.null)
+  rlang::inject(httr2::req_cookies_set(req, !!!cookie))
 }
 
 #' Add a method if it is supplied
