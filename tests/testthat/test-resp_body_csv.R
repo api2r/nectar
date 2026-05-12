@@ -16,7 +16,8 @@ test_that("resp_body_csv fails gracefully for bad data (#40)", {
   )
   expect_error(
     resp_body_csv(resp),
-    "Unexpected content type"
+    "Unexpected content type",
+    class = "rlang_error"
   )
 })
 
@@ -38,6 +39,7 @@ test_that("resp_body_tsv fails gracefully for bad data (#40)", {
   )
   expect_error(
     resp_body_tsv(resp),
-    "Unexpected content type"
+    "Unexpected content type",
+    class = "rlang_error"
   )
 })

@@ -156,12 +156,12 @@ test_that("req_prepare() applies prepared tidying (#86)", {
 })
 
 test_that("req_prepare() errors for unsupported tidy policy objects (#86)", {
-  expect_error(
+  expect_nectar_error_snapshot(
     req_prepare(
       base_url = "https://example.com",
       tidy_policy = "not_tidy_policy"
     ),
-    class = "nectar-error-unsupported_tidy_policy_class"
+    "unsupported_tidy_policy_class"
   )
 })
 
@@ -227,12 +227,12 @@ test_that("req_prepare() removes NULL cookies", {
 })
 
 test_that("req_prepare() errors for unsupported auth objects (#81)", {
-  expect_error(
+  expect_nectar_error_snapshot(
     req_prepare(
       base_url = "https://example.com",
       auth = "not_auth"
     ),
-    class = "nectar-error-unsupported_auth_class"
+    "unsupported_auth_class"
   )
 })
 

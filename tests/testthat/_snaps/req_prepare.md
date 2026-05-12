@@ -23,6 +23,28 @@
       list()
       
 
+# req_prepare() errors for unsupported tidy policy objects (#86)
+
+    Code
+      (expect_pkg_error_classes(req_prepare(base_url = "https://example.com",
+        tidy_policy = "not_tidy_policy"), "nectar", "unsupported_tidy_policy_class"))
+    Output
+      <error/nectar-error-unsupported_tidy_policy_class>
+      Error:
+      ! `not_tidy_policy` must be `NULL` or a <nectar_tidy_policy>.
+      x `not_tidy_policy` is a string.
+
+# req_prepare() errors for unsupported auth objects (#81)
+
+    Code
+      (expect_pkg_error_classes(req_prepare(base_url = "https://example.com", auth = "not_auth"),
+      "nectar", "unsupported_auth_class"))
+    Output
+      <error/nectar-error-unsupported_auth_class>
+      Error:
+      ! `not_auth` must be `NULL` or a <nectar_auth>.
+      x `not_auth` is a string.
+
 # .as_nectar_request() fails gracefully for non-reqs
 
     Code

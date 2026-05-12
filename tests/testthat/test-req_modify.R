@@ -9,7 +9,12 @@ test_that("req_modify() returns an unmodified request when no args are given", {
 
 test_that("req_modify() errors for unexpected dots", {
   req_base <- req_init("https://example.com")
-  expect_error(req_modify(req_base, unexpected = "arg"))
+  expect_error(
+    {
+      req_modify(req_base, unexpected = "arg")
+    },
+    class = "rlib_error_dots_nonempty"
+  )
 })
 
 test_that("req_modify() deals with paths", {
