@@ -1,4 +1,4 @@
-test_that("resp_tidy_json fails gracefully with a bad subset_path (#40)", {
+test_that("resp_tidy_json fails gracefully with a bad subset_path (#95)", {
   stbl::expect_pkg_error_classes(
     resp_tidy_json(subset_path = list(a = 1:10, b = mean), resp = NULL),
     package = "stbl",
@@ -7,98 +7,46 @@ test_that("resp_tidy_json fails gracefully with a bad subset_path (#40)", {
   )
 })
 
-test_that("resp_tidy_json returns NULL for an empty body (#40)", {
+test_that("resp_tidy_json returns NULL for an empty body (#95)", {
   mock_response <- httr2::response_json(body = list())
   expect_null(resp_tidy_json(mock_response))
 })
 
-test_that("resp_tidy_json tidies a response (#40)", {
-  target_tibble <- tibble::tibble(
-    a = letters,
-    b = LETTERS,
-    c = 1:26
+test_that("resp_tidy_json returns parsed JSON directly (#95)", {
+  target <- list(
+    list(a = "x", b = 1L),
+    list(a = "y", b = 2L)
   )
+  mock_response <- httr2::response_json(body = target)
+  expect_identical(resp_tidy_json(mock_response), target)
+})
+
+test_that("resp_tidy_json subsets a response (#95)", {
+  target <- list(list(a = "x"), list(a = "y"))
   mock_response <- httr2::response_json(
-    body = target_tibble
+    body = list(ok = TRUE, data = list(target = target))
   )
   expect_identical(
-    resp_tidy_json(mock_response),
-    target_tibble
+    resp_tidy_json(mock_response, subset_path = c("data", "target")),
+    target
   )
 })
 
-test_that("resp_tidy_json subsets a response (#40)", {
-  target_tibble <- tibble::tibble(
-    a = letters,
-    b = LETTERS,
-    c = 1:26
-  )
+test_that("resp_tidy_json passes simplifyVector to httr2::resp_body_json (#95)", {
+  target <- data.frame(a = c("x", "y"), b = c(1, 2))
   mock_response <- httr2::response_json(
-    body = list(
-      ok = TRUE,
-      data = list(
-        target_tibble = target_tibble
-      )
-    )
+    body = list(list(a = "x", b = 1), list(a = "y", b = 2))
   )
-  expect_identical(
-    resp_tidy_json(mock_response, subset_path = c("data", "target_tibble")),
-    target_tibble
-  )
+  expect_equal(resp_tidy_json(mock_response, simplifyVector = TRUE), target)
 })
 
-test_that("resp_tidy_json tidies a response with a spec (#40)", {
-  source_tibble <- tibble::tibble(
-    a = letters,
-    b = LETTERS,
-    c = 1:26
-  )
-  target_tibble <- tibble::tibble(
-    lc = letters,
-    uc = LETTERS,
-    n = 1:26
-  )
-  mock_response <- httr2::response_json(
-    body = source_tibble
-  )
-  spec <- tibblify::tspec_df(
-    lc = tibblify::tib_chr("a"),
-    uc = tibblify::tib_chr("b"),
-    n = tibblify::tib_int("c"),
-  )
-  expect_identical(
-    resp_tidy_json(mock_response, spec = spec),
-    target_tibble
-  )
-})
-
-test_that("tidy_policy_json() prepares resp_tidy_json for resp_tidy() (#40, #86)", {
-  source_tibble <- tibble::tibble(
-    a = letters,
-    b = LETTERS,
-    c = 1:26
-  )
-  target_tibble <- tibble::tibble(
-    lc = letters,
-    uc = LETTERS,
-    n = 1:26
-  )
-  mock_response <- httr2::response_json(
-    body = source_tibble
-  )
+test_that("tidy_policy_json() prepares parser for resp_tidy() (#95)", {
+  target <- list(list(a = "x"), list(a = "y"))
+  mock_response <- httr2::response_json(body = list(data = target))
   mock_response$request <- list(
     policies = list(
-      resp_tidy = tidy_policy_json(
-        spec = tibblify::tspec_df(
-          lc = tibblify::tib_chr("a"),
-          uc = tibblify::tib_chr("b"),
-          n = tibblify::tib_int("c"),
-        )
-      )
+      resp_tidy = tidy_policy_json(subset_path = "data")
     )
   )
-  expect_identical(
-    resp_tidy(mock_response),
-    target_tibble
-  )
+  expect_identical(resp_tidy(mock_response), target)
 })
