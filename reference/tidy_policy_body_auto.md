@@ -20,8 +20,10 @@ Other opinionated response parsers:
 [`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md),
 [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
 [`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
+[`resp_tidy_json_tibblify()`](https://nectar.api2r.org/reference/resp_tidy_json_tibblify.md),
 [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
 [`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
+[`tidy_policy_json_tibblify()`](https://nectar.api2r.org/reference/tidy_policy_json_tibblify.md),
 [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md),
 [`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
 
@@ -40,7 +42,7 @@ tidy_policy_body_auto()
 #>         `text/tab-separated-values` = resp_body_tsv(resp), `image/svg+xml` = httr2::resp_body_string(resp), 
 #>         .resp_body_auto_other(resp))
 #> }
-#> <bytecode: 0x55ea8dc0acf8>
+#> <bytecode: 0x55e26e341ca8>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args

@@ -21,9 +21,11 @@ Other opinionated response parsers:
 [`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md),
 [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
 [`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
+[`resp_tidy_json_tibblify()`](https://nectar.api2r.org/reference/resp_tidy_json_tibblify.md),
 [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
 [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md),
 [`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
+[`tidy_policy_json_tibblify()`](https://nectar.api2r.org/reference/tidy_policy_json_tibblify.md),
 [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md)
 
 ## Examples
@@ -38,7 +40,7 @@ tidy_policy_unknown()
 #>         i = "Response pieces: {names(results)}"), subclass = "unknown_response_type", 
 #>         call = call)
 #> }
-#> <bytecode: 0x55ea84d28a80>
+#> <bytecode: 0x55e2712ae7d0>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args

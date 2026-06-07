@@ -42,12 +42,16 @@
 - [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md) :
   Extract and clean an API response
 - [`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md)
-  : Extract and clean a JSON API response
+  : Extract and optionally subset a JSON API response
+- [`resp_tidy_json_tibblify()`](https://nectar.api2r.org/reference/resp_tidy_json_tibblify.md)
+  : Extract and clean a JSON API response with tibblify
 - [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md)
   : Error informatively for unknown response types
 - [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md)
   : A policy to automatically parse a response body
 - [`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md)
+  : A policy to parse a response body as JSON
+- [`tidy_policy_json_tibblify()`](https://nectar.api2r.org/reference/tidy_policy_json_tibblify.md)
   : A policy to parse a response body as JSON
 - [`tidy_policy_prepare()`](https://nectar.api2r.org/reference/tidy_policy_prepare.md)
   : Prepare tidying independent of a request

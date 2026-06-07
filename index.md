@@ -25,7 +25,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
+  tidy_policy = tidy_policy_json_tibblify(subset_path = c("message", "items")),
   pagination_fn = iterate_with_json_cursor(
     param_name = "cursor",
     next_cursor_path = c("message", "next-cursor")

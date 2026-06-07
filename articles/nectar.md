@@ -72,10 +72,10 @@ req <- req_auth_api_key(
 )
 ```
 
-## Response tidying with `resp_tidy_json()`
+## Response tidying with `resp_tidy_json_tibblify()`
 
 The Crossref API returns JSON. nectar’s
-[`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md)
+[`resp_tidy_json_tibblify()`](https://nectar.api2r.org/reference/resp_tidy_json_tibblify.md)
 function parses the JSON response body and converts the result to a
 tibble using
 [`tibblify::tibblify()`](https://tibblify.wrangle.zone/reference/tibblify.html).
@@ -89,7 +89,7 @@ automatically tidy each response when you call
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
 later, supply a prepared tidying policy object via the `tidy_policy`
 argument, such as
-`tidy_policy_json(subset_path = c("message", "items"))`:
+`tidy_policy_json_tibblify(subset_path = c("message", "items"))`:
 
 ``` r
 req <- req_prepare(
@@ -97,7 +97,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_policy = tidy_policy_json(subset_path = c("message", "items"))
+  tidy_policy = tidy_policy_json_tibblify(subset_path = c("message", "items"))
 )
 ```
 
@@ -127,7 +127,7 @@ req <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
+  tidy_policy = tidy_policy_json_tibblify(subset_path = c("message", "items")),
   pagination_fn = iterate_xref
 )
 ```
@@ -158,7 +158,7 @@ regardless of whether one or many pages were fetched.
 
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md)
 converts the raw responses into a usable R object. Because the request
-was prepared with `tidy_policy = tidy_policy_json(...)`,
+was prepared with `tidy_policy = tidy_policy_json_tibblify(...)`,
 [`resp_parse()`](https://nectar.api2r.org/reference/resp_parse.md) will
 find that function automatically and apply it to each response, then
 combine the results:
@@ -179,7 +179,7 @@ result <- req_prepare(
   query = list(
     rows = 10, cursor = "*", select = c("publisher", "DOI"), .multi = "comma"
   ),
-  tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
+  tidy_policy = tidy_policy_json_tibblify(subset_path = c("message", "items")),
   pagination_fn = iterate_with_json_cursor(
     param_name = "cursor",
     next_cursor_path = c("message", "next-cursor")
@@ -227,7 +227,7 @@ works <- function(
     "https://api.crossref.org/works",
     query = list(rows = rows, cursor = "*", select = select),
     auth = auth_api_key("mailto", api_key = mailto, location = "query"),
-    tidy_policy = tidy_policy_json(subset_path = c("message", "items")),
+    tidy_policy = tidy_policy_json_tibblify(subset_path = c("message", "items")),
     pagination_fn = iterate_with_json_cursor(
       param_name = "cursor",
       next_cursor_path = c("message", "next-cursor")

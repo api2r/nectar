@@ -55,5 +55,5 @@ req$options$useragent
 req_pkg_user_agent(req)$options$useragent
 #> httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)
 req_pkg_user_agent(req, "stbl")$options$useragent
-#> httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org) stbl/0.3.0
+#> httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org) stbl/0.3.0.9002
 ```

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>nectar • nectar</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="nectar">
 </head>
@@ -117,26 +117,27 @@ access), pass <code>api_key = NULL</code>:</p>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="response-tidying-with-resp_tidy_json">Response tidying with <code>resp_tidy_json()</code><a class="anchor" aria-label="anchor" href="#response-tidying-with-resp_tidy_json"></a>
+<h2 id="response-tidying-with-resp_tidy_json_tibblify">Response tidying with <code>resp_tidy_json_tibblify()</code><a class="anchor" aria-label="anchor" href="#response-tidying-with-resp_tidy_json_tibblify"></a>
 </h2>
-<p>The Crossref API returns JSON. nectar’s <code><a href="../reference/resp_tidy_json.html">resp_tidy_json()</a></code>
-function parses the JSON response body and converts the result to a
-tibble using <code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code>. You can extract a nested
-path from the response at the same time with the
-<code>subset_path</code> argument.</p>
+<p>The Crossref API returns JSON. nectar’s
+<code><a href="../reference/resp_tidy_json_tibblify.html">resp_tidy_json_tibblify()</a></code> function parses the JSON response
+body and converts the result to a tibble using
+<code><a href="https://tibblify.wrangle.zone/reference/tibblify.html" class="external-link">tibblify::tibblify()</a></code>. You can extract a nested path from
+the response at the same time with the <code>subset_path</code>
+argument.</p>
 <p>For Crossref, the actual work items live at
 <code>message$items</code> in the response body. To have
 <code><a href="../reference/req_prepare.html">req_prepare()</a></code> automatically tidy each response when you
 call <code><a href="../reference/resp_parse.html">resp_parse()</a></code> later, supply a prepared tidying policy
 object via the <code>tidy_policy</code> argument, such as
-<code>tidy_policy_json(subset_path = c("message", "items"))</code>:</p>
+<code>tidy_policy_json_tibblify(subset_path = c("message", "items"))</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/req_prepare.html">req_prepare</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json_tibblify.html">tidy_policy_json_tibblify</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -161,7 +162,7 @@ value in the response body:</p>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json_tibblify.html">tidy_policy_json_tibblify</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="va">iterate_xref</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -190,7 +191,7 @@ fetched.</p>
 </h2>
 <p><code><a href="../reference/resp_parse.html">resp_parse()</a></code> converts the raw responses into a usable R
 object. Because the request was prepared with
-<code>tidy_policy = tidy_policy_json(...)</code>,
+<code>tidy_policy = tidy_policy_json_tibblify(...)</code>,
 <code><a href="../reference/resp_parse.html">resp_parse()</a></code> will find that function automatically and
 apply it to each response, then combine the results:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -208,7 +209,7 @@ the full workflow in one expression:</p>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    rows <span class="op">=</span> <span class="fl">10</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"publisher"</span>, <span class="st">"DOI"</span><span class="op">)</span>, .multi <span class="op">=</span> <span class="st">"comma"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json_tibblify.html">tidy_policy_json_tibblify</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>    param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>    next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>
@@ -255,7 +256,7 @@ provide:</p>
 <span>    <span class="st">"https://api.crossref.org/works"</span>,</span>
 <span>    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="va">rows</span>, cursor <span class="op">=</span> <span class="st">"*"</span>, select <span class="op">=</span> <span class="va">select</span><span class="op">)</span>,</span>
 <span>    auth <span class="op">=</span> <span class="fu"><a href="../reference/auth_api_key.html">auth_api_key</a></span><span class="op">(</span><span class="st">"mailto"</span>, api_key <span class="op">=</span> <span class="va">mailto</span>, location <span class="op">=</span> <span class="st">"query"</span><span class="op">)</span>,</span>
-<span>    tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json.html">tidy_policy_json</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    tidy_policy <span class="op">=</span> <span class="fu"><a href="../reference/tidy_policy_json_tibblify.html">tidy_policy_json_tibblify</a></span><span class="op">(</span>subset_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"items"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    pagination_fn <span class="op">=</span> <span class="fu"><a href="../reference/iterate_with_json_cursor.html">iterate_with_json_cursor</a></span><span class="op">(</span></span>
 <span>      param_name <span class="op">=</span> <span class="st">"cursor"</span>,</span>
 <span>      next_cursor_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"message"</span>, <span class="st">"next-cursor"</span><span class="op">)</span></span>

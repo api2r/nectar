@@ -32,9 +32,11 @@ Other opinionated response parsers:
 [`req_tidy_policy()`](https://nectar.api2r.org/reference/req_tidy_policy.md),
 [`resp_tidy()`](https://nectar.api2r.org/reference/resp_tidy.md),
 [`resp_tidy_json()`](https://nectar.api2r.org/reference/resp_tidy_json.md),
+[`resp_tidy_json_tibblify()`](https://nectar.api2r.org/reference/resp_tidy_json_tibblify.md),
 [`resp_tidy_unknown()`](https://nectar.api2r.org/reference/resp_tidy_unknown.md),
 [`tidy_policy_body_auto()`](https://nectar.api2r.org/reference/tidy_policy_body_auto.md),
 [`tidy_policy_json()`](https://nectar.api2r.org/reference/tidy_policy_json.md),
+[`tidy_policy_json_tibblify()`](https://nectar.api2r.org/reference/tidy_policy_json_tibblify.md),
 [`tidy_policy_unknown()`](https://nectar.api2r.org/reference/tidy_policy_unknown.md)
 
 ## Examples
@@ -58,7 +60,7 @@ tidy_policy_prepare(httr2::resp_body_json, simplifyVector = TRUE)
 #>         ...)
 #>     resp$cache[[key]]
 #> }
-#> <bytecode: 0x55ea8dd6f660>
+#> <bytecode: 0x55e27130a770>
 #> <environment: namespace:httr2>
 #> 
 #> $tidy_args
