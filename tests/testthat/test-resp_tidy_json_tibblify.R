@@ -1,4 +1,4 @@
-test_that("resp_tidy_json_tibblify fails gracefully with a bad subset_path (#95)", {
+test_that("resp_tidy_json_tibblify fails gracefully with a bad subset_path (#40, #95)", {
   stbl::expect_pkg_error_classes(
     resp_tidy_json_tibblify(
       subset_path = list(a = 1:10, b = mean),
@@ -10,12 +10,12 @@ test_that("resp_tidy_json_tibblify fails gracefully with a bad subset_path (#95)
   )
 })
 
-test_that("resp_tidy_json_tibblify returns NULL for an empty body (#95)", {
+test_that("resp_tidy_json_tibblify returns NULL for an empty body (#40, #95)", {
   mock_response <- httr2::response_json(body = list())
   expect_null(resp_tidy_json_tibblify(mock_response))
 })
 
-test_that("resp_tidy_json_tibblify tidies a response (#95)", {
+test_that("resp_tidy_json_tibblify tidies a response (#40, #95)", {
   target_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -30,7 +30,7 @@ test_that("resp_tidy_json_tibblify tidies a response (#95)", {
   )
 })
 
-test_that("resp_tidy_json_tibblify subsets a response (#95)", {
+test_that("resp_tidy_json_tibblify subsets a response (#40, #95)", {
   target_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -53,7 +53,7 @@ test_that("resp_tidy_json_tibblify subsets a response (#95)", {
   )
 })
 
-test_that("resp_tidy_json_tibblify tidies a response with a spec (#95)", {
+test_that("resp_tidy_json_tibblify tidies a response with a spec (#40, #95)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,
@@ -78,7 +78,7 @@ test_that("resp_tidy_json_tibblify tidies a response with a spec (#95)", {
   )
 })
 
-test_that("resp_tidy_json_tibblify calls resp_tidy_json with simplifyVector = FALSE (#95)", {
+test_that("resp_tidy_json_tibblify calls resp_tidy_json with simplifyVector = FALSE (#40, #95)", {
   mock_response <- httr2::response_json(body = list(list(a = 1)))
   local_mocked_bindings(
     resp_tidy_json = function(resp, subset_path, simplifyVector) {
@@ -94,7 +94,7 @@ test_that("resp_tidy_json_tibblify calls resp_tidy_json with simplifyVector = FA
   )
 })
 
-test_that("tidy_policy_json_tibblify() prepares parser for resp_tidy() (#95)", {
+test_that("tidy_policy_json_tibblify() prepares parser for resp_tidy() (#40, #95)", {
   source_tibble <- tibble::tibble(
     a = letters,
     b = LETTERS,

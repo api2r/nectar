@@ -26,16 +26,16 @@ resp_tidy_json_tibblify <- function(
   unspecified = "list",
   subset_path = NULL
 ) {
-  rlang::check_installed(
-    "tibblify",
-    "to tidy the JSON response body."
-  )
   result <- resp_tidy_json(
     resp = resp,
     subset_path = subset_path,
     simplifyVector = FALSE
   )
   if (length(result)) {
+    rlang::check_installed(
+      "tibblify",
+      "to tidy the JSON response body."
+    )
     return(
       tibblify::tibblify(
         result,

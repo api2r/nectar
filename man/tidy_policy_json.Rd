@@ -14,8 +14,8 @@ information, perhaps pagination information, and then the actual data in a
 field such as \code{data}. If the desired part of the response body is in
 \code{data$objects}, the value of this argument should be \code{c("data", "object")}.}
 
-\item{simplifyVector}{(\verb{length-1 logical}) Should JSON arrays containing only
-primitives and records be simplified to atomic vectors and data frames?}
+\item{simplifyVector}{Should JSON arrays containing only primitives (i.e.
+booleans, numbers, and strings) be caused to atomic vectors?}
 }
 \value{
 A list with class \code{"nectar_tidy_policy"} and elements \code{tidy_fn} and
