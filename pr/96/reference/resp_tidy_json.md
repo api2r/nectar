@@ -31,8 +31,8 @@ resp_tidy_json(resp, subset_path = NULL, simplifyVector = FALSE)
 
 - simplifyVector:
 
-  (`length-1 logical`) Should JSON arrays containing only primitives and
-  records be simplified to atomic vectors and data frames?
+  Should JSON arrays containing only primitives (i.e. booleans, numbers,
+  and strings) be caused to atomic vectors?
 
 ## Value
 

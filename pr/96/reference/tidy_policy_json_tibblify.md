@@ -69,15 +69,15 @@ tidy_policy_json_tibblify(subset_path = "data")
 #> $tidy_fn
 #> function (resp, spec = NULL, unspecified = "list", subset_path = NULL) 
 #> {
-#>     rlang::check_installed("tibblify", "to tidy the JSON response body.")
 #>     result <- resp_tidy_json(resp = resp, subset_path = subset_path, 
 #>         simplifyVector = FALSE)
 #>     if (length(result)) {
+#>         rlang::check_installed("tibblify", "to tidy the JSON response body.")
 #>         return(tibblify::tibblify(result, spec = spec, unspecified = unspecified))
 #>     }
 #>     return(NULL)
 #> }
-#> <bytecode: 0x5603c24464b8>
+#> <bytecode: 0x55adc3430580>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args

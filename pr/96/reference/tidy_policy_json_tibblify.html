@@ -98,15 +98,15 @@ field such as <code>data</code>. If the desired part of the response body is in
 <span class="r-out co"><span class="r-pr">#&gt;</span> $tidy_fn</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (resp, spec = NULL, unspecified = "list", subset_path = NULL) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     rlang::check_installed("tibblify", "to tidy the JSON response body.")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     result &lt;- resp_tidy_json(resp = resp, subset_path = subset_path, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         simplifyVector = FALSE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (length(result)) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         rlang::check_installed("tibblify", "to tidy the JSON response body.")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         return(tibblify::tibblify(result, spec = spec, unspecified = unspecified))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     return(NULL)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5603c24464b8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55adc3430580&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:nectar&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $tidy_args</span>

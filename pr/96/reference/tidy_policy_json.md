@@ -23,8 +23,8 @@ tidy_policy_json(subset_path = NULL, simplifyVector = FALSE)
 
 - simplifyVector:
 
-  (`length-1 logical`) Should JSON arrays containing only primitives and
-  records be simplified to atomic vectors and data frames?
+  Should JSON arrays containing only primitives (i.e. booleans, numbers,
+  and strings) be caused to atomic vectors?
 
 ## Value
 
@@ -59,7 +59,7 @@ tidy_policy_json(subset_path = "data")
 #>     }
 #>     return(NULL)
 #> }
-#> <bytecode: 0x5603c344c6b8>
+#> <bytecode: 0x55adc3b18710>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args
