@@ -11,6 +11,7 @@
 ^principles\.md$
 ^AGENTS\.md$
 ^\.positai$
+^\.posit$
 ^\.claude$
 ^[.]?air[.]toml$
 ^\.vscode$

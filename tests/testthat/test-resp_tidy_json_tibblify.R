@@ -5,7 +5,7 @@ test_that("resp_tidy_json_tibblify fails gracefully with a bad subset_path (#40,
       resp = NULL
     ),
     package = "stbl",
-    "coerce",
+    "incompatible_values",
     "character"
   )
 })

@@ -49,9 +49,13 @@ export(tidy_policy_unknown)
 export(url_normalize)
 export(url_path_append)
 importFrom(fs,path)
-importFrom(httr2,req_perform)
-importFrom(httr2,req_perform_iterative)
+importFrom(httr2,
+  req_perform,
+  req_perform_iterative
+)
 importFrom(lifecycle,deprecated)
-importFrom(rlang,"%||%")
-importFrom(rlang,":=")
-importFrom(rlang,caller_env)
+importFrom(rlang,
+  "%||%",
+  ":=",
+  caller_env
+)
