@@ -59,7 +59,7 @@ tidy_policy_json(subset_path = "data")
 #>     }
 #>     return(NULL)
 #> }
-#> <bytecode: 0x55e271302ab8>
+#> <bytecode: 0x5c99ce107840>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args

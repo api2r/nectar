@@ -42,7 +42,7 @@ tidy_policy_body_auto()
 #>         `text/tab-separated-values` = resp_body_tsv(resp), `image/svg+xml` = httr2::resp_body_string(resp), 
 #>         .resp_body_auto_other(resp))
 #> }
-#> <bytecode: 0x55e26e341ca8>
+#> <bytecode: 0x5c99d036a668>
 #> <environment: namespace:nectar>
 #> 
 #> $tidy_args

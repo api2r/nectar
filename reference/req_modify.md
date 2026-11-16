@@ -112,11 +112,11 @@ req_modify(req_base, path = c("specific/{path}", path = "endpoint"))
 #> GET https://example.com/specific/endpoint
 #> Body: empty
 #> Options:
-#> * useragent: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+#> * useragent: "httr2/1.3.0.9000 r-curl/8.1.0 libcurl/8.18.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
 req_modify(req_base, query = c("param1" = "value1", "param2" = "value2"))
 #> <nectar_request/httr2_request>
 #> GET https://example.com/?param1=value1&param2=value2
 #> Body: empty
 #> Options:
-#> * useragent: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+#> * useragent: "httr2/1.3.0.9000 r-curl/8.1.0 libcurl/8.18.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
 ```

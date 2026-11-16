@@ -64,7 +64,7 @@ req_init("https://example.com")
 #> GET https://example.com
 #> Body: empty
 #> Options:
-#> * useragent: "httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
+#> * useragent: "httr2/1.3.0.9000 r-curl/8.1.0 libcurl/8.18.0 nectar/0.0.0.9007 (https://nectar.api2r.org)"
 req_init(
   "https://example.com",
   additional_user_agent = "my_api_client (https://my.api.client)"
