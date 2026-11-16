@@ -4,7 +4,7 @@ test_that("req_pkg_user_agent adds a package agent (#29)", {
   # Scrub versions but make sure they're there.
   test_agent <- stringr::str_replace_all(
     test_result$options$useragent,
-    r"(\d+(\.\d+){2,3})",
+    r"(\d+(\.\d+){2,3}(-DEV)?)",
     "x.x.x"
   )
   expect_identical(
@@ -23,7 +23,7 @@ test_that("req_pkg_user_agent adds a package agent and url (#29)", {
   # Scrub versions but make sure they're there.
   test_agent <- stringr::str_replace_all(
     test_result$options$useragent,
-    r"(\d+(\.\d+){2,3})",
+    r"(\d+(\.\d+){2,3}(-DEV)?)",
     "x.x.x"
   )
   expect_identical(

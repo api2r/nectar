@@ -2,7 +2,7 @@ test_that("resp_tidy_json fails gracefully with a bad subset_path (#95)", {
   stbl::expect_pkg_error_classes(
     resp_tidy_json(subset_path = list(a = 1:10, b = mean), resp = NULL),
     package = "stbl",
-    "coerce",
+    "incompatible_values",
     "character"
   )
 })

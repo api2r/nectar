@@ -103,8 +103,7 @@ test_that(".get_pkg_version errors for a non-string pkg_name (#noissue)", {
   stbl::expect_pkg_error_classes(
     .get_pkg_version(mean),
     "stbl",
-    "coerce",
-    "character"
+    "bad_function"
   )
 })
 
